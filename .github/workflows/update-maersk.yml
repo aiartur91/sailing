@@ -1,0 +1,86 @@
+name: Update Maersk schedules
+
+# Pulls Maersk DCSA Commercial Schedules into sailings.csv.
+#
+# The API key has a request QUOTA, so the full 26×6 lane matrix is split into
+# three region slices that run on different mornings — each stays under quota:
+#   • Monday    06:00 UTC → China        (LANE_GROUP=china)
+#   • Wednesday 06:00 UTC → India        (LANE_GROUP=india)
+#   • Friday    06:00 UTC → Bangladesh + Vietnam (LANE_GROUP=bdvn)
+# Each slice only replaces its own origins; other rows are kept.
+#
+# Manual run: Actions → Run workflow → pick lane_group (china/india/bdvn/all).
+#
+# SETUP (one time): Settings → Secrets and variables → Actions → New secret
+#   Name: MAERSK_API_KEY   Value: <your Maersk Consumer-Key>
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'        # Mon  → china
+    - cron: '0 6 * * 3'        # Wed  → india
+    - cron: '0 6 * * 5'        # Fri  → bdvn
+  workflow_dispatch:
+    inputs:
+      lane_group:
+        description: 'Which origins to pull'
+        type: choice
+        options: [china, india, bdvn, all]
+        default: china
+      debug:
+        description: 'Write maersk-raw.json for mapping checks'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pick lane group
+        id: pick
+        run: |
+          # schedule → group by cron; manual → use the chosen input
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            case "${{ github.event.schedule }}" in
+              "0 6 * * 1") echo "group=china" >> "$GITHUB_OUTPUT" ;;
+              "0 6 * * 3") echo "group=india" >> "$GITHUB_OUTPUT" ;;
+              "0 6 * * 5") echo "group=bdvn"  >> "$GITHUB_OUTPUT" ;;
+              *)           echo "group=china" >> "$GITHUB_OUTPUT" ;;
+            esac
+          else
+            echo "group=${{ inputs.lane_group }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch Maersk schedules
+        env:
+          MAERSK_API_KEY: ${{ secrets.MAERSK_API_KEY }}
+          LANE_GROUP: ${{ steps.pick.outputs.group }}
+        run: |
+          if [ "${{ inputs.debug }}" = "true" ]; then
+            node scripts/fetch-maersk.mjs --debug
+          else
+            node scripts/fetch-maersk.mjs
+          fi
+
+      - name: Commit changes
+        run: |
+          git config user.name  "sailingi-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git pull --rebase --autostash || true
+          git add sailings.csv maersk-raw.json 2>/dev/null || git add sailings.csv
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: refresh Maersk (${{ steps.pick.outputs.group }}) $(date -u +%Y-%m-%d)"
+            git push
+          fi
