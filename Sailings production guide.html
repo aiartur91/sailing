@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sailingi · Poradnik wdrożenia (GitHub Pages + dane)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b1626; --ink-2:#1d2a3f; --mute:#5b6a82; --line:#dfe4ec; --line-2:#eaeef4;
+    --paper:#fbfaf6; --paper-2:#f4f1e8; --navy:#0f3b66; --sea:#1d6fa5; --sky:#e6f0f6;
+    --accent:#c95a2a; --warn:#a96a14; --ok:#2b6a3c;
+    --shadow:0 1px 0 rgba(15,59,102,.04), 0 6px 22px -10px rgba(15,59,102,.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;}
+  a{color:var(--sea);text-decoration:none;} a:hover{text-decoration:underline;}
+  .shell{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh;}
+  aside{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#08233d,#0f3b66);
+    color:#cfe1f0;padding:28px 22px;overflow:auto;}
+  aside .brand{display:flex;gap:10px;align-items:center;margin-bottom:22px;}
+  aside .brand h1{font-family:'Fraunces';font-weight:700;font-size:21px;color:#fff;margin:0;letter-spacing:-.5px;}
+  aside .brand .sub{font-size:11px;color:#7ea3c4;letter-spacing:1px;text-transform:uppercase;}
+  aside nav a{display:block;padding:7px 10px;color:#cfe1f0;border-radius:6px;font-size:13px;line-height:1.4;margin-bottom:1px;}
+  aside nav a:hover{background:rgba(255,255,255,.06);text-decoration:none;color:#fff;}
+  aside nav a.section{font-weight:600;color:#fff;margin-top:16px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;padding-left:0;opacity:.7;}
+  aside nav a.section:first-child{margin-top:0;}
+  aside .foot{margin-top:24px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);font-size:11px;color:#7ea3c4;}
+  main{padding:48px 56px 120px;max-width:920px;}
+  h1.page{font-family:'Fraunces';font-size:42px;line-height:1.05;margin:0 0 10px;letter-spacing:-1px;}
+  .lede{font-size:17px;color:var(--ink-2);max-width:68ch;margin:0 0 32px;}
+  h2{font-family:'Fraunces';font-size:28px;line-height:1.1;letter-spacing:-.5px;margin:54px 0 12px;padding-top:14px;border-top:1px solid var(--line);}
+  h2:first-of-type{border-top:none;padding-top:0;margin-top:32px;}
+  h3{font-size:18px;font-weight:600;margin:26px 0 8px;}
+  h4{font-size:13px;font-weight:600;margin:18px 0 6px;text-transform:uppercase;letter-spacing:.8px;color:var(--mute);}
+  p{margin:0 0 12px;} ul,ol{margin:0 0 14px;padding-left:22px;} li{margin-bottom:6px;}
+  li::marker{color:var(--mute);}
+  code{font-family:'JetBrains Mono',monospace;font-size:.86em;background:var(--paper-2);padding:1px 6px;border-radius:4px;color:var(--ink-2);}
+  pre{font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.55;background:#0b1626;color:#cfe1f0;
+    padding:16px 18px;border-radius:8px;overflow:auto;margin:12px 0 20px;}
+  pre .c{color:#5e7898;font-style:italic;} pre .g{color:#aed490;}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0 22px;}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:var(--paper-2);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;color:var(--mute);}
+  .pill{display:inline-block;padding:1px 8px;font-size:11px;font-weight:600;border-radius:999px;letter-spacing:.3px;white-space:nowrap;}
+  .pill.req{background:#fae3da;color:var(--accent);}
+  .pill.rec{background:var(--sky);color:var(--navy);}
+  .pill.opt{background:var(--paper-2);color:var(--mute);}
+  .pill.auto{background:#e3f1e7;color:var(--ok);}
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow);margin:14px 0 20px;}
+  .card.note{background:var(--sky);border-color:#c6dded;}
+  .card.warn{background:#fdf5e9;border-color:#ebd6ad;}
+  .card.tip{background:#eef7f0;border-color:#cfe6d6;}
+  .card .label{font-weight:700;}
+  .card.warn .label{color:var(--warn);} .card.tip .label{color:var(--ok);} .card.note .label{color:var(--navy);}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  /* numbered steps */
+  ol.steps{list-style:none;padding-left:0;counter-reset:step;margin:18px 0;}
+  ol.steps>li{position:relative;padding:2px 0 18px 52px;counter-increment:step;}
+  ol.steps>li::before{content:counter(step);position:absolute;left:0;top:0;width:34px;height:34px;
+    background:var(--navy);color:#fff;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:15px;font-family:'Fraunces';}
+  ol.steps>li::after{content:'';position:absolute;left:16px;top:36px;bottom:2px;width:2px;background:var(--line);}
+  ol.steps>li:last-child::after{display:none;}
+  ol.steps>li .st-title{font-weight:600;font-size:16px;margin-bottom:3px;}
+  .kbd{font-family:'JetBrains Mono',monospace;font-size:12px;background:#fff;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 6px;}
+  .filechip{display:inline-flex;align-items:center;gap:7px;font-family:'JetBrains Mono';font-size:12.5px;
+    background:#fff;border:1px solid var(--line);border-radius:7px;padding:5px 10px;margin:3px 6px 3px 0;}
+  .filechip .ic{color:var(--sea);}
+  .url-demo{font-family:'JetBrains Mono';font-size:14px;background:#0b1626;color:#aed490;padding:12px 16px;border-radius:8px;display:inline-block;margin:6px 0 16px;}
+  @media print{aside{display:none;} .shell{grid-template-columns:1fr;} main{padding:24px;max-width:none;} h2{break-after:avoid;} pre,.card,ol.steps>li{break-inside:avoid;}}
+  @media (max-width:880px){.shell{grid-template-columns:1fr;} aside{position:static;height:auto;} .grid-2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside>
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7" stroke-dasharray="2 2"/>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>
+      </svg>
+      <div><h1>Sailingi</h1><div class="sub">Poradnik wdrożenia</div></div>
+    </div>
+    <nav>
+      <a class="section">Start</a>
+      <a href="#co-masz">Co masz w paczce</a>
+      <a href="#jak-dziala">Jak to działa</a>
+      <a class="section">Część 1 · Strona</a>
+      <a href="#konto">Konto GitHub</a>
+      <a href="#repo">Utwórz repozytorium</a>
+      <a href="#wgraj">Wgraj pliki</a>
+      <a href="#pages">Włącz GitHub Pages</a>
+      <a href="#domena">Adres i własna domena</a>
+      <a class="section">Część 2 · Dane</a>
+      <a href="#plik-danych">Plik sailings.csv</a>
+      <a href="#kolumny">Opis kolumn</a>
+      <a href="#wypelnianie">Jak wypełniać w Excelu</a>
+      <a href="#edytor">Edytor w przeglądarce ⭐</a>
+      <a class="section">Część 3 · Rutyna</a>
+      <a href="#tydzien">Aktualizacja co tydzień</a>
+      <a href="#metoda-b">Metoda B · GitHub Desktop</a>
+      <a class="section">Pomoc</a>
+      <a href="#faq">FAQ i problemy</a>
+      <a href="#checklist">Checklista</a>
+    </nav>
+    <div class="foot">Towarzyszy plikom prototypu Wariant D.<br>Hosting i dane: 100% bezpłatnie.</div>
+  </aside>
+
+  <main>
+    <h1 class="page">Jak opublikować stronę i co tydzień wgrywać sailingi</h1>
+    <p class="lede">
+      Krok po kroku, bez wiedzy programistycznej. Najpierw raz publikujesz stronę na <b>GitHub Pages</b> (darmowy hosting),
+      a potem co tydzień wypełniasz <b>jeden plik Excel</b>, zapisujesz go jako CSV i wgrywasz przeciągnięciem.
+      Strona aktualizuje się sama w ~1 minutę.
+    </p>
+
+    <div class="card note">
+      <p style="margin:0"><span class="label">W skrócie:</span> strona to zestaw plików + jeden plik z danymi
+      <code>sailings.csv</code>. Hosting jest darmowy i bezterminowy. Aktualizacja danych = podmiana jednego pliku.
+      Żadnych serwerów, baz danych ani opłat.</p>
+    </div>
+
+    <h2 id="co-masz">Co masz w paczce</h2>
+    <p>To są pliki Twojej strony. Wszystkie muszą trafić do repozytorium <b>razem, w tym samym folderze</b>:</p>
+    <div style="margin:10px 0 6px;">
+      <span class="filechip"><span class="ic">📄</span> index.html <span style="color:var(--mute)">← strona (patrz niżej)</span></span>
+      <span class="filechip"><span class="ic">📊</span> sailings.csv <span style="color:var(--mute)">← Twoje dane</span></span>
+    </div>
+    <div>
+      <span class="filechip">hifi-d-data.js</span>
+      <span class="filechip">hifi-d-parts.jsx</span>
+      <span class="filechip">hifi-d-app.jsx</span>
+      <span class="filechip">hifi-d-detail.jsx</span>
+      <span class="filechip">hifi-d-root.jsx</span>
+      <span class="filechip">tweaks-panel.jsx</span>
+    </div>
+    <div style="margin:8px 0 0;">
+      <span class="filechip"><span class="ic">✎</span> Sailing editor.html <span style="color:var(--mute)">← edytor danych (opcjonalny, wygodny)</span></span>
+      <span class="filechip">sailing-editor.jsx</span>
+      <span class="filechip">sailing-editor-ui.jsx</span>
+    </div>
+    <div class="card warn">
+      <p style="margin:0"><span class="label">⚠ Ważne — zmień nazwę pliku strony.</span>
+      GitHub Pages domyślnie pokazuje plik o nazwie <code>index.html</code>. Zanim wgrasz, zmień nazwę
+      <code>Sailings — Variant D (hi-fi).html</code> na <code>index.html</code>. Reszta plików zostaje bez zmian —
+      strona sama je znajdzie.</p>
+    </div>
+
+    <h2 id="jak-dziala">Jak to działa (1 akapit)</h2>
+    <p>
+      Strona przy otwarciu wczytuje plik <code>sailings.csv</code> z tego samego folderu i rysuje z niego listę sailingów.
+      Kiedy podmienisz <code>sailings.csv</code> na nowszy, GitHub w ~1 minutę przebudowuje stronę i każdy, kto ją otworzy,
+      widzi świeże dane. Nic więcej nie musisz robić.
+    </p>
+
+    <!-- ───────── CZĘŚĆ 1 ───────── -->
+    <h2 id="konto">Część 1 · Konto GitHub</h2>
+    <ol class="steps">
+      <li><div class="st-title">Wejdź na github.com i kliknij „Sign up"</div>
+        Załóż darmowe konto (e-mail, hasło, nazwa użytkownika). Nazwa użytkownika będzie częścią adresu strony — wybierz krótką, np. <code>twojafirma</code>.</li>
+      <li><div class="st-title">Potwierdź e-mail</div>
+        Kliknij link z wiadomości powitalnej. Plan <b>Free</b> w zupełności wystarcza — GitHub Pages jest w nim za darmo.</li>
+    </ol>
+
+    <h2 id="repo">Utwórz repozytorium</h2>
+    <p>Repozytorium (w skrócie „repo") to folder Twojej strony na GitHubie.</p>
+    <ol class="steps">
+      <li><div class="st-title">Kliknij „+” w prawym górnym rogu → „New repository”</div></li>
+      <li><div class="st-title">Nazwa repo</div>
+        Wpisz np. <code>sailingi</code>. Zaznacz <b>Public</b> (Pages dla prywatnych wymaga płatnego planu). Zaznacz „Add a README file”. Kliknij <b>Create repository</b>.</li>
+    </ol>
+
+    <h2 id="wgraj">Wgraj pliki strony</h2>
+    <ol class="steps">
+      <li><div class="st-title">W repo kliknij „Add file” → „Upload files”</div></li>
+      <li><div class="st-title">Przeciągnij wszystkie 8 plików naraz</div>
+        Pamiętaj o zmienionej nazwie <code>index.html</code> oraz o <code>sailings.csv</code>. Zaznacz wszystkie w oknie systemowym i upuść w przeglądarce.</li>
+      <li><div class="st-title">Zatwierdź („Commit changes”)</div>
+        Na dole kliknij zielony przycisk <b>Commit changes</b>. Pliki są już na GitHubie.</li>
+    </ol>
+    <div class="card tip"><p style="margin:0"><span class="label">✓ Wskazówka:</span> nazwy plików muszą być dokładnie takie jak na liście (małe litery, myślniki). Jeśli zmienisz nazwę pliku <code>.jsx</code>, strona go nie znajdzie.</p></div>
+
+    <h2 id="pages">Włącz GitHub Pages</h2>
+    <ol class="steps">
+      <li><div class="st-title">W repo wejdź w „Settings” → w menu po lewej „Pages”</div></li>
+      <li><div class="st-title">Source: „Deploy from a branch”</div>
+        W „Branch” wybierz <code>main</code>, folder <code>/ (root)</code>, kliknij <b>Save</b>.</li>
+      <li><div class="st-title">Poczekaj ~1–2 minuty</div>
+        Odśwież stronę Settings → Pages. Pojawi się zielony komunikat z adresem Twojej strony:</li>
+    </ol>
+    <div class="url-demo">https://twojafirma.github.io/sailingi/</div>
+    <p>Otwórz ten adres — powinna pojawić się działająca wyszukiwarka sailingów. <b>Gotowe.</b> Ten adres możesz wysłać współpracownikom.</p>
+
+    <h2 id="domena">Adres i własna domena (opcjonalnie)</h2>
+    <p>
+      Domyślny adres <code>twojafirma.github.io/sailingi</code> jest darmowy i wieczny. Jeśli chcesz własny, np.
+      <code>sailingi.twojafirma.pl</code>, kup domenę u dowolnego rejestratora i w Settings → Pages → „Custom domain”
+      wpisz adres, a u rejestratora ustaw rekord <code>CNAME</code> na <code>twojafirma.github.io</code>. To krok na później — nie jest potrzebny do startu.
+    </p>
+
+    <!-- ───────── CZĘŚĆ 2 ───────── -->
+    <h2 id="plik-danych">Część 2 · Plik <code>sailings.csv</code></h2>
+    <p>
+      To serce strony — jeden wiersz = jeden sailing. Otwierasz go w <b>Excelu</b> (albo Arkuszach Google / LibreOffice),
+      uzupełniasz i zapisujesz z powrotem jako CSV. Pierwszy wiersz to nagłówki kolumn — <b>nie zmieniaj ich nazw</b>.
+    </p>
+    <div class="card note"><p style="margin:0"><span class="label">Format dat:</span> <code>RRRR-MM-DD GG:MM</code>, np. <code>2026-06-23 18:00</code>.
+      Sama data (<code>2026-06-23</code>) też zadziała. Strona sama policzy <i>transit time</i> i <i>numer tygodnia</i>, jeśli zostawisz te kolumny puste.</p></div>
+
+    <h2 id="kolumny">Opis kolumn</h2>
+    <table>
+      <thead><tr><th>Kolumna</th><th>Status</th><th>Co wpisać</th><th>Przykład</th></tr></thead>
+      <tbody>
+        <tr><td><code>carrier</code></td><td><span class="pill req">wymagane</span></td><td>Armator</td><td>MAERSK</td></tr>
+        <tr><td><code>service</code></td><td><span class="pill rec">zalecane</span></td><td>Kod serwisu</td><td>AE7</td></tr>
+        <tr><td><code>service_name</code></td><td><span class="pill opt">opcjonalne</span></td><td>Pełna nazwa serwisu</td><td>Asia–North Europe 7</td></tr>
+        <tr><td><code>pol</code></td><td><span class="pill req">wymagane</span></td><td>Port załadunku (kod)</td><td>CNSHA</td></tr>
+        <tr><td><code>pod</code></td><td><span class="pill req">wymagane</span></td><td>Port wyładunku (kod)</td><td>PLGDN</td></tr>
+        <tr><td><code>transshipment</code></td><td><span class="pill opt">opcjonalne</span></td><td><b>Puste = direct.</b> Kod portu przeładunku</td><td>NLRTM</td></tr>
+        <tr><td><code>mother_vessel</code></td><td><span class="pill rec">zalecane</span></td><td>Statek matka (główny rejs)</td><td>Maersk Hangzhou</td></tr>
+        <tr><td><code>mother_voyage</code></td><td><span class="pill opt">opcjonalne</span></td><td>Numer podróży matki</td><td>079E</td></tr>
+        <tr><td><code>mother_imo</code></td><td><span class="pill opt">opcjonalne</span></td><td>Numer IMO statku matki</td><td>9784271</td></tr>
+        <tr><td><code>feeder_vessel</code></td><td><span class="pill opt">tylko TS</span></td><td>Feeder (dowóz do portu przeładunku)</td><td>Wec Vermeer</td></tr>
+        <tr><td><code>feeder_voyage</code></td><td><span class="pill opt">tylko TS</span></td><td>Numer podróży feedera</td><td>FR2618</td></tr>
+        <tr><td><code>feeder_imo</code></td><td><span class="pill opt">tylko TS</span></td><td>IMO feedera</td><td>9361310</td></tr>
+        <tr><td><code>etd</code></td><td><span class="pill req">wymagane</span></td><td>Wypłynięcie z POL</td><td>2026-06-23 18:00</td></tr>
+        <tr><td><code>eta</code></td><td><span class="pill req">wymagane</span></td><td>Przybycie do POD</td><td>2026-07-29 08:00</td></tr>
+        <tr><td><code>transit_days</code></td><td><span class="pill auto">auto</span></td><td>Liczone z ETD/ETA, jeśli puste</td><td>36</td></tr>
+        <tr><td><code>etd_week</code></td><td><span class="pill auto">auto</span></td><td>Numer tygodnia ETD, jeśli puste</td><td>26</td></tr>
+        <tr><td><code>cutoff_gatein</code></td><td><span class="pill opt">opcjonalne</span></td><td>Cut-off gate-in</td><td>2026-06-21 12:00</td></tr>
+        <tr><td><code>cutoff_vgm</code></td><td><span class="pill opt">opcjonalne</span></td><td>Cut-off VGM</td><td>2026-06-22 12:00</td></tr>
+        <tr><td><code>cutoff_doc</code></td><td><span class="pill opt">opcjonalne</span></td><td>Cut-off dokumentów / SI</td><td>2026-06-21 16:00</td></tr>
+        <tr><td><code>ts_arrive</code></td><td><span class="pill opt">tylko TS</span></td><td>Przybycie do portu przeładunku</td><td>2026-07-30 06:00</td></tr>
+        <tr><td><code>ts_depart</code></td><td><span class="pill opt">tylko TS</span></td><td>Odpłynięcie matki z przeładunku</td><td>2026-08-02 20:00</td></tr>
+        <tr><td><code>rotation</code></td><td><span class="pill opt">opcjonalne</span></td><td>Pełna rotacja, kody portów oddzielone <code>|</code></td><td>CNSHA|NLRTM|PLGDN</td></tr>
+        <tr><td><code>space</code></td><td><span class="pill opt">opcjonalne</span></td><td><code>open</code> lub <code>tight</code> (domyślnie open)</td><td>open</td></tr>
+        <tr><td><code>co2</code></td><td><span class="pill opt">opcjonalne</span></td><td>Szacowana emisja</td><td>1.92 t/TEU</td></tr>
+      </tbody>
+    </table>
+    <div class="card tip"><p style="margin:0"><span class="label">✓ Minimum, żeby ruszyć:</span> wystarczą <code>carrier</code>, <code>pol</code>, <code>pod</code>, <code>etd</code>, <code>eta</code> i <code>transshipment</code> (puste dla direct).
+      Resztę dodajesz, gdy masz czas — strona poradzi sobie z brakami i pokaże tylko to, co podałeś.</p></div>
+
+    <h3>Kody portów (Twoje lane'y)</h3>
+    <p>Używaj kodów UN/LOCODE — strona zna ich nazwy:</p>
+    <div class="grid-2">
+      <div class="card" style="margin:6px 0;">
+        <h4 style="margin-top:0">Chiny (POL)</h4>
+        <code>CNTAO</code> Qingdao · <code>CNDLC</code> Dalian · <code>CNSHA</code> Shanghai · <code>CNYTN</code> Yantian/Shenzhen · <code>CNTXG</code> Xingang/Tianjin · <code>CNNGB</code> Ningbo
+      </div>
+      <div class="card" style="margin:6px 0;">
+        <h4 style="margin-top:0">Polska (POD) + huby przeładunku</h4>
+        <code>PLGDN</code> Gdańsk · <code>PLGDY</code> Gdynia<br>
+        <code>NLRTM</code> Rotterdam · <code>DEBRV</code> Bremerhaven · <code>DEHAM</code> Hamburg · <code>DEWVN</code> Wilhelmshaven
+      </div>
+    </div>
+    <p style="font-size:13.5px;color:var(--mute)">Inny kod też zadziała — jeśli strona nie zna nazwy portu, pokaże sam kod. Pełną listę nazw można rozszerzyć w pliku <code>hifi-d-data.js</code> (sekcja <code>PORTS</code>).</p>
+
+    <h2 id="wypelnianie">Jak wypełniać w Excelu</h2>
+    <ol class="steps">
+      <li><div class="st-title">Otwórz <code>sailings.csv</code> w Excelu</div>
+        Plik już zawiera 20 przykładowych wierszy — możesz je nadpisać swoimi danymi albo dopisywać kolejne.</li>
+      <li><div class="st-title">Każdy sailing to jeden wiersz</div>
+        Kopiuj dane z plików pobranych ze stron armatorów (Excel/PDF). Dla rejsu direct zostaw kolumnę <code>transshipment</code> pustą.</li>
+      <li><div class="st-title">Zapisz jako CSV</div>
+        <b>Plik → Zapisz jako → format „CSV UTF-8 (rozdzielany przecinkami)”</b>. Zachowaj nazwę <code>sailings.csv</code>.</li>
+    </ol>
+    <div class="card warn"><p style="margin:0"><span class="label">⚠ Uwaga na Excel i kodowanie.</span>
+      Zawsze wybieraj wariant <b>„CSV UTF-8”</b> — inaczej polskie znaki (Gdańsk) mogą się rozsypać.
+      Jeśli Excel pyta o zachowanie formatu, potwierdź „Tak, zachowaj CSV”.</p></div>
+
+    <h3 id="edytor">Szybciej niż Excel — wbudowany edytor ⭐</h3>
+    <p>
+      W paczce jest też <code>Sailing editor.html</code> — strona z formularzem, która buduje
+      <code>sailings.csv</code> za Ciebie. Otwiera się pod adresem
+      <span class="mono" style="font-size:13px">…github.io/sailingi/Sailing editor.html</span>
+      (albo z menu wyszukiwarki → <b>„Edit data”</b>). Zalecana zamiast Excela:
+    </p>
+    <ul>
+      <li><b>Armator i porty z list</b> — zero wpisywania kodów, zero literówek.</li>
+      <li><b>Kalendarze dat</b> — <i>transit time</i> i <i>numer tygodnia</i> liczą się same.</li>
+      <li><b>„Wklej z Excela”</b> — skopiuj wiersz z pliku armatora (Ctrl+C), wklej, a pola wypełnią się same. Poprawiasz i klikasz <b>Add</b>.</li>
+      <li>Wczytuje Twój obecny <code>sailings.csv</code>, pozwala edytować/usuwać wiersze i <b>pobiera gotowy plik</b> jednym przyciskiem.</li>
+    </ul>
+    <div class="card tip"><p style="margin:0"><span class="label">✓ Workflow z edytorem:</span>
+      otwórz edytor → dodaj/popraw sailingi → <b>Download sailings.csv</b> → wgraj plik na GitHub (Część 3 niżej). Dane edytujesz w przeglądarce i nie znikają po odświeżeniu.</p></div>
+
+    <!-- ───────── CZĘŚĆ 3 ───────── -->
+    <h2 id="tydzien">Część 3 · Aktualizacja co tydzień (Metoda A — przeglądarka)</h2>
+    <p>Najprostsza droga, bez instalowania niczego. ~2 minuty tygodniowo.</p>
+    <ol class="steps">
+      <li><div class="st-title">Przygotuj świeży <code>sailings.csv</code></div>
+        Wypełnij w Excelu według instrukcji wyżej i zapisz jako CSV UTF-8.</li>
+      <li><div class="st-title">Wejdź do swojego repo na GitHubie</div>
+        Kliknij plik <code>sailings.csv</code> na liście, potem ikonę ołówka („Edit”) — lub prościej: na głównej stronie repo „Add file” → „Upload files”.</li>
+      <li><div class="st-title">Przeciągnij nowy plik <code>sailings.csv</code></div>
+        Upuść go w oknie — GitHub rozpozna, że to nowsza wersja i podmieni stary plik.</li>
+      <li><div class="st-title">Kliknij „Commit changes”</div>
+        Po ~1 minucie strona pokazuje nowe sailingi. Odśwież ją (<span class="kbd">Ctrl</span> + <span class="kbd">F5</span>), żeby zobaczyć od razu.</li>
+    </ol>
+    <div class="card tip"><p style="margin:0"><span class="label">✓ To wszystko.</span> Nazwa pliku musi pozostać <code>sailings.csv</code> — wtedy nadpisuje poprzedni. Cała aktualizacja to: wypełnij Excel → zapisz CSV → przeciągnij → Commit.</p></div>
+
+    <h2 id="metoda-b">Metoda B · GitHub Desktop (dla wygody)</h2>
+    <p>Jeśli aktualizujesz często, wygodniej mieć folder na komputerze zsynchronizowany z GitHubem:</p>
+    <ol class="steps">
+      <li><div class="st-title">Zainstaluj GitHub Desktop</div> z <a href="https://desktop.github.com">desktop.github.com</a> i zaloguj się swoim kontem.</li>
+      <li><div class="st-title">„Clone” swojego repo</div> — pojawi się folder na dysku ze wszystkimi plikami.</li>
+      <li><div class="st-title">Podmieniaj <code>sailings.csv</code> w tym folderze</div> jak zwykły plik na dysku.</li>
+      <li><div class="st-title">W GitHub Desktop kliknij „Commit” → „Push”</div> — zmiany lecą na stronę. Bez przeglądarki, dwa kliknięcia.</li>
+    </ol>
+
+    <!-- ───────── POMOC ───────── -->
+    <h2 id="faq">FAQ i typowe problemy</h2>
+    <div class="card"><p style="margin:0 0 4px"><b>Strona pokazuje stare dane.</b></p>
+      Odśwież z pominięciem cache: <span class="kbd">Ctrl</span>+<span class="kbd">F5</span> (Windows) lub <span class="kbd">Cmd</span>+<span class="kbd">Shift</span>+<span class="kbd">R</span> (Mac). Sprawdź też, czy commit się wykonał i minęła ~1 minuta.</div>
+    <div class="card"><p style="margin:0 0 4px"><b>Strona jest pusta / biała.</b></p>
+      Najczęściej brakuje któregoś pliku albo nazwa się nie zgadza. Sprawdź, czy w repo jest <code>index.html</code> i wszystkie pliki <code>hifi-d-*.jsx</code> oraz <code>sailings.csv</code> — dokładnie z tymi nazwami.</div>
+    <div class="card"><p style="margin:0 0 4px"><b>Polskie znaki się rozsypały (Gdaďż˝sk).</b></p>
+      Plik został zapisany w złym kodowaniu. Zapisz ponownie jako <b>CSV UTF-8</b>.</div>
+    <div class="card"><p style="margin:0 0 4px"><b>Jeden sailing się nie pokazuje.</b></p>
+      Prawdopodobnie pusta jest jedna z wymaganych kolumn (<code>carrier</code>, <code>pol</code>, <code>pod</code>). Wiersze bez nich są pomijane.</div>
+    <div class="card"><p style="margin:0 0 4px"><b>Czy to naprawdę za darmo?</b></p>
+      Tak. GitHub Pages dla publicznych repozytoriów jest bezpłatny i bezterminowy (limit 100 GB transferu/mc — dla tej strony nieosiągalny).</div>
+    <div class="card"><p style="margin:0 0 4px"><b>Czy ktoś może podejrzeć moje dane?</b></p>
+      Repozytorium publiczne = pliki są widoczne. Rozkłady armatorów są jawne, więc to zwykle nie problem. Jeśli chcesz ukryć dane, potrzebny jest płatny plan GitHub (prywatne Pages) lub inny hosting.</div>
+
+    <h2 id="checklist">Checklista — pierwsze uruchomienie</h2>
+    <div class="card">
+      <ul>
+        <li>☐ Konto GitHub założone i e-mail potwierdzony</li>
+        <li>☐ Publiczne repozytorium utworzone (np. <code>sailingi</code>)</li>
+        <li>☐ Plik strony przemianowany na <code>index.html</code></li>
+        <li>☐ Wszystkie pliki wgrane do repo (kod + <code>index.html</code> + <code>sailings.csv</code> + <code>Sailing editor.html</code>)</li>
+        <li>☐ GitHub Pages włączone (Settings → Pages → branch <code>main</code>, root)</li>
+        <li>☐ Adres <code>https://…github.io/…</code> otwiera działającą stronę</li>
+        <li>☐ Test aktualizacji: zmień jeden wiersz w <code>sailings.csv</code>, wgraj, sprawdź że strona się zmieniła</li>
+        <li>☐ Adres wysłany zespołowi</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:54px;padding-top:18px;border-top:1px solid var(--line);color:var(--mute);font-size:12.5px;">
+      Poradnik towarzyszy plikom prototypu <code>Sailings — Variant D (hi-fi)</code> oraz danym <code>sailings.csv</code>.
+      Pełna specyfikacja techniczna (model danych, parsery, roadmap) jest w pliku <code>Sailings documentation.html</code>.
+    </div>
+  </main>
+</div>
+</body>
+</html>

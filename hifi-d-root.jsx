@@ -65,7 +65,7 @@ function TopBar({ shortlistCount }) {
       <nav className="topnav">
         <a href="#" className="active">Search</a>
         <a href="#">Shortlist {shortlistCount>0 && <span style={{ opacity:.7 }}>· {shortlistCount}</span>}</a>
-        <a href="#">Admin · Upload</a>
+        <a href="Sailing editor.html">Edit data</a>
       </nav>
       <div className="user">JK</div>
     </div>
