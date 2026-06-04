@@ -1,5 +1,8 @@
-// fetch-maersk.mjs — pull Maersk Point-to-Point schedules → sailings.csv
-// Runs in Node 18+. Reads MAERSK_API_KEY from env (GitHub Secret).
+// fetch-maersk.mjs — pull Maersk DCSA Commercial Schedules → sailings.csv
+// API: "Ocean - Commercial Schedules [DCSA]" v1
+//   GET https://api.maersk.com/ocean/commercial-schedules/dcsa/v1/point-to-point-routes
+//   auth header: Consumer-Key
+// Node 18+. Reads MAERSK_API_KEY from env (GitHub Secret).
 // Local test:  MAERSK_API_KEY=xxxxx node scripts/fetch-maersk.mjs --debug
 
 import { readFile, writeFile } from 'node:fs/promises';
@@ -8,11 +11,9 @@ import { existsSync } from 'node:fs';
 const API_KEY = process.env.MAERSK_API_KEY;
 const DEBUG = process.argv.includes('--debug');
 
-// Confirm exact path on developer.maersk.com "Point-to-Point Schedules" → Try it
-const BASE = 'https://api.maersk.com/schedules/point-to-point';
-const CARRIER_CODE = 'MAEU';
-const WEEKS_AHEAD  = 6;
-const CSV_PATH     = 'sailings.csv';
+const BASE = 'https://api.maersk.com/ocean/commercial-schedules/dcsa/v1/point-to-point-routes';
+const RANGE_DAYS = 42;
+const CSV_PATH   = 'sailings.csv';
 
 const LANES = [
   ['CNTAO','PLGDN'], ['CNTAO','PLGDY'],
@@ -28,7 +29,7 @@ const COLS = ['carrier','service','service_name','pol','pod','transshipment',
   'etd','eta','transit_days','etd_week','cutoff_gatein','cutoff_vgm','cutoff_doc',
   'ts_arrive','ts_depart','rotation','space','co2'];
 
-const today = () => new Date().toISOString().slice(0,10);
+const addDays = (n)=>{ const d=new Date(); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().slice(0,10); };
 function isoWeek(d){
   const x=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));
   const day=(x.getUTCDay()+6)%7; x.setUTCDate(x.getUTCDate()-day+3);
@@ -37,26 +38,16 @@ function isoWeek(d){
   return 1+Math.round((x-f)/(7*864e5));
 }
 const fmtDT = (iso)=> iso ? String(iso).replace('T',' ').slice(0,16) : '';
-const pick = (obj, ...paths) => {
-  for (const p of paths){
-    let v=obj; let ok=true;
-    for (const k of p.split('.')){ if(v && k in v) v=v[k]; else { ok=false; break; } }
-    if (ok && v!==undefined && v!==null && v!=='') return v;
-  }
-  return '';
-};
 
 async function fetchLane(origin, dest){
   const qs = new URLSearchParams({
-    collectionOriginUNLocationCode: origin,
-    deliveryDestinationUNLocationCode: dest,
-    vesselOperatorCarrierCode: CARRIER_CODE,
-    startDate: today(),
-    startDateType: 'D',
-    dateRange: `P${WEEKS_AHEAD}W`,
+    placeOfReceipt: origin,
+    placeOfDelivery: dest,
+    departureStartDate: addDays(0),
+    departureEndDate: addDays(RANGE_DAYS),
   });
   const res = await fetch(`${BASE}?${qs}`, {
-    headers: { 'Consumer-Key': API_KEY, 'Accept': 'application/json' },
+    headers: { 'Consumer-Key': API_KEY, 'API-Version': '1', 'Accept': 'application/json' },
   });
   if (!res.ok){
     const body = await res.text().catch(()=> '');
@@ -65,52 +56,54 @@ async function fetchLane(origin, dest){
   return res.json();
 }
 
+function legInfo(leg){
+  const t = leg.transport || {};
+  const sp = (t.servicePartners || [])[0] || {};
+  const v  = t.vessel || {};
+  return {
+    mode: t.modeOfTransport || '',
+    vessel: v.name || '', imo: v.vesselIMONumber || '',
+    voy: sp.carrierExportVoyageNumber || '',
+    svc: sp.carrierServiceCode || '', svcN: sp.carrierServiceName || '',
+    depUN: leg.departure?.location?.UNLocationCode || '',
+    arrUN: leg.arrival?.location?.UNLocationCode || '',
+    depDT: leg.departure?.dateTime || '', arrDT: leg.arrival?.dateTime || '',
+    dur: (leg.departure?.dateTime && leg.arrival?.dateTime)
+            ? (new Date(leg.arrival.dateTime) - new Date(leg.departure.dateTime)) : 0,
+  };
+}
+
 function rowsFromResponse(json, reqOrigin, reqDest){
+  const routes = Array.isArray(json) ? json : (json.routes || json.data || []);
   const out = [];
-  const products = json.oceanProducts || json.products || [];
-  for (const prod of products){
-    const scheds = prod.transportSchedules || prod.schedules || [];
-    for (const s of scheds){
-      const legs = (s.transportLegs || s.transport || s.legs || []);
-      const vlegs = legs.filter(l => {
-        const mode = pick(l,'transport.transportMode','transportMode','mode');
-        return !mode || /VESSEL|VESL/i.test(mode);
-      });
-      const first = vlegs[0] || {};
-      const last  = vlegs[vlegs.length-1] || first;
-      const startLoc = (l)=> pick(l,'facilities.startLocation.UNLocationCode','startLocation.UNLocationCode','facilities.collectionOrigin.UNLocationCode');
-      const endLoc   = (l)=> pick(l,'facilities.endLocation.UNLocationCode','endLocation.UNLocationCode','facilities.deliveryDestination.UNLocationCode');
-      const pol = startLoc(first) || reqOrigin;
-      const pod = endLoc(last)    || reqDest;
-      const isTS = vlegs.length > 1;
-      const ts = isTS ? endLoc(first) : '';
-      const vesselOf = (l)=> ({
-        name:  pick(l,'transport.vessel.vesselName','vessel.vesselName','transport.vesselName'),
-        imo:   pick(l,'transport.vessel.vesselIMONumber','vessel.vesselIMONumber','transport.vesselIMONumber'),
-        voy:   pick(l,'transport.carrierDepartureVoyageNumber','carrierDepartureVoyageNumber','transport.voyageNumber'),
-        svc:   pick(l,'transport.carrierServiceCode','carrierServiceCode','transport.inttraServiceCode'),
-        svcN:  pick(l,'transport.carrierServiceName','carrierServiceName','transport.inttraServiceName'),
-      });
-      const mother = vesselOf(last);
-      const feeder = isTS ? vesselOf(first) : { name:'', imo:'', voy:'', svc:'', svcN:'' };
-      const etd = pick(s,'departureDateTime','firstDepartureDateTime') || pick(first,'departureDateTime');
-      const eta = pick(s,'arrivalDateTime','lastArrivalDateTime')      || pick(last,'arrivalDateTime');
-      let transit = pick(s,'transitTime');
-      if (!transit && etd && eta) transit = Math.round((new Date(eta)-new Date(etd))/864e5);
-      const rotation = vlegs.map(l=>startLoc(l)).concat(endLoc(last)).filter(Boolean);
-      out.push({
-        carrier:'MAERSK', service: mother.svc||'', service_name: mother.svcN||'',
-        pol, pod, transshipment: ts||'',
-        mother_vessel: mother.name||'', mother_voyage: mother.voy||'', mother_imo: mother.imo||'',
-        feeder_vessel: feeder.name||'', feeder_voyage: feeder.voy||'', feeder_imo: feeder.imo||'',
-        etd: fmtDT(etd), eta: fmtDT(eta), transit_days: transit||'',
-        etd_week: etd && !isNaN(new Date(etd)) ? isoWeek(new Date(etd)) : '',
-        cutoff_gatein:'', cutoff_vgm:'', cutoff_doc:'',
-        ts_arrive: isTS ? fmtDT(pick(first,'arrivalDateTime')) : '',
-        ts_depart: isTS ? fmtDT(pick(last,'departureDateTime')) : '',
-        rotation: rotation.join('|'), space:'open', co2:'',
-      });
-    }
+  for (const r of routes){
+    const legs = (r.legs || []).map(legInfo).sort((a,b)=> new Date(a.depDT||0) - new Date(b.depDT||0));
+    const vlegs = legs.filter(l => /VESSEL/i.test(l.mode));
+    if (vlegs.length === 0) continue;
+    const byDur = [...vlegs].sort((a,b)=> b.dur - a.dur);
+    const mother = byDur[0];
+    const isTS = vlegs.length > 1;
+    const feeder = isTS ? byDur[1] : null;
+    const pol = r.placeOfReceipt?.location?.UNLocationCode || vlegs[0].depUN || reqOrigin;
+    const pod = r.placeOfDelivery?.location?.UNLocationCode || vlegs[vlegs.length-1].arrUN || reqDest;
+    const ts  = isTS ? vlegs[0].arrUN : '';
+    const etd = r.placeOfReceipt?.dateTime || vlegs[0].depDT;
+    const eta = r.placeOfDelivery?.dateTime || vlegs[vlegs.length-1].arrDT;
+    let transit = r.transitTime;
+    if (!transit && etd && eta) transit = Math.round((new Date(eta)-new Date(etd))/864e5);
+    const rotation = legs.map(l=>l.depUN).concat(legs[legs.length-1]?.arrUN).filter(Boolean);
+    out.push({
+      carrier:'MAERSK', service: mother.svc||'', service_name: mother.svcN||'',
+      pol, pod, transshipment: ts||'',
+      mother_vessel: mother.vessel||'', mother_voyage: mother.voy||'', mother_imo: mother.imo||'',
+      feeder_vessel: feeder?(feeder.vessel||''):'', feeder_voyage: feeder?(feeder.voy||''):'', feeder_imo: feeder?(feeder.imo||''):'',
+      etd: fmtDT(etd), eta: fmtDT(eta), transit_days: transit||'',
+      etd_week: etd && !isNaN(new Date(etd)) ? isoWeek(new Date(etd)) : '',
+      cutoff_gatein:'', cutoff_vgm:'', cutoff_doc:'',
+      ts_arrive: isTS ? fmtDT(vlegs[0].arrDT) : '',
+      ts_depart: isTS ? fmtDT(vlegs[vlegs.length-1].depDT) : '',
+      rotation: rotation.join('|'), space:'open', co2:'',
+    });
   }
   return out;
 }
@@ -153,7 +146,7 @@ async function main(){
       fresh.push(...rows); ok++;
       console.log(`OK ${o}->${d}: ${rows.length} sailings`);
     } catch(e){ fail++; console.warn(`WARN ${o}->${d}: ${e.message}`); }
-    await new Promise(r=>setTimeout(r, 400));
+    await new Promise(r=>setTimeout(r, 500));
   }
   if (DEBUG && firstRaw){
     await writeFile('maersk-raw.json', JSON.stringify(firstRaw,null,2));
