@@ -1,0 +1,956 @@
+[
+  {
+    "placeOfReceipt": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Qingdao Qianwan Container Co Ltd",
+        "address": {
+          "street": "Qingdao Qianwan Container Co Ltd",
+          "city": "Qingdao",
+          "countryCode": "CN"
+        },
+        "UNLocationCode": "CNTAO",
+        "facility": {
+          "facilityCode": "QQCTX",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-06-09T07:00:00+08:00"
+    },
+    "placeOfDelivery": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Gdansk Baltic HUB Terminal",
+        "address": {
+          "street": "Gdansk Baltic HUB Terminal",
+          "city": "Gdansk",
+          "countryCode": "PL"
+        },
+        "UNLocationCode": "PLGDN",
+        "facility": {
+          "facilityCode": "DCT",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-07-28T06:00:00+02:00"
+    },
+    "receiptTypeAtOrigin": "CY",
+    "deliveryTypeAtDestination": "CY",
+    "cutOffTimes": [
+      {
+        "cutOffDateTimeCode": "FCO",
+        "cutOffDateTime": "2026-06-04T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "DCO",
+        "cutOffDateTime": "2026-06-04T20:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "ECP",
+        "cutOffDateTime": "2026-06-05T10:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "OBC",
+        "cutOffDateTime": "2026-06-05T10:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "VCO",
+        "cutOffDateTime": "2026-06-05T16:00:00+08:00"
+      }
+    ],
+    "solutionNumber": 1,
+    "routingReference": "v3~MSK~sail:MVS:CNTSTQQ:DEBRVTM:DN6:623W:623W~sail:MVS:DEBRVTM:PLGDNDCT:860:630N:630N",
+    "transitTime": 49,
+    "legs": [
+      {
+        "sequenceNumber": 1,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "AE5",
+              "carrierCommercialServiceName": "AE5",
+              "carrierServiceCode": "415",
+              "carrierImportVoyageNumber": "623W",
+              "carrierExportVoyageNumber": "623W"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9984601",
+            "name": "BRUSSELS MAERSK",
+            "flag": "DK",
+            "callSign": "OUYX2"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Qingdao Qianwan Container Co Ltd",
+            "UNLocationCode": "CNTAO",
+            "facility": {
+              "facilityCode": "QQCTX",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-06-09T07:00:00+08:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-07-22T06:00:00+02:00"
+        }
+      },
+      {
+        "sequenceNumber": 2,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "SHUTTLE E15",
+              "carrierCommercialServiceName": "Europe Shuttle 15",
+              "carrierServiceCode": "E15",
+              "carrierImportVoyageNumber": "630N",
+              "carrierExportVoyageNumber": "630N"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9356115",
+            "name": "MAERSK NUBA",
+            "flag": "HK",
+            "callSign": "VRLA5"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-07-23T22:00:00+02:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Gdansk Baltic HUB Terminal",
+            "UNLocationCode": "PLGDN",
+            "facility": {
+              "facilityCode": "DCT",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-07-28T06:00:00+02:00"
+        }
+      }
+    ]
+  },
+  {
+    "placeOfReceipt": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Qingdao Qianwan Container Co Ltd",
+        "address": {
+          "street": "Qingdao Qianwan Container Co Ltd",
+          "city": "Qingdao",
+          "countryCode": "CN"
+        },
+        "UNLocationCode": "CNTAO",
+        "facility": {
+          "facilityCode": "QQCTX",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-06-14T02:00:00+08:00"
+    },
+    "placeOfDelivery": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Gdansk Baltic HUB Terminal",
+        "address": {
+          "street": "Gdansk Baltic HUB Terminal",
+          "city": "Gdansk",
+          "countryCode": "PL"
+        },
+        "UNLocationCode": "PLGDN",
+        "facility": {
+          "facilityCode": "DCT",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-08-04T06:00:00+02:00"
+    },
+    "receiptTypeAtOrigin": "CY",
+    "deliveryTypeAtDestination": "CY",
+    "cutOffTimes": [
+      {
+        "cutOffDateTimeCode": "DCO",
+        "cutOffDateTime": "2026-06-10T07:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "VCO",
+        "cutOffDateTime": "2026-06-10T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "ECP",
+        "cutOffDateTime": "2026-06-10T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "OBC",
+        "cutOffDateTime": "2026-06-10T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "FCO",
+        "cutOffDateTime": "2026-06-10T22:00:00+08:00"
+      }
+    ],
+    "solutionNumber": 1,
+    "routingReference": "v3~MSK~sail:MVS:CNTSTQQ:DEBRVTM:1UM:624W:624W~sail:MVS:DEBRVTM:PLGDNDCT:44C:631N:631N",
+    "transitTime": 51,
+    "legs": [
+      {
+        "sequenceNumber": 1,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "AE5",
+              "carrierCommercialServiceName": "AE5",
+              "carrierServiceCode": "415",
+              "carrierImportVoyageNumber": "624W",
+              "carrierExportVoyageNumber": "624W"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9632117",
+            "name": "MUNKEBO MAERSK",
+            "flag": "DK",
+            "callSign": "OWUQ2"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Qingdao Qianwan Container Co Ltd",
+            "UNLocationCode": "CNTAO",
+            "facility": {
+              "facilityCode": "QQCTX",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-06-14T02:00:00+08:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-07-29T06:00:00+02:00"
+        }
+      },
+      {
+        "sequenceNumber": 2,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "SHUTTLE E15",
+              "carrierCommercialServiceName": "Europe Shuttle 15",
+              "carrierServiceCode": "E15",
+              "carrierImportVoyageNumber": "631N",
+              "carrierExportVoyageNumber": "631N"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9294020",
+            "name": "JPO GEMINI",
+            "flag": "LR",
+            "callSign": "A8VF7"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-07-30T22:00:00+02:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Gdansk Baltic HUB Terminal",
+            "UNLocationCode": "PLGDN",
+            "facility": {
+              "facilityCode": "DCT",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-04T06:00:00+02:00"
+        }
+      }
+    ]
+  },
+  {
+    "placeOfReceipt": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Qingdao Qianwan Container Co Ltd",
+        "address": {
+          "street": "Qingdao Qianwan Container Co Ltd",
+          "city": "Qingdao",
+          "countryCode": "CN"
+        },
+        "UNLocationCode": "CNTAO",
+        "facility": {
+          "facilityCode": "QQCTX",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-06-21T09:00:00+08:00"
+    },
+    "placeOfDelivery": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Gdansk Baltic HUB Terminal",
+        "address": {
+          "street": "Gdansk Baltic HUB Terminal",
+          "city": "Gdansk",
+          "countryCode": "PL"
+        },
+        "UNLocationCode": "PLGDN",
+        "facility": {
+          "facilityCode": "DCT",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-08-11T06:00:00+02:00"
+    },
+    "receiptTypeAtOrigin": "CY",
+    "deliveryTypeAtDestination": "CY",
+    "cutOffTimes": [
+      {
+        "cutOffDateTimeCode": "DCO",
+        "cutOffDateTime": "2026-06-17T14:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "ECP",
+        "cutOffDateTime": "2026-06-17T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "OBC",
+        "cutOffDateTime": "2026-06-17T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "FCO",
+        "cutOffDateTime": "2026-06-18T05:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "VCO",
+        "cutOffDateTime": "2026-06-18T13:00:00+08:00"
+      }
+    ],
+    "solutionNumber": 1,
+    "routingReference": "v3~MSK~sail:MVS:CNTSTQQ:DEBRVTM:DN7:625W:625W~sail:MVS:DEBRVTM:PLGDNDCT:860:632N:632N",
+    "transitTime": 51,
+    "legs": [
+      {
+        "sequenceNumber": 1,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "AE5",
+              "carrierCommercialServiceName": "AE5",
+              "carrierServiceCode": "415",
+              "carrierImportVoyageNumber": "625W",
+              "carrierExportVoyageNumber": "625W"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9984613",
+            "name": "BARCELONA MAERSK",
+            "flag": "DK",
+            "callSign": "OUYT2"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Qingdao Qianwan Container Co Ltd",
+            "UNLocationCode": "CNTAO",
+            "facility": {
+              "facilityCode": "QQCTX",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-06-21T09:00:00+08:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-05T06:00:00+02:00"
+        }
+      },
+      {
+        "sequenceNumber": 2,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "SHUTTLE E15",
+              "carrierCommercialServiceName": "Europe Shuttle 15",
+              "carrierServiceCode": "E15",
+              "carrierImportVoyageNumber": "632N",
+              "carrierExportVoyageNumber": "632N"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9356115",
+            "name": "MAERSK NUBA",
+            "flag": "HK",
+            "callSign": "VRLA5"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-06T22:00:00+02:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Gdansk Baltic HUB Terminal",
+            "UNLocationCode": "PLGDN",
+            "facility": {
+              "facilityCode": "DCT",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-11T06:00:00+02:00"
+        }
+      }
+    ]
+  },
+  {
+    "placeOfReceipt": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Qingdao Qianwan Container Co Ltd",
+        "address": {
+          "street": "Qingdao Qianwan Container Co Ltd",
+          "city": "Qingdao",
+          "countryCode": "CN"
+        },
+        "UNLocationCode": "CNTAO",
+        "facility": {
+          "facilityCode": "QQCTX",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-06-28T09:00:00+08:00"
+    },
+    "placeOfDelivery": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Gdansk Baltic HUB Terminal",
+        "address": {
+          "street": "Gdansk Baltic HUB Terminal",
+          "city": "Gdansk",
+          "countryCode": "PL"
+        },
+        "UNLocationCode": "PLGDN",
+        "facility": {
+          "facilityCode": "DCT",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-08-18T06:00:00+02:00"
+    },
+    "receiptTypeAtOrigin": "CY",
+    "deliveryTypeAtDestination": "CY",
+    "cutOffTimes": [
+      {
+        "cutOffDateTimeCode": "DCO",
+        "cutOffDateTime": "2026-06-24T14:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "ECP",
+        "cutOffDateTime": "2026-06-24T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "OBC",
+        "cutOffDateTime": "2026-06-24T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "FCO",
+        "cutOffDateTime": "2026-06-25T05:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "VCO",
+        "cutOffDateTime": "2026-06-25T13:00:00+08:00"
+      }
+    ],
+    "solutionNumber": 1,
+    "routingReference": "v3~MSK~sail:MVS:CNTSTQQ:DEBRVTM:788:626W:626W~sail:MVS:DEBRVTM:PLGDNDCT:44C:633N:633N",
+    "transitTime": 51,
+    "legs": [
+      {
+        "sequenceNumber": 1,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "AE5",
+              "carrierCommercialServiceName": "AE5",
+              "carrierServiceCode": "415",
+              "carrierImportVoyageNumber": "626W",
+              "carrierExportVoyageNumber": "626W"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9321524",
+            "name": "EBBA MAERSK",
+            "flag": "SG",
+            "callSign": "9VCX8"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Qingdao Qianwan Container Co Ltd",
+            "UNLocationCode": "CNTAO",
+            "facility": {
+              "facilityCode": "QQCTX",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-06-28T09:00:00+08:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-12T06:00:00+02:00"
+        }
+      },
+      {
+        "sequenceNumber": 2,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "SHUTTLE E15",
+              "carrierCommercialServiceName": "Europe Shuttle 15",
+              "carrierServiceCode": "E15",
+              "carrierImportVoyageNumber": "633N",
+              "carrierExportVoyageNumber": "633N"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9294020",
+            "name": "JPO GEMINI",
+            "flag": "LR",
+            "callSign": "A8VF7"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-13T22:00:00+02:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Gdansk Baltic HUB Terminal",
+            "UNLocationCode": "PLGDN",
+            "facility": {
+              "facilityCode": "DCT",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-18T06:00:00+02:00"
+        }
+      }
+    ]
+  },
+  {
+    "placeOfReceipt": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Qingdao Qianwan Container Co Ltd",
+        "address": {
+          "street": "Qingdao Qianwan Container Co Ltd",
+          "city": "Qingdao",
+          "countryCode": "CN"
+        },
+        "UNLocationCode": "CNTAO",
+        "facility": {
+          "facilityCode": "QQCTX",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-07-05T09:00:00+08:00"
+    },
+    "placeOfDelivery": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Gdansk Baltic HUB Terminal",
+        "address": {
+          "street": "Gdansk Baltic HUB Terminal",
+          "city": "Gdansk",
+          "countryCode": "PL"
+        },
+        "UNLocationCode": "PLGDN",
+        "facility": {
+          "facilityCode": "DCT",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-08-25T06:00:00+02:00"
+    },
+    "receiptTypeAtOrigin": "CY",
+    "deliveryTypeAtDestination": "CY",
+    "cutOffTimes": [
+      {
+        "cutOffDateTimeCode": "DCO",
+        "cutOffDateTime": "2026-07-01T14:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "ECP",
+        "cutOffDateTime": "2026-07-01T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "OBC",
+        "cutOffDateTime": "2026-07-01T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "FCO",
+        "cutOffDateTime": "2026-07-02T05:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "VCO",
+        "cutOffDateTime": "2026-07-02T13:00:00+08:00"
+      }
+    ],
+    "solutionNumber": 1,
+    "routingReference": "v3~MSK~sail:MVS:CNTSTQQ:DEBRVTM:Y29:627W:627W~sail:MVS:DEBRVTM:PLGDNDCT:860:634N:634N",
+    "transitTime": 51,
+    "legs": [
+      {
+        "sequenceNumber": 1,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "AE5",
+              "carrierCommercialServiceName": "AE5",
+              "carrierServiceCode": "415",
+              "carrierImportVoyageNumber": "627W",
+              "carrierExportVoyageNumber": "627W"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9778844",
+            "name": "MARSEILLE MAERSK",
+            "flag": "DK",
+            "callSign": "OWPU2"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Qingdao Qianwan Container Co Ltd",
+            "UNLocationCode": "CNTAO",
+            "facility": {
+              "facilityCode": "QQCTX",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-07-05T09:00:00+08:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-19T06:00:00+02:00"
+        }
+      },
+      {
+        "sequenceNumber": 2,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "SHUTTLE E15",
+              "carrierCommercialServiceName": "Europe Shuttle 15",
+              "carrierServiceCode": "E15",
+              "carrierImportVoyageNumber": "634N",
+              "carrierExportVoyageNumber": "634N"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9356115",
+            "name": "MAERSK NUBA",
+            "flag": "HK",
+            "callSign": "VRLA5"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-20T22:00:00+02:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Gdansk Baltic HUB Terminal",
+            "UNLocationCode": "PLGDN",
+            "facility": {
+              "facilityCode": "DCT",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-25T06:00:00+02:00"
+        }
+      }
+    ]
+  },
+  {
+    "placeOfReceipt": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Qingdao Qianwan Container Co Ltd",
+        "address": {
+          "street": "Qingdao Qianwan Container Co Ltd",
+          "city": "Qingdao",
+          "countryCode": "CN"
+        },
+        "UNLocationCode": "CNTAO",
+        "facility": {
+          "facilityCode": "QQCTX",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-07-12T09:00:00+08:00"
+    },
+    "placeOfDelivery": {
+      "facilityTypeCode": "POTE",
+      "location": {
+        "locationName": "Gdansk Baltic HUB Terminal",
+        "address": {
+          "street": "Gdansk Baltic HUB Terminal",
+          "city": "Gdansk",
+          "countryCode": "PL"
+        },
+        "UNLocationCode": "PLGDN",
+        "facility": {
+          "facilityCode": "DCT",
+          "facilityCodeListProvider": "SMDG"
+        }
+      },
+      "dateTime": "2026-09-01T06:00:00+02:00"
+    },
+    "receiptTypeAtOrigin": "CY",
+    "deliveryTypeAtDestination": "CY",
+    "cutOffTimes": [
+      {
+        "cutOffDateTimeCode": "ECP",
+        "cutOffDateTime": "2026-07-08T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "OBC",
+        "cutOffDateTime": "2026-07-08T17:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "FCO",
+        "cutOffDateTime": "2026-07-09T05:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "DCO",
+        "cutOffDateTime": "2026-07-09T09:00:00+08:00"
+      },
+      {
+        "cutOffDateTimeCode": "VCO",
+        "cutOffDateTime": "2026-07-09T13:00:00+08:00"
+      }
+    ],
+    "solutionNumber": 1,
+    "routingReference": "v3~MSK~sail:MVS:CNTSTQQ:DEBRVTM:Y24:628W:628W~sail:MVS:DEBRVTM:PLGDNDCT:44C:635N:635N",
+    "transitTime": 51,
+    "legs": [
+      {
+        "sequenceNumber": 1,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "AE5",
+              "carrierCommercialServiceName": "AE5",
+              "carrierServiceCode": "415",
+              "carrierImportVoyageNumber": "628W",
+              "carrierExportVoyageNumber": "628W"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9778791",
+            "name": "MADRID MAERSK",
+            "flag": "DK",
+            "callSign": "OWMD2"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Qingdao Qianwan Container Co Ltd",
+            "UNLocationCode": "CNTAO",
+            "facility": {
+              "facilityCode": "QQCTX",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-07-12T09:00:00+08:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-26T06:00:00+02:00"
+        }
+      },
+      {
+        "sequenceNumber": 2,
+        "transport": {
+          "modeOfTransport": "VESSEL",
+          "servicePartners": [
+            {
+              "carrierCode": "MAEU",
+              "carrierCodeListProvider": "NMFTA",
+              "carrierServiceName": "SHUTTLE E15",
+              "carrierCommercialServiceName": "Europe Shuttle 15",
+              "carrierServiceCode": "E15",
+              "carrierImportVoyageNumber": "635N",
+              "carrierExportVoyageNumber": "635N"
+            }
+          ],
+          "vessel": {
+            "vesselIMONumber": "9294020",
+            "name": "JPO GEMINI",
+            "flag": "LR",
+            "callSign": "A8VF7"
+          }
+        },
+        "departure": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "NTB North Sea Terminal Bremerhaven",
+            "UNLocationCode": "DEBRV",
+            "facility": {
+              "facilityCode": "NTB",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-08-27T22:00:00+02:00"
+        },
+        "arrival": {
+          "facilityTypeCode": "POTE",
+          "location": {
+            "locationName": "Gdansk Baltic HUB Terminal",
+            "UNLocationCode": "PLGDN",
+            "facility": {
+              "facilityCode": "DCT",
+              "facilityCodeListProvider": "SMDG"
+            }
+          },
+          "dateTime": "2026-09-01T06:00:00+02:00"
+        }
+      }
+    ]
+  }
+]
