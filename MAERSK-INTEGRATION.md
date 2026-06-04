@@ -22,17 +22,27 @@ Klucz API jest schowany w sekrecie repozytorium — nigdy nie trafia do kodu ani
   ```
   Skrypt wypisze ile sailingów pobrał per lane i zaktualizuje `sailings.csv`.
 
+## API (potwierdzone ze specyfikacji)
+- **Produkt:** „Ocean – Commercial Schedules [DCSA]" v1
+- **Endpoint:** `GET https://api.maersk.com/ocean/commercial-schedules/dcsa/v1/point-to-point-routes`
+- **Nagłówek autoryzacji:** `Consumer-Key: <twój klucz>` (+ `API-Version: 1`)
+- **Parametry:** `placeOfReceipt`, `placeOfDelivery` (UN/LOCODE), `departureStartDate`, `departureEndDate` (YYYY-MM-DD)
+- **Odpowiedź:** tablica `PointToPoint` → każda ma `placeOfReceipt`/`placeOfDelivery` (z `dateTime`), `transitTime` i `legs[]`. Noga (`Leg`) z `transport.vessel.{name,vesselIMONumber}` oraz `transport.servicePartners[].{carrierServiceCode,carrierServiceName,carrierExportVoyageNumber}`.
+
 ## Jak działa
-1. Dla każdej z 12 par (UN/LOCODE → UN/LOCODE) woła endpoint Maersk Point-to-Point Schedules na najbliższe 6 tygodni, carrier = `MAEU`.
-2. Z odpowiedzi wyciąga: POL, ewentualny przeładunek (TS), POD, statek matkę + feeder (nazwa, voyage, IMO), serwis, ETD/ETA, transit time, numer tygodnia.
+1. Dla każdej z 12 par (UN/LOCODE → UN/LOCODE) woła endpoint na najbliższe 6 tygodni.
+2. Z `legs[]` wybiera nogi morskie (VESSEL): najdłuższa = statek matka, druga = feeder. Wyciąga: POL, ewentualny przeładunek (TS), POD, statek matkę + feeder (nazwa, voyage, IMO), serwis, ETD/ETA, transit time, numer tygodnia.
 3. Z `sailings.csv` zostawia wiersze **innych armatorów**, a wszystkie wiersze MAERSK zastępuje świeżym pobraniem.
 4. Workflow commituje `sailings.csv` — strona odświeża się sama.
 
 ## Uwagi
-- **Endpoint:** w skrypcie ustawiony jest `https://api.maersk.com/schedules/point-to-point`. Sprawdź dokładny adres i parametry na swojej stronie produktu „Point-to-Point Schedules" w portalu Maersk („Try it") — różne konta mogą mieć inny host/wersję. Zmienisz go w stałej `BASE` na górze skryptu.
 - **Cut-offy** nie są częścią rozkładów P2P (pochodzą z modułu ofert/bookingu) — pozostają puste.
-- **Błąd 401** = zły klucz lub nagłówek; **403** = produkt nieprzypięty do konta; **429** = za dużo zapytań (skrypt już zwalnia do ~2,5/s).
-- Jeśli `sailings.csv` po przebiegu nie ma wierszy MAERSK, uruchom z `--debug` i podeślij `maersk-raw.json` — dostroję mapowanie pól do realnej struktury Twojej odpowiedzi.
+- **Błąd 401 `ERR_GW_001`** = zły klucz **albo zły endpoint dla tego klucza** (każdy klucz jest przypięty do konkretnego API). Ten skrypt celuje już w DCSA Commercial Schedules.
+- **403** = produkt nieprzypięty/oczekuje na zatwierdzenie; **429** = za dużo zapytań (skrypt zwalnia do ~2/s).
+- Jeśli `sailings.csv` po przebiegu nie ma wierszy MAERSK, uruchom z `--debug` i zajrzyj do `maersk-raw.json` — sprawdzimy realną strukturę odpowiedzi.
 
 ## Skala
-12 par × ~kilka sailingów = kilkadziesiąt wierszy MAERSK. Bezpłatne (GitHub Actions: 2000 min/mc w planie Free, ten job zajmuje <1 min/tydzień).
+Pełna macierz: **26 portów załadunku** (Chiny, Indie, Bangladesz, Wietnam) × **7 portów docelowych** (Gdańsk, Gdynia, Rotterdam, Antwerpia, Hamburg, Bremerhaven, Wilhelmshaven) = **182 zapytania**. Dla par, których Maersk nie obsługuje, API zwraca pustą listę (w logu `0 sailings`). Przebieg trwa ~3–4 min, mieści się w darmowym limicie GitHub Actions. Listę origin/destination zmienisz w tablicach `ORIGINS` / `DESTINATIONS` na górze skryptu.
+
+## Nazwy portów (zasada systemowa)
+W skrypcie i CSV trzymamy **kody UN/LOCODE** (np. `CNSHA`, `MAPTM`, `PLGDN`). Strona zamienia je na czytelne nazwy (Shanghai, Tanger Med, Gdańsk) przez słownik `PORTS` w `hifi-d-data.js`. Jeśli API zwróci hub, którego nie ma w słowniku, strona pokaże sam kod — dopisz go wtedy do `PORTS`. Ta sama zasada obowiązuje przyszłe integracje innych armatorów.

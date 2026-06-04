@@ -18,8 +18,8 @@ function RouteStrip({ s }) {
             )}
             <div className={'rs-port'+(isEnd?' endpoint':'')}>
               <div className="seg-dot"></div>
-              <div className="pc mono">{code}</div>
-              <div className="pn">{known? pname(code) : ''}</div>
+              <div className="pc">{known? pname(code) : code}</div>
+              <div className="pn mono">{code}</div>
             </div>
           </React.Fragment>
         );
@@ -140,14 +140,16 @@ function DetailPane({ s, star, onStar, onExport, onCopy, onBack, showCutoffs=tru
           <div>
             <div className="d-title"><CarrierBadge carrier={s.carrier} service={s.service} serviceName={s.serviceName}/></div>
             <div className="d-route">
-              <span className="big">{s.pol}</span>
-              {s.ts && <><span className="arrow">{Ico.arrow()}</span><span className="big" style={{ fontSize:22, color:'var(--ink-3)' }}>{s.ts}</span></>}
+              <span className="big">{pname(s.pol)}</span>
+              {s.ts && <><span className="arrow">{Ico.arrow()}</span><span className="big" style={{ fontSize:24, color:'var(--ink-3)' }}>{pname(s.ts)}</span></>}
               <span className="arrow">{Ico.arrow()}</span>
-              <span className="big">{s.pod}</span>
+              <span className="big">{pname(s.pod)}</span>
+            </div>
+            <div className="d-codes mono">
+              {s.pol}{s.ts && <> → {s.ts}</>} → {s.pod}
             </div>
             <div className="d-sub">
-              <span>{pname(s.pol)} → {pname(s.pod)}</span>
-              {s.ts ? <span className="pill ts">1 transshipment · {pname(s.ts)}</span> : <span className="pill direct">{Ico.check()} Direct call</span>}
+              {s.ts ? <span className="pill ts">1 transshipment · {pname(s.ts)} ({s.ts})</span> : <span className="pill direct">{Ico.check()} Direct call</span>}
               {s.space==='tight' && <span className="pill tight">{Ico.warn()} Space tight</span>}
             </div>
           </div>

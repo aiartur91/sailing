@@ -35,7 +35,7 @@ function DataEmpty({ mode, query, onReset, onReload }) {
         ) : (
           <>
             <p className="de-sub">Żaden sailing nie pasuje do wybranych filtrów
-              {query && <> dla trasy <b>{pname(query.pol)} → Gdańsk + Gdynia</b></>}.
+              {query && <> dla trasy <b>{pname(query.pol)} → {query.pod==='all'?'wszystkie porty docelowe':pname(query.pod)}</b></>}.
               Spróbuj poszerzyć zakres tygodni lub wyczyść filtry.</p>
             <button className="btn btn-primary btn-sm" onClick={onReset}>Reset filters</button>
           </>
@@ -74,8 +74,8 @@ function TopBar({ shortlistCount }) {
 
 function RealApp() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-  const [q, setQ] = uS({ pol:'CNSHA', pod:'PLGDN', weekRange:'all', carrierSel:'all' });
-  const [applied, setApplied] = uS({ pol:'CNSHA', pod:'PLGDN', weekRange:'all', carrierSel:'all' });
+  const [q, setQ] = uS({ pol:'CNSHA', pod:'all', weekRange:'all', carrierSel:'all' });
+  const [applied, setApplied] = uS({ pol:'CNSHA', pod:'all', weekRange:'all', carrierSel:'all' });
   const [filter, setFilter] = uS({ routing:'all', space:false });
   const [sort, setSort] = uS('etd');
   const [selId, setSelId] = uS(null);
@@ -88,6 +88,8 @@ function RealApp() {
   const showToast = (msg) => { setToast(msg); clearTimeout(toastTimer.current); toastTimer.current = setTimeout(()=>setToast(null), 2200); };
 
   const passBase = (s) => {
+    if (applied.pol && applied.pol!=='all' && s.pol!==applied.pol) return false;
+    if (applied.pod && applied.pod!=='all' && s.pod!==applied.pod) return false;
     if (applied.carrierSel!=='all' && s.carrier!==applied.carrierSel) return false;
     if (applied.weekRange!=='all') {
       if (applied.weekRange==='26-28') { if (![26,27,28].includes(s.week)) return false; }
@@ -140,7 +142,7 @@ function RealApp() {
 
   const onStar = (id) => setStars(prev=>{ const n=new Set(prev); if(n.has(id)){n.delete(id);showToast('Removed from shortlist');}else{n.add(id);showToast('Added to shortlist');} return n; });
   const onSelect = (id) => { setSelId(id); setDetailView(true); };
-  const onSearch = () => { setApplied({ ...q }); showToast(`Searching ${pname(q.pol)} → Gdańsk + Gdynia`); };
+  const onSearch = () => { setApplied({ ...q }); const dst = (q.pod==='all')?'all destinations':`${pname(q.pod)} (${q.pod})`; showToast(`Searching ${pname(q.pol)} → ${dst}`); };
   const onCopy = () => {
     if (!sel) return;
     const txt = `${sel.carrier} · ${sel.service} · ${sel.pol}${sel.ts?` → ${sel.ts}`:''} → ${sel.pod} · ETD ${fmtDateY(sel.etd)} · ETA ${fmtDateY(sel.eta)} · ${sel.transit}d · Mother: ${sel.mother.vessel} ${sel.mother.voyage}`;

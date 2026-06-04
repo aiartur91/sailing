@@ -243,20 +243,39 @@
     <div class="card tip"><p style="margin:0"><span class="label">✓ Minimum, żeby ruszyć:</span> wystarczą <code>carrier</code>, <code>pol</code>, <code>pod</code>, <code>etd</code>, <code>eta</code> i <code>transshipment</code> (puste dla direct).
       Resztę dodajesz, gdy masz czas — strona poradzi sobie z brakami i pokaże tylko to, co podałeś.</p></div>
 
-    <h3>Kody portów (Twoje lane'y)</h3>
-    <p>Używaj kodów UN/LOCODE — strona zna ich nazwy:</p>
+    <h3>Wyświetlanie: nazwa portu, nie kod (zasada systemowa)</h3>
+    <div class="card note"><p style="margin:0">
+      W <code>sailings.csv</code> wpisujesz <b>kody UN/LOCODE</b> (np. <code>CNSHA</code>), a strona pokazuje użytkownikowi <b>czytelną nazwę</b> (Shanghai), z kodem jako drobnym podpisem pod spodem:
+      <br><br>
+      <b>Shanghai → Tanger Med → Gdańsk</b><br>
+      <span style="font-family:'JetBrains Mono';font-size:12px;color:var(--mute)">CNSHA → MAPTM → PLGDN</span>
+      <br><br>
+      Mapowanie kod → nazwa jest w pliku <code>hifi-d-data.js</code> (sekcja <code>PORTS</code>). Ta sama zasada działa wszędzie: lista, szczegóły rejsu, rotacja serwisu — i dotyczy też danych z integracji (Maersk itd.).
+    </p></div>
+
+    <h3>Kody portów (słownik)</h3>
+    <p>Strona zna nazwy poniższych kodów. Brakujący kod pokaże się „na surowo” — wtedy dopisz go do <code>PORTS</code> w <code>hifi-d-data.js</code>.</p>
     <div class="grid-2">
       <div class="card" style="margin:6px 0;">
-        <h4 style="margin-top:0">Chiny (POL)</h4>
-        <code>CNTAO</code> Qingdao · <code>CNDLC</code> Dalian · <code>CNSHA</code> Shanghai · <code>CNYTN</code> Yantian/Shenzhen · <code>CNTXG</code> Xingang/Tianjin · <code>CNNGB</code> Ningbo
+        <h4 style="margin-top:0">Chiny</h4>
+        <code>CNSHA</code> Shanghai · <code>CNNGB</code> Ningbo · <code>CNYTN</code> Yantian/Shenzhen · <code>CNTAO</code> Qingdao · <code>CNXMN</code> Xiamen · <code>CNNSA</code> Nansha/Guangzhou · <code>CNTXG</code> Xingang/Tianjin · <code>CNDLC</code> Dalian
       </div>
       <div class="card" style="margin:6px 0;">
-        <h4 style="margin-top:0">Polska (POD) + huby przeładunku</h4>
-        <code>PLGDN</code> Gdańsk · <code>PLGDY</code> Gdynia<br>
-        <code>NLRTM</code> Rotterdam · <code>DEBRV</code> Bremerhaven · <code>DEHAM</code> Hamburg · <code>DEWVN</code> Wilhelmshaven
+        <h4 style="margin-top:0">Indie</h4>
+        <code>INNSA</code> Nhava Sheva · <code>INMUN</code> Mundra · <code>INHZA</code> Hazira · <code>INPAV</code> Pipavav · <code>INMAA</code> Chennai · <code>INENR</code> Ennore · <code>INCOK</code> Cochin · <code>INTUT</code> Tuticorin · <code>INCCU</code> Kolkata · <code>INHAL</code> Haldia · <code>INVTZ</code> Visakhapatnam
+      </div>
+      <div class="card" style="margin:6px 0;">
+        <h4 style="margin-top:0">Bangladesz · Wietnam</h4>
+        <code>BDCGP</code> Chattogram · <code>BDMGL</code> Mongla · <code>BDPGN</code> Pangaon<br>
+        <code>VNCMT</code> Cai Mep · <code>VNSGN</code> Ho Chi Minh · <code>VNHPH</code> Hai Phong · <code>VNDAD</code> Da Nang · <code>VNUIH</code> Qui Nhon
+      </div>
+      <div class="card" style="margin:6px 0;">
+        <h4 style="margin-top:0">Porty docelowe + huby przeładunku</h4>
+        <code>PLGDN</code> Gdańsk · <code>PLGDY</code> Gdynia · <code>NLRTM</code> Rotterdam · <code>BEANR</code> Antwerpia · <code>DEHAM</code> Hamburg · <code>DEBRV</code> Bremerhaven · <code>DEWVN</code> Wilhelmshaven<br>
+        <span style="color:var(--mute)">Huby:</span> <code>MAPTM</code> Tanger Med · <code>MYTPP</code> Tanjung Pelepas · <code>SGSIN</code> Singapore · <code>LKCMB</code> Colombo · <code>ESALG</code> Algeciras · <code>GRPIR</code> Piraeus · <code>EGPSD</code> Port Said · <code>OMSLL</code> Salalah · <code>AEJEA</code> Jebel Ali · <code>MTMAR</code> Marsaxlokk
       </div>
     </div>
-    <p style="font-size:13.5px;color:var(--mute)">Inny kod też zadziała — jeśli strona nie zna nazwy portu, pokaże sam kod. Pełną listę nazw można rozszerzyć w pliku <code>hifi-d-data.js</code> (sekcja <code>PORTS</code>).</p>
+    <p style="font-size:13.5px;color:var(--mute)">Inny kod też zadziała — jeśli strona nie zna nazwy portu, pokaże sam kod. Pełną listę nazw rozszerzysz w pliku <code>hifi-d-data.js</code> (sekcja <code>PORTS</code>).</p>
 
     <h2 id="wypelnianie">Jak wypełniać w Excelu</h2>
     <ol class="steps">

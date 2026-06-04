@@ -1,21 +1,58 @@
 // Realistic mock dataset for the hi-fi Variant D prototype.
-// Lanes: 6 Chinese ports → Gdańsk (Baltic Hub, takes direct deepsea calls)
-// and Gdynia (usually fed from a North-European hub). 9 carriers.
+// Display rule (systemwide): port NAME is primary, UN/LOCODE is secondary.
 
 window.PORTS = {
-  CNTAO: { code:'CNTAO', name:'Qingdao',   country:'CN', city:'Qingdao' },
-  CNDLC: { code:'CNDLC', name:'Dalian',    country:'CN', city:'Dalian' },
-  CNSHA: { code:'CNSHA', name:'Shanghai',  country:'CN', city:'Shanghai' },
-  CNYTN: { code:'CNYTN', name:'Yantian',   country:'CN', city:'Shenzhen' },
-  CNTXG: { code:'CNTXG', name:'Xingang',   country:'CN', city:'Tianjin' },
-  CNNGB: { code:'CNNGB', name:'Ningbo',    country:'CN', city:'Ningbo' },
-  PLGDN: { code:'PLGDN', name:'Gdańsk',    country:'PL', city:'Gdańsk · Baltic Hub' },
-  PLGDY: { code:'PLGDY', name:'Gdynia',    country:'PL', city:'Gdynia · GCT' },
-  // transshipment hubs
-  NLRTM: { code:'NLRTM', name:'Rotterdam', country:'NL', city:'Rotterdam' },
-  DEBRV: { code:'DEBRV', name:'Bremerhaven', country:'DE', city:'Bremerhaven' },
-  DEHAM: { code:'DEHAM', name:'Hamburg',   country:'DE', city:'Hamburg' },
-  DEWVN: { code:'DEWVN', name:'Wilhelmshaven', country:'DE', city:'Wilhelmshaven' },
+  // ── China ──
+  CNSHA: { code:'CNSHA', name:'Shanghai',            country:'CN', city:'Shanghai' },
+  CNNGB: { code:'CNNGB', name:'Ningbo',              country:'CN', city:'Ningbo' },
+  CNYTN: { code:'CNYTN', name:'Yantian',             country:'CN', city:'Shenzhen' },
+  CNTAO: { code:'CNTAO', name:'Qingdao',             country:'CN', city:'Qingdao' },
+  CNXMN: { code:'CNXMN', name:'Xiamen',              country:'CN', city:'Xiamen' },
+  CNNSA: { code:'CNNSA', name:'Nansha',              country:'CN', city:'Guangzhou' },
+  CNTXG: { code:'CNTXG', name:'Xingang',             country:'CN', city:'Tianjin' },
+  CNDLC: { code:'CNDLC', name:'Dalian',              country:'CN', city:'Dalian' },
+  // ── India ──
+  INNSA: { code:'INNSA', name:'Nhava Sheva',         country:'IN', city:'JNPT · Mumbai' },
+  INMUN: { code:'INMUN', name:'Mundra',              country:'IN', city:'Mundra' },
+  INHZA: { code:'INHZA', name:'Hazira',              country:'IN', city:'Hazira' },
+  INPAV: { code:'INPAV', name:'Pipavav',             country:'IN', city:'Pipavav' },
+  INMAA: { code:'INMAA', name:'Chennai',             country:'IN', city:'Chennai' },
+  INENR: { code:'INENR', name:'Ennore',              country:'IN', city:'Kamarajar' },
+  INCOK: { code:'INCOK', name:'Cochin',              country:'IN', city:'Kochi' },
+  INTUT: { code:'INTUT', name:'Tuticorin',           country:'IN', city:'V.O.C. · Thoothukudi' },
+  INCCU: { code:'INCCU', name:'Kolkata',             country:'IN', city:'Kolkata' },
+  INHAL: { code:'INHAL', name:'Haldia',              country:'IN', city:'Haldia' },
+  INVTZ: { code:'INVTZ', name:'Visakhapatnam',       country:'IN', city:'Visakhapatnam' },
+  // ── Bangladesh ──
+  BDCGP: { code:'BDCGP', name:'Chattogram',          country:'BD', city:'Chittagong' },
+  BDMGL: { code:'BDMGL', name:'Mongla',              country:'BD', city:'Mongla' },
+  BDPGN: { code:'BDPGN', name:'Pangaon',             country:'BD', city:'Pangaon ICD · Dhaka' },
+  // ── Vietnam ──
+  VNCMT: { code:'VNCMT', name:'Cai Mep',             country:'VN', city:'Phu My · Cai Mep' },
+  VNSGN: { code:'VNSGN', name:'Ho Chi Minh',         country:'VN', city:'Cat Lai · HCMC' },
+  VNHPH: { code:'VNHPH', name:'Hai Phong',           country:'VN', city:'Lach Huyen' },
+  VNDAD: { code:'VNDAD', name:'Da Nang',             country:'VN', city:'Da Nang' },
+  VNUIH: { code:'VNUIH', name:'Qui Nhon',            country:'VN', city:'Qui Nhon' },
+  // ── European destinations ──
+  PLGDN: { code:'PLGDN', name:'Gdańsk',              country:'PL', city:'Baltic Hub' },
+  PLGDY: { code:'PLGDY', name:'Gdynia',              country:'PL', city:'GCT' },
+  NLRTM: { code:'NLRTM', name:'Rotterdam',           country:'NL', city:'Rotterdam' },
+  BEANR: { code:'BEANR', name:'Antwerp',             country:'BE', city:'Antwerpia' },
+  DEHAM: { code:'DEHAM', name:'Hamburg',             country:'DE', city:'Hamburg' },
+  DEBRV: { code:'DEBRV', name:'Bremerhaven',         country:'DE', city:'Bremerhaven' },
+  DEWVN: { code:'DEWVN', name:'Wilhelmshaven',       country:'DE', city:'Wilhelmshaven' },
+  // ── Transshipment hubs ──
+  MAPTM: { code:'MAPTM', name:'Tanger Med',          country:'MA', city:'Tangier' },
+  MYTPP: { code:'MYTPP', name:'Tanjung Pelepas',     country:'MY', city:'Tanjung Pelepas' },
+  SGSIN: { code:'SGSIN', name:'Singapore',           country:'SG', city:'Singapore' },
+  LKCMB: { code:'LKCMB', name:'Colombo',             country:'LK', city:'Colombo' },
+  ESALG: { code:'ESALG', name:'Algeciras',           country:'ES', city:'Algeciras' },
+  ESVLC: { code:'ESVLC', name:'Valencia',            country:'ES', city:'Valencia' },
+  GRPIR: { code:'GRPIR', name:'Piraeus',             country:'GR', city:'Piraeus' },
+  EGPSD: { code:'EGPSD', name:'Port Said',           country:'EG', city:'Port Said' },
+  OMSLL: { code:'OMSLL', name:'Salalah',             country:'OM', city:'Salalah' },
+  AEJEA: { code:'AEJEA', name:'Jebel Ali',           country:'AE', city:'Dubai' },
+  MTMAR: { code:'MTMAR', name:'Marsaxlokk',          country:'MT', city:'Malta Freeport' },
 };
 
 window.CARRIER_META = {
@@ -248,7 +285,22 @@ window.SAILINGS = [
   },
 ];
 
-// Lanes for the search-bar selectors
-window.LANES_POL = ['CNTAO','CNDLC','CNSHA','CNYTN','CNTXG','CNNGB'];
-window.LANES_POD = ['PLGDN','PLGDY'];
+// Lanes for the search-bar selectors — grouped origin regions, European destinations.
+window.LANES_POL = [
+  // China
+  'CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC',
+  // India
+  'INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ',
+  // Bangladesh
+  'BDCGP','BDMGL','BDPGN',
+  // Vietnam
+  'VNCMT','VNSGN','VNHPH','VNDAD','VNUIH',
+];
+window.LANES_POD = ['PLGDN','PLGDY','NLRTM','BEANR','DEHAM','DEBRV','DEWVN'];
+window.PORT_REGIONS = {
+  CN:'China', IN:'India', BD:'Bangladesh', VN:'Vietnam',
+  PL:'Poland', NL:'Netherlands', BE:'Belgium', DE:'Germany',
+  MA:'Morocco', MY:'Malaysia', SG:'Singapore', LK:'Sri Lanka',
+  ES:'Spain', GR:'Greece', EG:'Egypt', OM:'Oman', AE:'UAE', MT:'Malta',
+};
 window.CARRIER_LIST = ['MAERSK','MSC','HAPAG-LLOYD','COSCO','OOCL','YANG MING','ONE','CMA CGM','EVERGREEN'];

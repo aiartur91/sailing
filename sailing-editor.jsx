@@ -5,10 +5,14 @@ const PORTS = window.PORTS || {};
 const CM = window.CARRIER_META || {};
 const CARRIERS = window.CARRIER_LIST || Object.keys(CM);
 
-// port groups for selects
-const CN_PORTS = Object.keys(PORTS).filter(c=>c.startsWith('CN'));
-const PL_PORTS = Object.keys(PORTS).filter(c=>c.startsWith('PL'));
-const HUB_PORTS = Object.keys(PORTS).filter(c=>/^(NL|DE)/.test(c));
+// port groups for selects (driven by the shared dictionary)
+const ORIGIN_CC = ['CN','IN','BD','VN'];
+const DEST_CC   = ['PL','NL','BE','DE'];
+const HUB_CC    = ['MA','MY','SG','LK','ES','GR','EG','OM','AE','MT','NL','DE'];
+const byCC = (ccList)=> Object.keys(PORTS).filter(c => ccList.includes((PORTS[c]||{}).country));
+const CN_PORTS  = window.LANES_POL || byCC(ORIGIN_CC);   // all origins
+const PL_PORTS  = window.LANES_POD || byCC(DEST_CC);     // all destinations
+const HUB_PORTS = byCC(HUB_CC);                          // transshipment hubs
 
 // canonical CSV columns (must match sailings.csv header)
 const COLS = ['carrier','service','service_name','pol','pod','transshipment',

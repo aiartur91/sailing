@@ -3,14 +3,28 @@ const { useState, useEffect, useRef, useMemo, useCallback } = React;
 const S = window.SAILINGS;
 
 // ───────────────────────── search bar ─────────────────────────
-function PortSelect({ label, value, onChange, options }) {
+function PortSelect({ label, value, onChange, options, allLabel }) {
+  const REG = window.PORT_REGIONS || {};
+  // group option codes by country/region, preserving order
+  const groups = [];
+  const seen = {};
+  options.forEach(c => {
+    const cc = (window.PORTS[c]||{}).country || '—';
+    if (seen[cc]===undefined){ seen[cc]=groups.length; groups.push({ region: REG[cc]||cc, codes:[c] }); }
+    else groups[seen[cc]].codes.push(c);
+  });
   return (
     <div className="field port">
       <label>{label}</label>
       <div className="ctrl">
         <span className="pin">{Ico.pin()}</span>
         <select value={value} onChange={e=>onChange(e.target.value)}>
-          {options.map(c => <option key={c} value={c}>{pname(c)} ({c})</option>)}
+          {allLabel && <option value="all">{allLabel}</option>}
+          {groups.map(g => (
+            <optgroup key={g.region} label={g.region}>
+              {g.codes.map(c => <option key={c} value={c}>{pname(c)} ({c})</option>)}
+            </optgroup>
+          ))}
         </select>
       </div>
     </div>
@@ -18,12 +32,11 @@ function PortSelect({ label, value, onChange, options }) {
 }
 
 function SearchBar({ q, setQ, onSearch }) {
-  const swap = () => setQ(s => ({ ...s, pol: s.pod.startsWith('PL')? s.pol : s.pod, pod: s.pol }));
   return (
     <div className="searchbar">
       <PortSelect label="Port of loading" value={q.pol} onChange={v=>setQ(s=>({...s,pol:v}))} options={window.LANES_POL}/>
-      <button className="swap" title="Swap" onClick={swap}>{Ico.swap()}</button>
-      <PortSelect label="Port of discharge" value={q.pod} onChange={v=>setQ(s=>({...s,pod:v}))} options={window.LANES_POD}/>
+      <span className="leg-sep">{Ico.arrowS()}</span>
+      <PortSelect label="Port of discharge" value={q.pod} onChange={v=>setQ(s=>({...s,pod:v}))} options={window.LANES_POD} allLabel="All destinations"/>
       <div className="field week">
         <label>ETD week</label>
         <div className="ctrl">
@@ -91,22 +104,25 @@ function SailingCard({ s, sel, star, onSelect, onStar, refCb }) {
         </button>
       </div>
       <div className="scard-route">
-        <div>
-          <div className="pcode">{s.pol}</div>
-          <div className="pcity">{pcity(s.pol).replace(/ ·.*/,'')}</div>
+        <div className="port-blk">
+          <div className="pname">{pname(s.pol)}</div>
+          <div className="pcd mono">{s.pol}</div>
         </div>
         {s.ts ? (
           <>
             <span className="leg-ico">{Ico.arrowS()}</span>
-            <span className="ts-mini" title={`Transshipment · ${pname(s.ts)}`}>{s.ts}</span>
+            <div className="port-blk ts">
+              <div className="pname ts-name">{pname(s.ts)}</div>
+              <div className="pcd mono">{s.ts}</div>
+            </div>
             <span className="leg-ico">{Ico.arrowS()}</span>
           </>
         ) : (
           <span className="leg-ico" style={{ margin:'0 2px' }}>{Ico.arrow({ width:22, height:22 })}</span>
         )}
-        <div>
-          <div className="pcode">{s.pod}</div>
-          <div className="pcity">{pcity(s.pod).replace(/ ·.*/,'')}</div>
+        <div className="port-blk">
+          <div className="pname">{pname(s.pod)}</div>
+          <div className="pcd mono">{s.pod}</div>
         </div>
         <div style={{ flex:1 }}></div>
         {s.ts ? <span className="pill ts">1 TS</span> : <span className="pill direct">{Ico.check()} Direct</span>}

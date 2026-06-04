@@ -10,7 +10,18 @@ function CMark({ carrier, sm }){
 }
 
 function PortOpts({ codes }){
-  return codes.map(c => <option key={c} value={c}>{pname(c)} ({c})</option>);
+  const REG = window.PORT_REGIONS || {};
+  const groups = []; const seen = {};
+  codes.forEach(c => {
+    const cc = (PORTS[c]||{}).country || '—';
+    if (seen[cc]===undefined){ seen[cc]=groups.length; groups.push({ region: REG[cc]||cc, codes:[c] }); }
+    else groups[seen[cc]].codes.push(c);
+  });
+  return groups.map(g => (
+    <optgroup key={g.region} label={g.region}>
+      {g.codes.map(c => <option key={c} value={c}>{pname(c)} ({c})</option>)}
+    </optgroup>
+  ));
 }
 
 function Field({ label, req, children, hint }){
