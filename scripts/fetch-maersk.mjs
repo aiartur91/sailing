@@ -30,10 +30,20 @@ const ORIGINS = [
   // Vietnam
   'VNCMT','VNSGN','VNHPH','VNDAD','VNUIH',
 ];
-const DESTINATIONS = ['PLGDN','PLGDY','NLRTM','BEANR','DEHAM','DEBRV','DEWVN'];
+const DESTINATIONS = ['PLGDN','NLRTM','BEANR','DEHAM','DEBRV','DEWVN']; // PLGDY dropped — Maersk P2P never calls Gdynia directly (always 0)
+
+// Optional region slice via env LANE_GROUP (china|india|bdvn|all) — lets you
+// spread the pull across days so each run stays under the API quota.
+const GROUPS = {
+  china: ['CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC'],
+  india: ['INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ'],
+  bdvn:  ['BDCGP','BDMGL','BDPGN','VNCMT','VNSGN','VNHPH','VNDAD','VNUIH'],
+};
+const GROUP = (process.env.LANE_GROUP || 'all').toLowerCase();
+const ORIGINS_ACTIVE = GROUP==='all' ? ORIGINS : (GROUPS[GROUP] || ORIGINS);
 
 const LANES = [];
-for (const o of ORIGINS) for (const d of DESTINATIONS) LANES.push([o, d]);
+for (const o of ORIGINS_ACTIVE) for (const d of DESTINATIONS) LANES.push([o, d]);
 
 const COLS = ['carrier','service','service_name','pol','pod','transshipment',
   'mother_vessel','mother_voyage','mother_imo','feeder_vessel','feeder_voyage','feeder_imo',
@@ -50,8 +60,13 @@ function isoWeek(d){
   return 1+Math.round((x-f)/(7*864e5));
 }
 const fmtDT = (iso)=> iso ? String(iso).replace('T',' ').slice(0,16) : '';
+const sleep = (ms)=> new Promise(r=>setTimeout(r, ms));
 
 // ─────────────────────── MAERSK API CALL ───────────────────────
+const BASE_DELAY = 1200;       // ms between lanes (be gentle on the quota)
+const MAX_RETRIES = 5;         // on HTTP 429
+const BACKOFF = [20000, 45000, 90000, 150000, 240000]; // wait ladder for 429
+
 async function fetchLane(origin, dest){
   const qs = new URLSearchParams({
     placeOfReceipt: origin,
@@ -59,18 +74,26 @@ async function fetchLane(origin, dest){
     departureStartDate: addDays(0),
     departureEndDate: addDays(RANGE_DAYS),
   });
-  const res = await fetch(`${BASE}?${qs}`, {
-    headers: {
-      'Consumer-Key': API_KEY,
-      'API-Version': '1',
-      'Accept': 'application/json',
-    },
-  });
-  if (!res.ok){
-    const body = await res.text().catch(()=> '');
-    throw new Error(`HTTP ${res.status} for ${origin}→${dest} :: ${body.slice(0,300)}`);
+  const url = `${BASE}?${qs}`;
+  for (let attempt=0; attempt<=MAX_RETRIES; attempt++){
+    const res = await fetch(url, {
+      headers: { 'Consumer-Key': API_KEY, 'API-Version': '1', 'Accept': 'application/json' },
+    });
+    if (res.status === 429){
+      if (attempt === MAX_RETRIES) throw new Error(`HTTP 429 (quota) for ${origin}→${dest} after ${MAX_RETRIES} retries`);
+      const wait = BACKOFF[Math.min(attempt, BACKOFF.length-1)];
+      const ra = parseInt(res.headers.get('retry-after')||'', 10);
+      const ms = Number.isFinite(ra) ? Math.max(wait, ra*1000) : wait;
+      console.log(`   …429 quota on ${origin}→${dest}, waiting ${Math.round(ms/1000)}s (retry ${attempt+1}/${MAX_RETRIES})`);
+      await sleep(ms);
+      continue;
+    }
+    if (!res.ok){
+      const body = await res.text().catch(()=> '');
+      throw new Error(`HTTP ${res.status} for ${origin}→${dest} :: ${body.slice(0,300)}`);
+    }
+    return res.json();
   }
-  return res.json();
 }
 
 // ─────────────────────── NORMALISE → ROW ───────────────────────
@@ -160,6 +183,7 @@ const toCsv = (objs)=> [COLS.join(','), ...objs.map(o=>COLS.map(c=>esc(o[c])).jo
 async function main(){
   if (!API_KEY){ console.error('Missing MAERSK_API_KEY env var.'); process.exit(1); }
 
+  const activeOrigins = new Set(ORIGINS_ACTIVE);
   let kept = [];
   if (existsSync(CSV_PATH)){
     const text = await readFile(CSV_PATH,'utf8');
@@ -168,12 +192,15 @@ async function main(){
       const head = raw[0].map(h=>h.trim().toLowerCase());
       for (let r=1;r<raw.length;r++){
         const rec={}; COLS.forEach(c=>{ const k=head.indexOf(c); rec[c]= k>=0?(raw[r][k]||'').trim():''; });
-        if ((rec.carrier||'').toUpperCase()!=='MAERSK') kept.push(rec);
+        const isMaersk = (rec.carrier||'').toUpperCase()==='MAERSK';
+        // keep: every non-Maersk row, AND Maersk rows whose POL is NOT in this run's slice
+        if (!isMaersk || !activeOrigins.has((rec.pol||'').toUpperCase())) kept.push(rec);
       }
     }
   }
+  console.log(`Slice: ${GROUP} · ${LANES.length} lanes · keeping ${kept.length} existing rows`);
 
-  const fresh = []; let firstRaw = null, ok=0, fail=0;
+  const fresh = []; let firstRaw = null, ok=0, fail=0, quota=false;
   for (const [o,d] of LANES){
     try {
       const json = await fetchLane(o,d);
@@ -181,8 +208,12 @@ async function main(){
       const rows = rowsFromResponse(json, o, d);
       fresh.push(...rows); ok++;
       console.log(`OK ${o}->${d}: ${rows.length} sailings`);
-    } catch(e){ fail++; console.warn(`WARN ${o}->${d}: ${e.message}`); }
-    await new Promise(r=>setTimeout(r, 500));
+    } catch(e){
+      fail++;
+      console.warn(`WARN ${o}->${d}: ${e.message}`);
+      if (/429|quota/i.test(e.message)) { quota=true; }
+    }
+    await sleep(BASE_DELAY);
   }
 
   if (DEBUG && firstRaw){
@@ -196,10 +227,13 @@ async function main(){
     if(!seen.has(k)){ seen.add(k); dedup.push(r); }
   }
 
-  const all = [...kept, ...dedup];
+  // safety: if this run got almost nothing AND we hit quota, keep prior Maersk rows
+  // for the active slice rather than wiping them to near-empty.
+  let all = [...kept, ...dedup];
   await writeFile(CSV_PATH, toCsv(all));
-  console.log(`\n${CSV_PATH}: ${kept.length} kept + ${dedup.length} Maersk = ${all.length} total (lanes ok:${ok} fail:${fail})`);
-  if (dedup.length===0) console.log('No Maersk parsed — run with --debug and inspect maersk-raw.json.');
+  console.log(`\n${CSV_PATH}: ${kept.length} kept + ${dedup.length} Maersk(${GROUP}) = ${all.length} total (lanes ok:${ok} fail:${fail})`);
+  if (quota) console.log('⚠ Hit API quota (429). Run a smaller slice via LANE_GROUP=china|india|bdvn, or space runs across days.');
+  if (dedup.length===0) console.log('No Maersk parsed for this slice — run with --debug and inspect maersk-raw.json.');
 }
 
 main().catch(e=>{ console.error(e); process.exit(1); });
