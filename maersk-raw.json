@@ -15,7 +15,7 @@
           "facilityCodeListProvider": "SMDG"
         }
       },
-      "dateTime": "2026-06-06T16:01:00+08:00"
+      "dateTime": "2026-06-07T16:01:00+08:00"
     },
     "placeOfDelivery": {
       "facilityTypeCode": "POTE",
@@ -56,7 +56,7 @@
     ],
     "solutionNumber": 1,
     "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:HZ4:622W:622W~sail:MVS:DEWVNTM:PLGDNDCT:91W:630N:630N",
-    "transitTime": 56,
+    "transitTime": 55,
     "legs": [
       {
         "sequenceNumber": 1,
@@ -90,7 +90,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-06-06T16:01:00+08:00"
+          "dateTime": "2026-06-07T16:01:00+08:00"
         },
         "arrival": {
           "facilityTypeCode": "POTE",
@@ -170,7 +170,7 @@
           "facilityCodeListProvider": "SMDG"
         }
       },
-      "dateTime": "2026-06-10T01:00:00+08:00"
+      "dateTime": "2026-06-10T22:00:00+08:00"
     },
     "placeOfDelivery": {
       "facilityTypeCode": "POTE",
@@ -245,7 +245,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-06-10T01:00:00+08:00"
+          "dateTime": "2026-06-10T22:00:00+08:00"
         },
         "arrival": {
           "facilityTypeCode": "POTE",
@@ -348,12 +348,12 @@
     "deliveryTypeAtDestination": "CY",
     "cutOffTimes": [
       {
-        "cutOffDateTimeCode": "ECP",
-        "cutOffDateTime": "2026-06-07T17:00:00+08:00"
+        "cutOffDateTimeCode": "DCO",
+        "cutOffDateTime": "2026-06-07T20:00:00+08:00"
       },
       {
-        "cutOffDateTimeCode": "DCO",
-        "cutOffDateTime": "2026-06-08T00:00:00+08:00"
+        "cutOffDateTimeCode": "ECP",
+        "cutOffDateTime": "2026-06-08T14:00:00+08:00"
       },
       {
         "cutOffDateTimeCode": "VCO",
@@ -652,7 +652,7 @@
           "facilityCodeListProvider": "SMDG"
         }
       },
-      "dateTime": "2026-08-08T06:00:00+02:00"
+      "dateTime": "2026-08-15T06:00:00+02:00"
     },
     "receiptTypeAtOrigin": "CY",
     "deliveryTypeAtDestination": "CY",
@@ -675,8 +675,8 @@
       }
     ],
     "solutionNumber": 1,
-    "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:Y32:624W:624W~sail:MVS:DEWVNTM:PLGDNDCT:022:631N:631N",
-    "transitTime": 51,
+    "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:Y32:624W:624W~sail:MVS:DEWVNTM:PLGDNDCT:91W:632N:632N",
+    "transitTime": 58,
     "legs": [
       {
         "sequenceNumber": 1,
@@ -736,15 +736,15 @@
               "carrierServiceName": "SHUTTLE E3",
               "carrierCommercialServiceName": "Europe Shuttle 3",
               "carrierServiceCode": "E03",
-              "carrierImportVoyageNumber": "631N",
-              "carrierExportVoyageNumber": "631N"
+              "carrierImportVoyageNumber": "632N",
+              "carrierExportVoyageNumber": "632N"
             }
           ],
           "vessel": {
-            "vesselIMONumber": "9235555",
-            "name": "MAERSK GIRONDE",
-            "flag": "SG",
-            "callSign": "9V6212"
+            "vesselIMONumber": "9235531",
+            "name": "MAERSK VIRGINIA",
+            "flag": "HK",
+            "callSign": "VRMD3"
           }
         },
         "departure": {
@@ -757,7 +757,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-08-05T06:00:00+02:00"
+          "dateTime": "2026-08-12T06:00:00+02:00"
         },
         "arrival": {
           "facilityTypeCode": "POTE",
@@ -769,7 +769,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-08-08T06:00:00+02:00"
+          "dateTime": "2026-08-15T06:00:00+02:00"
         }
       }
     ]
@@ -1272,7 +1272,7 @@
           "facilityCodeListProvider": "SMDG"
         }
       },
-      "dateTime": "2026-08-22T06:00:00+02:00"
+      "dateTime": "2026-08-29T06:00:00+02:00"
     },
     "receiptTypeAtOrigin": "CY",
     "deliveryTypeAtDestination": "CY",
@@ -1295,8 +1295,8 @@
       }
     ],
     "solutionNumber": 1,
-    "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:IA0:626W:626W~sail:MVS:DEWVNTM:PLGDNDCT:022:633N:633N",
-    "transitTime": 50,
+    "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:IA0:626W:626W~sail:MVS:DEWVNTM:PLGDNDCT:91W:634N:634N",
+    "transitTime": 57,
     "legs": [
       {
         "sequenceNumber": 1,
@@ -1356,15 +1356,15 @@
               "carrierServiceName": "SHUTTLE E3",
               "carrierCommercialServiceName": "Europe Shuttle 3",
               "carrierServiceCode": "E03",
-              "carrierImportVoyageNumber": "633N",
-              "carrierExportVoyageNumber": "633N"
+              "carrierImportVoyageNumber": "634N",
+              "carrierExportVoyageNumber": "634N"
             }
           ],
           "vessel": {
-            "vesselIMONumber": "9235555",
-            "name": "MAERSK GIRONDE",
-            "flag": "SG",
-            "callSign": "9V6212"
+            "vesselIMONumber": "9235531",
+            "name": "MAERSK VIRGINIA",
+            "flag": "HK",
+            "callSign": "VRMD3"
           }
         },
         "departure": {
@@ -1377,7 +1377,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-08-19T06:00:00+02:00"
+          "dateTime": "2026-08-26T06:00:00+02:00"
         },
         "arrival": {
           "facilityTypeCode": "POTE",
@@ -1389,7 +1389,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-08-22T06:00:00+02:00"
+          "dateTime": "2026-08-29T06:00:00+02:00"
         }
       }
     ]
@@ -1737,7 +1737,7 @@
           "facilityCodeListProvider": "SMDG"
         }
       },
-      "dateTime": "2026-09-05T06:00:00+02:00"
+      "dateTime": "2026-09-12T06:00:00+02:00"
     },
     "receiptTypeAtOrigin": "CY",
     "deliveryTypeAtDestination": "CY",
@@ -1760,8 +1760,8 @@
       }
     ],
     "solutionNumber": 1,
-    "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:IA4:628W:628W~sail:MVS:DEWVNTM:PLGDNDCT:022:635N:635N",
-    "transitTime": 51,
+    "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:IA4:628W:628W~sail:MVS:DEWVNTM:PLGDNDCT:91W:636N:636N",
+    "transitTime": 58,
     "legs": [
       {
         "sequenceNumber": 1,
@@ -1821,15 +1821,15 @@
               "carrierServiceName": "SHUTTLE E3",
               "carrierCommercialServiceName": "Europe Shuttle 3",
               "carrierServiceCode": "E03",
-              "carrierImportVoyageNumber": "635N",
-              "carrierExportVoyageNumber": "635N"
+              "carrierImportVoyageNumber": "636N",
+              "carrierExportVoyageNumber": "636N"
             }
           ],
           "vessel": {
-            "vesselIMONumber": "9235555",
-            "name": "MAERSK GIRONDE",
-            "flag": "SG",
-            "callSign": "9V6212"
+            "vesselIMONumber": "9235531",
+            "name": "MAERSK VIRGINIA",
+            "flag": "HK",
+            "callSign": "VRMD3"
           }
         },
         "departure": {
@@ -1842,7 +1842,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-09-02T06:00:00+02:00"
+          "dateTime": "2026-09-09T06:00:00+02:00"
         },
         "arrival": {
           "facilityTypeCode": "POTE",
@@ -1854,7 +1854,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-09-05T06:00:00+02:00"
+          "dateTime": "2026-09-12T06:00:00+02:00"
         }
       }
     ]
