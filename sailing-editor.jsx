@@ -18,7 +18,7 @@ const HUB_PORTS = byCC(HUB_CC);                          // transshipment hubs
 const COLS = ['carrier','service','service_name','pol','pod','transshipment',
   'mother_vessel','mother_voyage','mother_imo','feeder_vessel','feeder_voyage','feeder_imo',
   'etd','eta','transit_days','etd_week','cutoff_gatein','cutoff_vgm','cutoff_doc',
-  'ts_arrive','ts_depart','rotation','space','co2'];
+  'ts_arrive','ts_depart','rotation','space','co2','fetched_at'];
 
 const LS_KEY = 'sailingi.editor.rows.v1';
 
@@ -91,7 +91,8 @@ function formToRecord(f){
     transit_days:calcTransit(f.etd,f.eta), etd_week:calcWeek(f.etd),
     cutoff_gatein:toCsvDate(f.cutoff_gatein), cutoff_vgm:toCsvDate(f.cutoff_vgm), cutoff_doc:toCsvDate(f.cutoff_doc),
     ts_arrive: ts? toCsvDate(f.ts_arrive):'', ts_depart: ts? toCsvDate(f.ts_depart):'',
-    rotation:f.rotation, space:f.space, co2:f.co2
+    rotation:f.rotation, space:f.space, co2:f.co2,
+    fetched_at: new Date().toISOString()   // a manual add/edit is the newest version
   };
 }
 // csv record → form (for editing)
