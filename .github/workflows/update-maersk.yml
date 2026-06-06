@@ -1,31 +1,52 @@
-name: Update Maersk schedules
+name: Update Maersk schedules (Maersk API only)
 
-# Pulls Maersk DCSA Commercial Schedules into sailings.csv.
+# Pulls ONLY Maersk from the official Maersk DCSA API into sailings.csv.
+# (All other carriers come from IQAX in update-iqax.yml.)
 #
-# The API key has a request QUOTA, so the full 26×6 lane matrix is split into
-# three region slices that run on different mornings — each stays under quota:
-#   • Monday    06:00 UTC → China        (LANE_GROUP=china)
-#   • Wednesday 06:00 UTC → India        (LANE_GROUP=india)
-#   • Friday    06:00 UTC → Bangladesh + Vietnam (LANE_GROUP=bdvn)
-# Each slice only replaces its own origins; other rows are kept.
+# Lanes split by COUNTRY PAIR (origin country → destination country) so each
+# run stays small. Runs at 07:00 UTC — after IQAX (05:00) — to avoid push clashes.
 #
-# Manual run: Actions → Run workflow → pick lane_group (china/india/bdvn/all).
+# Scheduled spread:
+#   • Monday    07:00 UTC → China               (cn = 48)
+#   • Tuesday   07:00 UTC → India · PL/NL/BE     (in-pl,in-nl,in-be = 33)
+#   • Wednesday 07:00 UTC → India · DE           (in-de = 33)
+#   • Thursday  07:00 UTC → Bangladesh+Vietnam   (bd,vn = 48)
+#
+# Manual run: Actions → this workflow → Run workflow → pick a country pair.
 #
 # SETUP (one time): Settings → Secrets and variables → Actions → New secret
-#   Name: MAERSK_API_KEY   Value: <your Maersk Consumer-Key>
+#   MAERSK_API_KEY = your Maersk Consumer-Key
 
 on:
   schedule:
-    - cron: '0 6 * * 1'        # Mon  → china
-    - cron: '0 6 * * 3'        # Wed  → india
-    - cron: '0 6 * * 5'        # Fri  → bdvn
+    - cron: '0 7 * * 1'   # Mon → cn
+    - cron: '0 7 * * 2'   # Tue → in-pl,in-nl,in-be
+    - cron: '0 7 * * 3'   # Wed → in-de
+    - cron: '0 7 * * 4'   # Thu → bd,vn
   workflow_dispatch:
     inputs:
       lane_group:
-        description: 'Which origins to pull'
+        description: 'Country pair to pull'
         type: choice
-        options: [china, india, bdvn, all]
-        default: china
+        default: cn-pl
+        options:
+          - cn-pl
+          - cn-de
+          - cn-nl
+          - cn-be
+          - in-pl
+          - in-de
+          - in-nl
+          - in-be
+          - bd-pl
+          - bd-de
+          - bd-nl
+          - bd-be
+          - vn-pl
+          - vn-de
+          - vn-nl
+          - vn-be
+          - all
       debug:
         description: 'Write maersk-raw.json for mapping checks'
         type: boolean
@@ -38,24 +59,21 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Pick lane group
         id: pick
         run: |
-          # schedule → group by cron; manual → use the chosen input
           if [ "${{ github.event_name }}" = "schedule" ]; then
             case "${{ github.event.schedule }}" in
-              "0 6 * * 1") echo "group=china" >> "$GITHUB_OUTPUT" ;;
-              "0 6 * * 3") echo "group=india" >> "$GITHUB_OUTPUT" ;;
-              "0 6 * * 5") echo "group=bdvn"  >> "$GITHUB_OUTPUT" ;;
-              *)           echo "group=china" >> "$GITHUB_OUTPUT" ;;
+              "0 7 * * 1") echo "group=cn"                   >> "$GITHUB_OUTPUT" ;;
+              "0 7 * * 2") echo "group=in-pl,in-nl,in-be"    >> "$GITHUB_OUTPUT" ;;
+              "0 7 * * 3") echo "group=in-de"                >> "$GITHUB_OUTPUT" ;;
+              "0 7 * * 4") echo "group=bd,vn"                >> "$GITHUB_OUTPUT" ;;
+              *)           echo "group=cn"                   >> "$GITHUB_OUTPUT" ;;
             esac
           else
             echo "group=${{ inputs.lane_group }}" >> "$GITHUB_OUTPUT"

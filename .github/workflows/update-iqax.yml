@@ -1,0 +1,103 @@
+name: Update schedules (IQAX · all carriers except Maersk)
+
+# Pulls every carrier EXCEPT Maersk from IQAX BigSchedules into sailings.csv.
+# (Maersk comes from its own API in update-maersk.yml.)
+#
+# License limits: 150 calls/day, 30 calls/min. Lanes are split by COUNTRY PAIR
+# (origin country → destination country) so every run stays well under 150.
+#
+# Scheduled spread (each day's total ≤ 77 calls):
+#   • Monday    05:00 UTC → China        (cn  = 56)
+#   • Tuesday   05:00 UTC → India        (in  = 77)
+#   • Wednesday 05:00 UTC → Bangladesh+Vietnam (bd,vn = 56)
+#
+# Manual run: Actions → this workflow → Run workflow → pick a country pair.
+#
+# SETUP (one time): Settings → Secrets and variables → Actions → New secret
+#   IQAX_APP_KEY = your appKey
+#   IQAX_BASE    = your host, e.g. https://api.bigschedules.com
+
+on:
+  schedule:
+    - cron: '0 5 * * 1'   # Mon → cn
+    - cron: '0 5 * * 2'   # Tue → in
+    - cron: '0 5 * * 3'   # Wed → bd,vn
+  workflow_dispatch:
+    inputs:
+      lane_group:
+        description: 'Country pair to pull'
+        type: choice
+        default: cn-pl
+        options:
+          - cn-pl
+          - cn-de
+          - cn-nl
+          - cn-be
+          - in-pl
+          - in-de
+          - in-nl
+          - in-be
+          - bd-pl
+          - bd-de
+          - bd-nl
+          - bd-be
+          - vn-pl
+          - vn-de
+          - vn-nl
+          - vn-be
+          - all
+      debug:
+        description: 'Write iqax-raw.json for mapping checks'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Pick lane group
+        id: pick
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            case "${{ github.event.schedule }}" in
+              "0 5 * * 1") echo "group=cn"    >> "$GITHUB_OUTPUT" ;;
+              "0 5 * * 2") echo "group=in"    >> "$GITHUB_OUTPUT" ;;
+              "0 5 * * 3") echo "group=bd,vn" >> "$GITHUB_OUTPUT" ;;
+              *)           echo "group=cn"    >> "$GITHUB_OUTPUT" ;;
+            esac
+          else
+            echo "group=${{ inputs.lane_group }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Fetch IQAX schedules
+        env:
+          IQAX_APP_KEY: ${{ secrets.IQAX_APP_KEY }}
+          IQAX_BASE: ${{ secrets.IQAX_BASE }}
+          LANE_GROUP: ${{ steps.pick.outputs.group }}
+        run: |
+          if [ "${{ inputs.debug }}" = "true" ]; then
+            node scripts/fetch-iqax.mjs --debug
+          else
+            node scripts/fetch-iqax.mjs
+          fi
+
+      - name: Commit changes
+        run: |
+          git config user.name  "sailingi-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git pull --rebase --autostash || true
+          git add sailings.csv iqax-raw.json 2>/dev/null || git add sailings.csv
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: refresh IQAX (${{ steps.pick.outputs.group }}) $(date -u +%Y-%m-%d)"
+            git push
+          fi
