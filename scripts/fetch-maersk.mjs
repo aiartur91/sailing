@@ -18,37 +18,71 @@ const BASE = 'https://api.maersk.com/ocean/commercial-schedules/dcsa/v1/point-to
 const RANGE_DAYS = 42;             // departure window (max allowed 56)
 const CSV_PATH   = 'sailings.csv';
 
-// Tracked lanes — full matrix: every origin × every European destination.
-// The API simply returns nothing for pairs Maersk doesn't serve (logged as 0).
-const ORIGINS = [
-  // China
-  'CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC',
-  // India
-  'INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ',
-  // Bangladesh
-  'BDCGP','BDMGL','BDPGN',
-  // Vietnam
-  'VNCMT','VNSGN','VNHPH','VNDAD','VNUIH',
-];
-const DESTINATIONS = ['PLGDN','NLRTM','BEANR','DEHAM','DEBRV','DEWVN']; // PLGDY dropped — Maersk P2P never calls Gdynia directly (always 0)
-
-// Optional region slice via env LANE_GROUP (china|india|bdvn|all) — lets you
-// spread the pull across days so each run stays under the API quota.
-const GROUPS = {
-  china: ['CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC'],
-  india: ['INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ'],
-  bdvn:  ['BDCGP','BDMGL','BDPGN','VNCMT','VNSGN','VNHPH','VNDAD','VNUIH'],
+// ── Lanes by COUNTRY PAIR (origin country → destination country) ──
+// Maersk drops Gdynia (PLGDY) — DCSA P2P never returns a direct Gdynia call.
+const ORIGIN_GROUPS = {
+  cn: ['CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC'],
+  in: ['INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ'],
+  bd: ['BDCGP','BDMGL','BDPGN'],
+  vn: ['VNCMT','VNSGN','VNHPH','VNDAD','VNUIH'],
 };
-const GROUP = (process.env.LANE_GROUP || 'all').toLowerCase();
-const ORIGINS_ACTIVE = GROUP==='all' ? ORIGINS : (GROUPS[GROUP] || ORIGINS);
+const DEST_GROUPS = {
+  pl: ['PLGDN'],                    // Gdynia dropped for Maersk
+  de: ['DEHAM','DEBRV','DEWVN'],
+  nl: ['NLRTM'],
+  be: ['BEANR'],
+};
 
-const LANES = [];
-for (const o of ORIGINS_ACTIVE) for (const d of DESTINATIONS) LANES.push([o, d]);
+// LANE_GROUP accepts: "cn-pl" (one pair) · "cn" (one origin, all dests) ·
+// "cn-pl,in-de" (comma list) · "all". Default "all".
+function buildLanes(token){
+  token = String(token || 'all').toLowerCase().trim();
+  const pairs = [];
+  const expand = (t)=>{
+    if (!t) return;
+    if (t === 'all'){ for (const o of Object.keys(ORIGIN_GROUPS)) for (const d of Object.keys(DEST_GROUPS)) pairs.push([o,d]); return; }
+    if (t.includes('-')){ const [o,d]=t.split('-'); if (ORIGIN_GROUPS[o] && DEST_GROUPS[d]) pairs.push([o,d]); return; }
+    if (ORIGIN_GROUPS[t]){ for (const d of Object.keys(DEST_GROUPS)) pairs.push([t,d]); return; }
+  };
+  token.split(',').forEach(s=>expand(s.trim()));
+  const lanes = [];
+  for (const [o,d] of pairs)
+    for (const por of ORIGIN_GROUPS[o])
+      for (const fnd of DEST_GROUPS[d])
+        lanes.push([por, fnd]);
+  return lanes;
+}
+const GROUP = (process.env.LANE_GROUP || 'all').toLowerCase();
+const LANES = buildLanes(GROUP);
+const ACTIVE_LANES = new Set(LANES.map(([o,d])=>`${o}|${d}`));
 
 const COLS = ['carrier','service','service_name','pol','pod','transshipment',
   'mother_vessel','mother_voyage','mother_imo','feeder_vessel','feeder_voyage','feeder_imo',
   'etd','eta','transit_days','etd_week','cutoff_gatein','cutoff_vgm','cutoff_doc',
-  'ts_arrive','ts_depart','rotation','space','co2'];
+  'ts_arrive','ts_depart','rotation','space','co2','fetched_at'];
+
+const NOW_ISO = new Date().toISOString();
+
+// Stable identity of a sailing (excludes revisable etd/eta/cutoffs).
+const _norm = (s)=> (s==null?'':String(s)).trim().toUpperCase();
+function sailKey(r){
+  const voy = _norm(r.mother_voyage);
+  return [_norm(r.carrier),_norm(r.pol),_norm(r.pod),_norm(r.transshipment),
+          _norm(r.service),_norm(r.mother_vessel), voy || ('ETD:'+_norm(r.etd))].join('|');
+}
+// Keep newest pull per key; drops older/duplicate versions.
+function dedupeKeepNewest(rows){
+  const best = new Map();
+  for (const r of rows){
+    const k = sailKey(r);
+    const prev = best.get(k);
+    if (!prev){ best.set(k, r); continue; }
+    const tp = Date.parse(prev.fetched_at||'') || 0;
+    const tr = Date.parse(r.fetched_at||'') || 0;
+    if (tr >= tp) best.set(k, r);
+  }
+  return [...best.values()];
+}
 
 // ─────────────────────────── HELPERS ───────────────────────────
 const addDays = (n)=>{ const d=new Date(); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().slice(0,10); };
@@ -183,7 +217,7 @@ const toCsv = (objs)=> [COLS.join(','), ...objs.map(o=>COLS.map(c=>esc(o[c])).jo
 async function main(){
   if (!API_KEY){ console.error('Missing MAERSK_API_KEY env var.'); process.exit(1); }
 
-  const activeOrigins = new Set(ORIGINS_ACTIVE);
+  const activeLanes = ACTIVE_LANES;
   let kept = [];
   if (existsSync(CSV_PATH)){
     const text = await readFile(CSV_PATH,'utf8');
@@ -193,12 +227,14 @@ async function main(){
       for (let r=1;r<raw.length;r++){
         const rec={}; COLS.forEach(c=>{ const k=head.indexOf(c); rec[c]= k>=0?(raw[r][k]||'').trim():''; });
         const isMaersk = (rec.carrier||'').toUpperCase()==='MAERSK';
-        // keep: every non-Maersk row, AND Maersk rows whose POL is NOT in this run's slice
-        if (!isMaersk || !activeOrigins.has((rec.pol||'').toUpperCase())) kept.push(rec);
+        const lane = `${(rec.pol||'').toUpperCase()}|${(rec.pod||'').toUpperCase()}`;
+        // Maersk owns only Maersk rows: keep all non-Maersk rows untouched,
+        // and keep Maersk rows whose lane is NOT in this run's slice.
+        if (!isMaersk || !activeLanes.has(lane)) kept.push(rec);
       }
     }
   }
-  console.log(`Slice: ${GROUP} · ${LANES.length} lanes · keeping ${kept.length} existing rows`);
+  console.log(`Maersk slice: ${GROUP} · ${LANES.length} lanes · keeping ${kept.length} existing rows`);
 
   const fresh = []; let firstRaw = null, ok=0, fail=0, quota=false;
   for (const [o,d] of LANES){
@@ -206,6 +242,7 @@ async function main(){
       const json = await fetchLane(o,d);
       if (!firstRaw) firstRaw = json;
       const rows = rowsFromResponse(json, o, d);
+      rows.forEach(r => { r.fetched_at = NOW_ISO; });   // stamp this pull
       fresh.push(...rows); ok++;
       console.log(`OK ${o}->${d}: ${rows.length} sailings`);
     } catch(e){
@@ -221,19 +258,17 @@ async function main(){
     console.log('wrote maersk-raw.json');
   }
 
-  const seen=new Set(); const dedup=[];
-  for (const r of fresh){
-    const k=[r.carrier,r.service,r.pol,r.pod,r.etd].join('|');
-    if(!seen.has(k)){ seen.add(k); dedup.push(r); }
-  }
+  // Combine kept + fresh, then collapse duplicates keeping the NEWEST pull —
+  // removes weekly repeats and replaces a revised sailing's older version.
+  const combined = [...kept, ...fresh];
+  const before = combined.length;
+  const all = dedupeKeepNewest(combined);
+  const removed = before - all.length;
 
-  // safety: if this run got almost nothing AND we hit quota, keep prior Maersk rows
-  // for the active slice rather than wiping them to near-empty.
-  let all = [...kept, ...dedup];
   await writeFile(CSV_PATH, toCsv(all));
-  console.log(`\n${CSV_PATH}: ${kept.length} kept + ${dedup.length} Maersk(${GROUP}) = ${all.length} total (lanes ok:${ok} fail:${fail})`);
-  if (quota) console.log('⚠ Hit API quota (429). Run a smaller slice via LANE_GROUP=china|india|bdvn, or space runs across days.');
-  if (dedup.length===0) console.log('No Maersk parsed for this slice — run with --debug and inspect maersk-raw.json.');
+  console.log(`\n${CSV_PATH}: ${kept.length} kept + ${fresh.length} fresh → ${all.length} after dedupe (removed ${removed} older/dupe) (lanes ok:${ok} fail:${fail})`);
+  if (quota) console.log('⚠ Hit API quota (429). Run a smaller country-pair via LANE_GROUP (e.g. cn-de), or space runs across days.');
+  if (fresh.length===0) console.log('No Maersk parsed for this slice — run with --debug and inspect maersk-raw.json.');
 }
 
 main().catch(e=>{ console.error(e); process.exit(1); });
