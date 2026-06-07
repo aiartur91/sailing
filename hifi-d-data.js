@@ -11,6 +11,9 @@ window.PORTS = {
   CNNSA: { code:'CNNSA', name:'Nansha',              country:'CN', city:'Guangzhou' },
   CNTXG: { code:'CNTXG', name:'Xingang',             country:'CN', city:'Tianjin' },
   CNDLC: { code:'CNDLC', name:'Dalian',              country:'CN', city:'Dalian' },
+  CNLYG: { code:'CNLYG', name:'Lianyungang',         country:'CN', city:'Lianyungang' },
+  CNNKG: { code:'CNNKG', name:'Nanjing',             country:'CN', city:'Nanjing' },
+  CNCAN: { code:'CNCAN', name:'Guangzhou',           country:'CN', city:'Canton' },
   // ── India ──
   INNSA: { code:'INNSA', name:'Nhava Sheva',         country:'IN', city:'JNPT · Mumbai' },
   INMUN: { code:'INMUN', name:'Mundra',              country:'IN', city:'Mundra' },
@@ -23,10 +26,13 @@ window.PORTS = {
   INCCU: { code:'INCCU', name:'Kolkata',             country:'IN', city:'Kolkata' },
   INHAL: { code:'INHAL', name:'Haldia',              country:'IN', city:'Haldia' },
   INVTZ: { code:'INVTZ', name:'Visakhapatnam',       country:'IN', city:'Visakhapatnam' },
+  INNML: { code:'INNML', name:'New Mangalore',       country:'IN', city:'Mangalore' },
+  INBOM: { code:'INBOM', name:'Mumbai',              country:'IN', city:'Mumbai' },
   // ── Bangladesh ──
   BDCGP: { code:'BDCGP', name:'Chattogram',          country:'BD', city:'Chittagong' },
   BDMGL: { code:'BDMGL', name:'Mongla',              country:'BD', city:'Mongla' },
   BDPGN: { code:'BDPGN', name:'Pangaon',             country:'BD', city:'Pangaon ICD · Dhaka' },
+  BDDAC: { code:'BDDAC', name:'Dhaka',               country:'BD', city:'Dhaka' },
   // ── Vietnam ──
   VNCMT: { code:'VNCMT', name:'Cai Mep',             country:'VN', city:'Phu My · Cai Mep' },
   VNSGN: { code:'VNSGN', name:'Ho Chi Minh',         country:'VN', city:'Cat Lai · HCMC' },
@@ -288,11 +294,11 @@ window.SAILINGS = [
 // Lanes for the search-bar selectors — grouped origin regions, European destinations.
 window.LANES_POL = [
   // China
-  'CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC',
+  'CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC','CNLYG','CNNKG','CNCAN',
   // India
-  'INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ',
+  'INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ','INNML','INBOM',
   // Bangladesh
-  'BDCGP','BDMGL','BDPGN',
+  'BDCGP','BDMGL','BDPGN','BDDAC',
   // Vietnam
   'VNCMT','VNSGN','VNHPH','VNDAD','VNUIH',
 ];

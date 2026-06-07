@@ -37,12 +37,27 @@ Liczba wywołań na parę (origin × cel):
 1. appKey z https://developer.iqax.com/ (Sailing Schedules API).
 2. **Settings → Secrets and variables → Actions → New repository secret** — dodaj dwa:
    - `IQAX_APP_KEY` = Twój appKey
-   - `IQAX_BASE` = host konta, np. `https://api.bigschedules.com` (dokumentacja pokazuje `https://xxxxx.bigschedules.com` — wpisz swój; bez tego dostaniesz 404/401).
+   - `IQAX_BASE` = `https://www.bigschedules.com` (potwierdzony host z panelu IQAX — API Keys → Scopes).
 3. Wgraj `scripts/fetch-iqax.mjs` i `.github/workflows/update-iqax.yml`.
 
 ## Test
 Actions → **„Update schedules (IQAX …)" → Run workflow** → `lane_group = cn-pl` → `debug = true` → Run.
 W logu zobaczysz np. `OK CNSHA->PLGDN: 18 sailings (6 carriers)` i `by carrier: MSC:9 COSCO:6 ...`. Plik `iqax-raw.json` to surowa odpowiedź — przyda się do dostrojenia mapowania.
+
+## Kody portów IQAX (ważne)
+Twój klucz jest ograniczony do **kodów portów IQAX**, które miejscami różnią się od standardowych UN/LOCODE. Skrypt **wysyła kody IQAX** (wymagane przez klucz), a w odpowiedzi **mapuje je z powrotem** na nasze standardowe kody, żeby CSV i strona były spójne z danymi Maerska. Mapowania:
+| IQAX wysyła | Nasz kod | Port |
+|---|---|---|
+| `CNSHG` | `CNSHA` | Shanghai |
+| `CNSZX` | `CNYTN` | Shenzhen / Yantian |
+| `CNTSN` | `CNTXG` | Tianjin / Xingang |
+| `VNCMV` | `VNCMT` | Cai Mep |
+| `VNQNH` | `VNUIH` | Quy Nhon |
+
+Porty występujące tylko w IQAX (Lianyungang `CNLYG`, Nanjing `CNNKG`, Guangzhou `CNCAN`, New Mangalore `INNML`, Mumbai `INBOM`, Dhaka `BDDAC`) zostały dodane do słownika `PORTS` w `hifi-d-data.js`. Pełna lista licencjonowanych kodów (origin/destination/carrier) jest w panelu IQAX → API Keys → Scopes; gdy IQAX rozszerzy Twój scope, dopisz kody w `ORIGIN_GROUPS`/`DEST_GROUPS` skryptu.
+
+## Klucz typu „Browser"
+Twój klucz IQAX jest typu **Browser**. Jeśli przy uruchomieniu z GitHub Actions zwróci `401`/`403` mimo poprawnego hosta i appKey (a ten sam adres **działa w przeglądarce**), oznacza to, że klucz ma ograniczenie do origin/domeny. Skrypt wysyła nagłówki `Referer`/`Origin` = `https://www.bigschedules.com`, co zwykle wystarcza; gdyby nie — poproś IQAX o klucz typu **Server** (do wywołań serwerowych) albo o dopisanie dozwolonego origin.
 
 ## Endpoint (Big Schedules v2.0.1)
 ```
