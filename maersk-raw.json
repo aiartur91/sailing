@@ -15,7 +15,7 @@
           "facilityCodeListProvider": "SMDG"
         }
       },
-      "dateTime": "2026-06-07T16:01:00+08:00"
+      "dateTime": "2026-06-07T07:40:00+08:00"
     },
     "placeOfDelivery": {
       "facilityTypeCode": "POTE",
@@ -90,7 +90,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-06-07T16:01:00+08:00"
+          "dateTime": "2026-06-07T07:40:00+08:00"
         },
         "arrival": {
           "facilityTypeCode": "POTE",
@@ -325,7 +325,7 @@
           "facilityCodeListProvider": "SMDG"
         }
       },
-      "dateTime": "2026-06-11T00:01:00+08:00"
+      "dateTime": "2026-06-13T10:00:00+08:00"
     },
     "placeOfDelivery": {
       "facilityTypeCode": "POTE",
@@ -366,7 +366,7 @@
     ],
     "solutionNumber": 1,
     "routingReference": "v3~MSK~sail:MVS:CNSGHY3:DEWVNTM:HZ3:623W:623W~sail:MVS:DEWVNTM:PLGDNDCT:91W:630N:630N",
-    "transitTime": 51,
+    "transitTime": 49,
     "legs": [
       {
         "sequenceNumber": 1,
@@ -400,7 +400,7 @@
               "facilityCodeListProvider": "SMDG"
             }
           },
-          "dateTime": "2026-06-11T00:01:00+08:00"
+          "dateTime": "2026-06-13T10:00:00+08:00"
         },
         "arrival": {
           "facilityTypeCode": "POTE",
