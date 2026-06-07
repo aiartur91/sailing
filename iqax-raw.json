@@ -1,0 +1,3505 @@
+{
+  "dataRange": {
+    "departureFrom": "2026-06-07T00:00:00.000Z",
+    "departureTo": "2026-07-18T23:59:59.999Z"
+  },
+  "requestRefNo": "7928c247-2876-4caf-a270-3bdedcff2e9a",
+  "routeGroupsList": [
+    {
+      "identification": {
+        "dataSourceType": "SSM2014",
+        "requestRefNo": "7928c247-2876-4caf-a270-3bdedcff2e9a"
+      },
+      "carrier": {
+        "_id": "557ab159395a5b8cdab4952a",
+        "carrierID": 1,
+        "name": "OOCL",
+        "scac": "OOLU",
+        "shortName": "OOCL",
+        "url": "http://www.oocl.com/eng/Pages/default.aspx",
+        "enabled": true,
+        "ssmEnabled": true,
+        "sortingKey": "oocl",
+        "updatedAt": "2021-08-18T05:04:29.162Z",
+        "updatedBy": "huangde4",
+        "analyticsEnabled": true,
+        "ssSearchEnabled": true,
+        "vsSearchEnabled": true,
+        "chineseName": "东方海外"
+      },
+      "por": {
+        "location": {
+          "_id": "66078e4263a71000141bfc06",
+          "source": "CS4",
+          "unlocode": "CNTAO",
+          "name": "Qingdao",
+          "uc_name": "QINGDAO",
+          "geo": [
+            120.19677,
+            35.999554
+          ],
+          "chineseName": "青岛",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P94",
+          "csID": 94,
+          "csCityID": 2532082,
+          "type": "PORT",
+          "fullName": "Qingdao, Shandong, China",
+          "timezone": "Asia/Shanghai",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "fnd": {
+        "location": {
+          "_id": "66078e4263a71000141bfc01",
+          "source": "CS4",
+          "unlocode": "PLGDN",
+          "name": "Gdansk",
+          "uc_name": "GDANSK",
+          "geo": [
+            18.646638,
+            54.352025
+          ],
+          "chineseName": "格但斯克",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P341",
+          "csID": 341,
+          "csCityID": 2547944,
+          "type": "PORT",
+          "fullName": "Gdansk, Pomorskie, Poland",
+          "timezone": "Europe/Warsaw",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "route": [
+        {
+          "csRouteID": 7809820841,
+          "csPointPairID": 2071945,
+          "carrierScac": "OOLU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-23T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-19T06:00:00.000Z"
+          },
+          "transitTime": 57,
+          "direct": true,
+          "importHaulage": "BOTH",
+          "exportHaulage": "BOTH",
+          "touchTime": "2026-06-07T13:32:39.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "C2532082",
+                  "name": "Qingdao",
+                  "csCityId": 2532082,
+                  "unlocode": "CNTAO",
+                  "csID": 2532082,
+                  "timezone": "Asia/Shanghai"
+                },
+                "etd": "2026-06-23T00:00:00.000Z",
+                "gmtEtd": "2026-06-22T16:00:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Terminal Co., Ltd.  Phase 3",
+                    "code": "QIN04",
+                    "id": 2998,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "transportMode": "INTERMODAL",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 64662247,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Terminal Co., Ltd.  Phase 3",
+                    "code": "QIN04",
+                    "id": 2998,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-26T02:00:00.000Z",
+                "gmtEtd": "2026-06-25T18:00:00.000Z",
+                "cyCutoffTime": "2026-06-24T02:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 64662257,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk S.A.",
+                    "code": "GDK02",
+                    "id": 1232,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-19T06:00:00.000Z",
+                "gmtEta": "2026-08-19T04:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10024562,
+                "code": "LL1",
+                "name": "Asia - North Europe Loop1"
+              },
+              "vessel": {
+                "vesselGID": "V000028140",
+                "name": "OOCL ZEEBRUGGE",
+                "code": "OZB",
+                "IMO": 9908140
+              },
+              "imoNumber": 9908140,
+              "externalVoyageNumber": "010W",
+              "internalVoyageNumber": "010W",
+              "transitTime": 55
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk S.A.",
+                    "code": "GDK02",
+                    "id": 1232,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "C2547944",
+                  "name": "Gdansk",
+                  "csCityId": 2547944,
+                  "unlocode": "PLGDN",
+                  "csID": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-08-22T15:00:00.000Z",
+                "gmtEta": "2026-08-22T13:00:00.000Z"
+              },
+              "transportMode": "INTERMODAL",
+              "internalVoyageNumber": "",
+              "transitTime": 1
+            }
+          ],
+          "transportSummary": "INTERMODAL/VESSEL:10024562:V000028140:010W/INTERMODAL",
+          "isPossibleDirect": true,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-23T00:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7904268601,
+          "csPointPairID": 2071945,
+          "carrierScac": "OOLU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-08T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-09-02T18:00:00.000Z"
+          },
+          "transitTime": 56,
+          "direct": true,
+          "importHaulage": "BOTH",
+          "exportHaulage": "BOTH",
+          "touchTime": "2026-06-07T13:32:39.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "C2532082",
+                  "name": "Qingdao",
+                  "csCityId": 2532082,
+                  "unlocode": "CNTAO",
+                  "csID": 2532082,
+                  "timezone": "Asia/Shanghai"
+                },
+                "etd": "2026-07-08T00:00:00.000Z",
+                "gmtEtd": "2026-07-07T16:00:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Terminal Co., Ltd.  Phase 3",
+                    "code": "QIN04",
+                    "id": 2998,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "transportMode": "INTERMODAL",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66213254,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Terminal Co., Ltd.  Phase 3",
+                    "code": "QIN04",
+                    "id": 2998,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-10T20:00:00.000Z",
+                "gmtEtd": "2026-07-10T12:00:00.000Z",
+                "cyCutoffTime": "2026-07-08T20:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66213264,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk S.A.",
+                    "code": "GDK02",
+                    "id": 1232,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-09-02T18:00:00.000Z",
+                "gmtEta": "2026-09-02T16:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10024562,
+                "code": "LL1",
+                "name": "Asia - North Europe Loop1"
+              },
+              "vessel": {
+                "vesselGID": "V000028134",
+                "name": "OOCL DENMARK",
+                "code": "ODK",
+                "IMO": 9922548
+              },
+              "imoNumber": 9922548,
+              "externalVoyageNumber": "009W",
+              "internalVoyageNumber": "009W",
+              "transitTime": 54
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk S.A.",
+                    "code": "GDK02",
+                    "id": 1232,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "C2547944",
+                  "name": "Gdansk",
+                  "csCityId": 2547944,
+                  "unlocode": "PLGDN",
+                  "csID": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-09-05T18:00:00.000Z",
+                "gmtEta": "2026-09-05T16:00:00.000Z"
+              },
+              "transportMode": "INTERMODAL",
+              "internalVoyageNumber": "",
+              "transitTime": 1
+            }
+          ],
+          "transportSummary": "INTERMODAL/VESSEL:10024562:V000028134:009W/INTERMODAL",
+          "isPossibleDirect": true,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-07-08T00:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7825202090,
+          "csPointPairID": 2071945,
+          "carrierScac": "OOLU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-30T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-26T18:00:00.000Z"
+          },
+          "transitTime": 57,
+          "direct": true,
+          "importHaulage": "BOTH",
+          "exportHaulage": "BOTH",
+          "touchTime": "2026-06-07T13:32:39.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "C2532082",
+                  "name": "Qingdao",
+                  "csCityId": 2532082,
+                  "unlocode": "CNTAO",
+                  "csID": 2532082,
+                  "timezone": "Asia/Shanghai"
+                },
+                "etd": "2026-06-30T00:00:00.000Z",
+                "gmtEtd": "2026-06-29T16:00:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Terminal Co., Ltd.  Phase 3",
+                    "code": "QIN04",
+                    "id": 2998,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "transportMode": "INTERMODAL",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65638084,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Terminal Co., Ltd.  Phase 3",
+                    "code": "QIN04",
+                    "id": 2998,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-03T20:00:00.000Z",
+                "gmtEtd": "2026-07-03T12:00:00.000Z",
+                "cyCutoffTime": "2026-07-01T10:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65638097,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk S.A.",
+                    "code": "GDK02",
+                    "id": 1232,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-26T18:00:00.000Z",
+                "gmtEta": "2026-08-26T16:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10024562,
+                "code": "LL1",
+                "name": "Asia - North Europe Loop1"
+              },
+              "vessel": {
+                "vesselGID": "V000031587",
+                "name": "NANTONG CHUANQI 456",
+                "code": "OWS",
+                "IMO": 9986324
+              },
+              "imoNumber": 9986324,
+              "externalVoyageNumber": "001W",
+              "internalVoyageNumber": "001W",
+              "transitTime": 54
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk S.A.",
+                    "code": "GDK02",
+                    "id": 1232,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "C2547944",
+                  "name": "Gdansk",
+                  "csCityId": 2547944,
+                  "unlocode": "PLGDN",
+                  "csID": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-08-29T18:00:00.000Z",
+                "gmtEta": "2026-08-29T16:00:00.000Z"
+              },
+              "transportMode": "INTERMODAL",
+              "internalVoyageNumber": "",
+              "transitTime": 1
+            }
+          ],
+          "transportSummary": "INTERMODAL/VESSEL:10024562:V000031587:001W/INTERMODAL",
+          "isPossibleDirect": true,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-30T00:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        }
+      ]
+    },
+    {
+      "identification": {
+        "dataSourceType": "SSM2014",
+        "requestRefNo": "7928c247-2876-4caf-a270-3bdedcff2e9a"
+      },
+      "carrier": {
+        "_id": "557ab159395a5b8cdab49526",
+        "carrierID": 2,
+        "name": "COSCO SHIPPING",
+        "scac": "COSU",
+        "shortName": "COSCO SHIPPING",
+        "url": "http://lines.coscoshipping.com",
+        "enabled": true,
+        "ssmEnabled": true,
+        "sortingKey": "coscon",
+        "updatedAt": "2021-08-18T05:03:01.901Z",
+        "updatedBy": "huangde4",
+        "analyticsEnabled": true,
+        "ssSearchEnabled": true,
+        "vsSearchEnabled": true,
+        "chineseName": "中远海运"
+      },
+      "por": {
+        "location": {
+          "_id": "66078e4263a71000141bfc06",
+          "source": "CS4",
+          "unlocode": "CNTAO",
+          "name": "Qingdao",
+          "uc_name": "QINGDAO",
+          "geo": [
+            120.19677,
+            35.999554
+          ],
+          "chineseName": "青岛",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P94",
+          "csID": 94,
+          "csCityID": 2532082,
+          "type": "PORT",
+          "fullName": "Qingdao, Shandong, China",
+          "timezone": "Asia/Shanghai",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "fnd": {
+        "location": {
+          "_id": "66078e4263a71000141bfc01",
+          "source": "CS4",
+          "unlocode": "PLGDN",
+          "name": "Gdansk",
+          "uc_name": "GDANSK",
+          "geo": [
+            18.646638,
+            54.352025
+          ],
+          "chineseName": "格但斯克",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P341",
+          "csID": 341,
+          "csCityID": 2547944,
+          "type": "PORT",
+          "fullName": "Gdansk, Pomorskie, Poland",
+          "timezone": "Europe/Warsaw",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "route": [
+        {
+          "csRouteID": 7904144315,
+          "csPointPairID": 5818739,
+          "carrierScac": "COSU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-14T19:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-09-02T18:00:00.000Z"
+          },
+          "transitTime": 50,
+          "direct": true,
+          "importHaulage": "BOTH",
+          "exportHaulage": "BOTH",
+          "touchTime": "2026-06-07T12:01:49.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "C2532082",
+                  "name": "Qingdao",
+                  "csCityId": 2532082,
+                  "unlocode": "CNTAO",
+                  "csID": 2532082,
+                  "timezone": "Asia/Shanghai"
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Tml Co.",
+                    "code": "TAO02",
+                    "id": 12719,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "transportMode": "TRUCK",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66214306,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Qingdao Qianwan Container Tml Co.",
+                    "code": "TAO02",
+                    "id": 12719,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-14T19:00:00.000Z",
+                "gmtEtd": "2026-07-14T11:00:00.000Z",
+                "cyCutoffTime": "2026-07-07T12:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66214325,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk",
+                    "code": "GDN02",
+                    "id": 13429,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-09-02T18:00:00.000Z",
+                "gmtEta": "2026-09-02T16:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025202,
+                "code": "AEU1",
+                "name": "AEU1"
+              },
+              "vessel": {
+                "vesselGID": "V000028134",
+                "name": "OOCL DENMARK",
+                "code": "MSZ",
+                "IMO": 9922548
+              },
+              "imoNumber": 9922548,
+              "externalVoyageNumber": "009W",
+              "internalVoyageNumber": "009W",
+              "transitTime": 50
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "Deepwater Container Terminal Gdansk",
+                    "code": "GDN02",
+                    "id": 13429,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "C2547944",
+                  "name": "Gdansk",
+                  "csCityId": 2547944,
+                  "unlocode": "PLGDN",
+                  "csID": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-09-04T09:00:00.000Z",
+                "gmtEta": "2026-09-04T07:00:00.000Z"
+              },
+              "transportMode": "TRUCK",
+              "internalVoyageNumber": "",
+              "transitTime": 1
+            }
+          ],
+          "transportSummary": "TRUCK/VESSEL:10025202:V000028134:009W/TRUCK",
+          "isPossibleDirect": true,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-07-07T12:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7809746209,
+          "csPointPairID": 5818739,
+          "carrierScac": "COSU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-03T04:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-29T18:00:00.000Z",
+            "arrivalTimeLocation": {
+              "locationID": "P342",
+              "name": "Gdynia",
+              "unlocode": "PLGDY",
+              "csID": 342,
+              "csCityId": 2537920,
+              "timezone": "Europe/Warsaw",
+              "facility": {
+                "name": "BCT Baltic Container Tml Gdynia",
+                "code": "GDY01",
+                "id": 12018,
+                "type": "Terminal"
+              }
+            }
+          },
+          "transitTime": 57,
+          "direct": false,
+          "importHaulage": "DOOR",
+          "exportHaulage": "BOTH",
+          "touchTime": "2026-06-07T12:01:49.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "C2532082",
+                  "name": "Qingdao",
+                  "csCityId": 2532082,
+                  "unlocode": "CNTAO",
+                  "csID": 2532082,
+                  "timezone": "Asia/Shanghai"
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QQCTU Qingdao Qianwan United Ctn",
+                    "code": "TAO06",
+                    "id": 11277,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "transportMode": "TRUCK",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65067001,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QQCTU Qingdao Qianwan United Ctn",
+                    "code": "TAO06",
+                    "id": 11277,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-03T04:00:00.000Z",
+                "gmtEtd": "2026-07-02T20:00:00.000Z",
+                "cyCutoffTime": "2026-07-01T04:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65067002,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P102",
+                  "name": "Shanghai",
+                  "unlocode": "CNSHA",
+                  "csID": 102,
+                  "csCityId": 2530967,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Shanghai Shengdong (I), Yangshan",
+                    "code": "SHA08",
+                    "id": 12009,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-04T06:00:00.000Z",
+                "gmtEta": "2026-07-03T22:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025463,
+                "code": "AEU3",
+                "name": "ASIA EUROPE EXPRESS SERVICE LOOP 3"
+              },
+              "vessel": {
+                "vesselGID": "V000028133",
+                "name": "OOCL PORTUGAL",
+                "code": "MTA",
+                "IMO": 9922615
+              },
+              "imoNumber": 9922615,
+              "externalVoyageNumber": "007W",
+              "internalVoyageNumber": "007W",
+              "transitTime": 1
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65495867,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P102",
+                  "name": "Shanghai",
+                  "unlocode": "CNSHA",
+                  "csID": 102,
+                  "csCityId": 2530967,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Shanghai Shengdong (I), Yangshan",
+                    "code": "SHA08",
+                    "id": 12009,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-05T01:30:00.000Z",
+                "gmtEtd": "2026-07-04T17:30:00.000Z",
+                "cyCutoffTime": "2026-07-03T01:30:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66326510,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P181",
+                  "name": "Hamburg",
+                  "unlocode": "DEHAM",
+                  "csID": 181,
+                  "csCityId": 2539114,
+                  "timezone": "Europe/Berlin",
+                  "facility": {
+                    "name": "Container Terminal Tollerort GmbH",
+                    "code": "HAM01",
+                    "id": 11268,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-25T22:00:00.000Z",
+                "gmtEta": "2026-08-25T20:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025425,
+                "code": "AEU7",
+                "name": "ASIA EUROPE EXPRESS SERVICE LOOP 7"
+              },
+              "vessel": {
+                "vesselGID": "V000023521",
+                "name": "COSCO SHIPPING PLANET",
+                "code": "CSK",
+                "IMO": 9795660
+              },
+              "imoNumber": 9795660,
+              "externalVoyageNumber": "048W",
+              "internalVoyageNumber": "048W",
+              "transitTime": 52
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P181",
+                  "name": "Hamburg",
+                  "unlocode": "DEHAM",
+                  "csID": 181,
+                  "csCityId": 2539114,
+                  "timezone": "Europe/Berlin",
+                  "facility": {
+                    "name": "Container Terminal Tollerort GmbH",
+                    "code": "HAM01",
+                    "id": 11268,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-08-26T06:00:00.000Z",
+                "gmtEtd": "2026-08-26T04:00:00.000Z",
+                "cyCutoffTime": "2026-08-21T12:00:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P342",
+                  "name": "Gdynia",
+                  "unlocode": "PLGDY",
+                  "csID": 342,
+                  "csCityId": 2537920,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BCT Baltic Container Tml Gdynia",
+                    "code": "GDY01",
+                    "id": 12018,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-29T18:00:00.000Z",
+                "gmtEta": "2026-08-29T16:00:00.000Z"
+              },
+              "transportMode": "FEEDER",
+              "service": {
+                "serviceID": 10054891,
+                "code": "GBX",
+                "name": "GERMANY BALTIC EXPRESS"
+              },
+              "vessel": {
+                "vesselGID": "V000009247",
+                "name": "TBA",
+                "code": "TBA"
+              },
+              "internalVoyageNumber": "",
+              "transitTime": 3
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P342",
+                  "name": "Gdynia",
+                  "unlocode": "PLGDY",
+                  "csID": 342,
+                  "csCityId": 2537920,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BCT Baltic Container Tml Gdynia",
+                    "code": "GDY01",
+                    "id": 12018,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "C2547944",
+                  "name": "Gdansk",
+                  "csCityId": 2547944,
+                  "unlocode": "PLGDN",
+                  "csID": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-08-29T20:00:00.000Z",
+                "gmtEta": "2026-08-29T18:00:00.000Z"
+              },
+              "transportMode": "TRUCK",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            }
+          ],
+          "transportSummary": "TRUCK/VESSEL:10025463:V000028133:007W/VESSEL:10025425:V000023521:048W/FEEDER:10054891:V000009247:/TRUCK",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-07-01T04:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7895763456,
+          "csPointPairID": 5818739,
+          "carrierScac": "COSU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-17T01:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-08T18:00:00.000Z",
+            "arrivalTimeLocation": {
+              "locationID": "P342",
+              "name": "Gdynia",
+              "unlocode": "PLGDY",
+              "csID": 342,
+              "csCityId": 2537920,
+              "timezone": "Europe/Warsaw",
+              "facility": {
+                "name": "BCT Baltic Container Tml Gdynia",
+                "code": "GDY01",
+                "id": 12018,
+                "type": "Terminal"
+              }
+            }
+          },
+          "transitTime": 52,
+          "direct": false,
+          "importHaulage": "DOOR",
+          "exportHaulage": "BOTH",
+          "touchTime": "2026-06-07T12:01:49.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "C2532082",
+                  "name": "Qingdao",
+                  "csCityId": 2532082,
+                  "unlocode": "CNTAO",
+                  "csID": 2532082,
+                  "timezone": "Asia/Shanghai"
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QQCTU Qingdao Qianwan United Ctn",
+                    "code": "TAO06",
+                    "id": 11277,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "transportMode": "TRUCK",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65067190,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QQCTU Qingdao Qianwan United Ctn",
+                    "code": "TAO06",
+                    "id": 11277,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-17T01:00:00.000Z",
+                "gmtEtd": "2026-06-16T17:00:00.000Z",
+                "cyCutoffTime": "2026-06-15T01:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65067191,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P102",
+                  "name": "Shanghai",
+                  "unlocode": "CNSHA",
+                  "csID": 102,
+                  "csCityId": 2530967,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Shanghai Shengdong (I), Yangshan",
+                    "code": "SHA08",
+                    "id": 12009,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-06-19T13:00:00.000Z",
+                "gmtEta": "2026-06-19T05:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025463,
+                "code": "AEU3",
+                "name": "ASIA EUROPE EXPRESS SERVICE LOOP 3"
+              },
+              "vessel": {
+                "vesselGID": "V000021162",
+                "name": "COSCO SHIPPING GEMINI",
+                "code": "CSA",
+                "IMO": 9783526
+              },
+              "imoNumber": 9783526,
+              "externalVoyageNumber": "036W",
+              "internalVoyageNumber": "036W",
+              "transitTime": 2
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65053971,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P102",
+                  "name": "Shanghai",
+                  "unlocode": "CNSHA",
+                  "csID": 102,
+                  "csCityId": 2530967,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "Shanghai Shengdong (I), Yangshan",
+                    "code": "SHA08",
+                    "id": 12009,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-21T01:30:00.000Z",
+                "gmtEtd": "2026-06-20T17:30:00.000Z",
+                "cyCutoffTime": "2026-06-19T14:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65053985,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P181",
+                  "name": "Hamburg",
+                  "unlocode": "DEHAM",
+                  "csID": 181,
+                  "csCityId": 2539114,
+                  "timezone": "Europe/Berlin",
+                  "facility": {
+                    "name": "Container Terminal Tollerort GmbH",
+                    "code": "HAM01",
+                    "id": 11268,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-04T17:00:00.000Z",
+                "gmtEta": "2026-08-04T15:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025425,
+                "code": "AEU7",
+                "name": "ASIA EUROPE EXPRESS SERVICE LOOP 7"
+              },
+              "vessel": {
+                "vesselGID": "V000022073",
+                "name": "COSCO SHIPPING ANDES",
+                "code": "CJE",
+                "IMO": 9757888
+              },
+              "imoNumber": 9757888,
+              "externalVoyageNumber": "048W",
+              "internalVoyageNumber": "044W",
+              "transitTime": 44
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66148292,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P181",
+                  "name": "Hamburg",
+                  "unlocode": "DEHAM",
+                  "csID": 181,
+                  "csCityId": 2539114,
+                  "timezone": "Europe/Berlin",
+                  "facility": {
+                    "name": "Container Terminal Tollerort GmbH",
+                    "code": "HAM01",
+                    "id": 11268,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-08-05T06:00:00.000Z",
+                "gmtEtd": "2026-08-05T04:00:00.000Z",
+                "cyCutoffTime": "2026-07-31T12:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66148244,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P342",
+                  "name": "Gdynia",
+                  "unlocode": "PLGDY",
+                  "csID": 342,
+                  "csCityId": 2537920,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BCT Baltic Container Tml Gdynia",
+                    "code": "GDY01",
+                    "id": 12018,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-08T18:00:00.000Z",
+                "gmtEta": "2026-08-08T16:00:00.000Z"
+              },
+              "transportMode": "FEEDER",
+              "service": {
+                "serviceID": 10054891,
+                "code": "GBX",
+                "name": "GERMANY BALTIC EXPRESS"
+              },
+              "vessel": {
+                "vesselGID": "V000001665",
+                "name": "FREDERIK",
+                "code": "UCM",
+                "IMO": 9328637
+              },
+              "imoNumber": 9328637,
+              "externalVoyageNumber": "465E",
+              "internalVoyageNumber": "419E",
+              "transitTime": 3
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P342",
+                  "name": "Gdynia",
+                  "unlocode": "PLGDY",
+                  "csID": 342,
+                  "csCityId": 2537920,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BCT Baltic Container Tml Gdynia",
+                    "code": "GDY01",
+                    "id": 12018,
+                    "type": "Terminal"
+                  }
+                }
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "C2547944",
+                  "name": "Gdansk",
+                  "csCityId": 2547944,
+                  "unlocode": "PLGDN",
+                  "csID": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-08-08T20:00:00.000Z",
+                "gmtEta": "2026-08-08T18:00:00.000Z"
+              },
+              "transportMode": "TRUCK",
+              "internalVoyageNumber": "",
+              "transitTime": 0
+            }
+          ],
+          "transportSummary": "TRUCK/VESSEL:10025463:V000021162:036W/VESSEL:10025425:V000022073:048W/FEEDER:10054891:V000001665:465E/TRUCK",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-15T01:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        }
+      ]
+    },
+    {
+      "identification": {
+        "dataSourceType": "SSM2014",
+        "requestRefNo": "7928c247-2876-4caf-a270-3bdedcff2e9a"
+      },
+      "carrier": {
+        "_id": "5559fcab395a2df11f3e0ed9",
+        "carrierID": 11,
+        "name": "CMA CGM",
+        "scac": "CMDU",
+        "enabled": true,
+        "ssmEnabled": true,
+        "url": "http://www.cma-cgm.com/",
+        "shortName": "CMA CGM",
+        "sortingKey": "cma-cgm",
+        "updatedAt": "2021-08-18T05:02:46.453Z",
+        "updatedBy": "huangde4",
+        "analyticsEnabled": true,
+        "ssSearchEnabled": true,
+        "vsSearchEnabled": true,
+        "chineseName": "法国达飞"
+      },
+      "por": {
+        "location": {
+          "_id": "66078e4263a71000141bfc06",
+          "source": "CS4",
+          "unlocode": "CNTAO",
+          "name": "Qingdao",
+          "uc_name": "QINGDAO",
+          "geo": [
+            120.19677,
+            35.999554
+          ],
+          "chineseName": "青岛",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P94",
+          "csID": 94,
+          "csCityID": 2532082,
+          "type": "PORT",
+          "fullName": "Qingdao, Shandong, China",
+          "timezone": "Asia/Shanghai",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "fnd": {
+        "location": {
+          "_id": "66078e4263a71000141bfc01",
+          "source": "CS4",
+          "unlocode": "PLGDN",
+          "name": "Gdansk",
+          "uc_name": "GDANSK",
+          "geo": [
+            18.646638,
+            54.352025
+          ],
+          "chineseName": "格但斯克",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P341",
+          "csID": 341,
+          "csCityID": 2547944,
+          "type": "PORT",
+          "fullName": "Gdansk, Pomorskie, Poland",
+          "timezone": "Europe/Warsaw",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "route": [
+        {
+          "csRouteID": 7821107624,
+          "csPointPairID": 1161219,
+          "carrierScac": "CMDU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-26T02:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-19T06:00:00.000Z"
+          },
+          "transitTime": 54,
+          "direct": true,
+          "touchTime": "2026-06-07T00:15:25.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65599328,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO QIANWAN CONTAINER TERMINAL",
+                    "code": "CNTAODQCT",
+                    "id": 25681,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-26T02:00:00.000Z",
+                "gmtEtd": "2026-06-25T18:00:00.000Z",
+                "cyCutoffTime": "2026-06-24T10:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65627607,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "DCT TERMINAL GDANSK",
+                    "code": "PLGDNDDCT",
+                    "id": 26151,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-19T06:00:00.000Z",
+                "gmtEta": "2026-08-19T04:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025339,
+                "code": "FAL5",
+                "name": "French Asia Line 5"
+              },
+              "vessel": {
+                "vesselGID": "V000028140",
+                "name": "OOCL ZEEBRUGGE",
+                "code": "OOZEE",
+                "IMO": 9908140
+              },
+              "imoNumber": 9908140,
+              "externalVoyageNumber": "0VAO5W1MA",
+              "internalVoyageNumber": "",
+              "transitTime": 54
+            }
+          ],
+          "transportSummary": "VESSEL:10025339:V000028140:0VAO5W1MA",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-24T10:00:00.000Z",
+            "siCutoffTime": "2026-06-24T09:00:00.000Z",
+            "vgmCutoffTime": "2026-06-24T10:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7836754087,
+          "csPointPairID": 1161219,
+          "carrierScac": "CMDU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-19T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-24T20:00:00.000Z"
+          },
+          "transitTime": 67,
+          "direct": false,
+          "touchTime": "2026-06-07T00:15:25.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65870196,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO QIANWAN CONTAINER TERMINAL",
+                    "code": "CNTAODQCT",
+                    "id": 25681,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-19T00:00:00.000Z",
+                "gmtEtd": "2026-06-18T16:00:00.000Z",
+                "cyCutoffTime": "2026-06-16T08:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65870203,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P355",
+                  "name": "Singapore",
+                  "unlocode": "SGSIN",
+                  "csID": 355,
+                  "csCityId": 2530507,
+                  "timezone": "Asia/Singapore",
+                  "facility": {
+                    "name": "CMA CGM PSA LION TERMINAL",
+                    "code": "SGSINDCCL",
+                    "id": 26209,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-08T08:00:00.000Z",
+                "gmtEta": "2026-07-08T00:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 510,
+                "code": "MEX",
+                "name": "Mediterranean Club Express"
+              },
+              "vessel": {
+                "vesselGID": "V000001065",
+                "name": "CMA CGM MARCO POLO",
+                "code": "CGPOL",
+                "IMO": 9454436
+              },
+              "imoNumber": 9454436,
+              "externalVoyageNumber": "0MEO3W1MA",
+              "internalVoyageNumber": "",
+              "transitTime": 19
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65533638,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P355",
+                  "name": "Singapore",
+                  "unlocode": "SGSIN",
+                  "csID": 355,
+                  "csCityId": 2530507,
+                  "timezone": "Asia/Singapore",
+                  "facility": {
+                    "name": "CMA CGM PSA LION TERMINAL",
+                    "code": "SGSINDCCL",
+                    "id": 26209,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-17T11:00:00.000Z",
+                "gmtEtd": "2026-07-17T03:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65565197,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "DCT TERMINAL GDANSK",
+                    "code": "PLGDNDDCT",
+                    "id": 26151,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-24T20:00:00.000Z",
+                "gmtEta": "2026-08-24T18:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 461,
+                "code": "FAL",
+                "name": "French Asia Line 1 (FAL 1)"
+              },
+              "vessel": {
+                "vesselGID": "V000021947",
+                "name": "CMA CGM JEAN MERMOZ",
+                "code": "CGJMZ",
+                "IMO": 9776420
+              },
+              "imoNumber": 9776420,
+              "externalVoyageNumber": "1FL3OW1MA",
+              "internalVoyageNumber": "",
+              "transitTime": 39
+            }
+          ],
+          "transportSummary": "VESSEL:510:V000001065:0MEO3W1MA/VESSEL:461:V000021947:1FL3OW1MA",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-16T08:00:00.000Z",
+            "siCutoffTime": "2026-06-15T17:00:00.000Z",
+            "vgmCutoffTime": "2026-06-16T08:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7922605065,
+          "csPointPairID": 1161219,
+          "carrierScac": "CMDU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-26T23:45:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-31T20:00:00.000Z"
+          },
+          "transitTime": 66,
+          "direct": false,
+          "touchTime": "2026-06-07T00:15:25.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66318078,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO QIANWAN CONTAINER TERMINAL",
+                    "code": "CNTAODQCT",
+                    "id": 25681,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-26T23:45:00.000Z",
+                "gmtEtd": "2026-06-26T15:45:00.000Z",
+                "cyCutoffTime": "2026-06-24T07:45:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66318091,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P355",
+                  "name": "Singapore",
+                  "unlocode": "SGSIN",
+                  "csID": 355,
+                  "csCityId": 2530507,
+                  "timezone": "Asia/Singapore",
+                  "facility": {
+                    "name": "CMA CGM PSA LION TERMINAL",
+                    "code": "SGSINDCCL",
+                    "id": 26209,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-15T08:00:00.000Z",
+                "gmtEta": "2026-07-15T00:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 510,
+                "code": "MEX",
+                "name": "Mediterranean Club Express"
+              },
+              "vessel": {
+                "vesselGID": "V000026210",
+                "name": "CMA CGM SORBONNE",
+                "code": "CGSOR",
+                "IMO": 9839210
+              },
+              "imoNumber": 9839210,
+              "externalVoyageNumber": "0MEO5W1MA",
+              "internalVoyageNumber": "",
+              "transitTime": 18
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65533078,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P355",
+                  "name": "Singapore",
+                  "unlocode": "SGSIN",
+                  "csID": 355,
+                  "csCityId": 2530507,
+                  "timezone": "Asia/Singapore",
+                  "facility": {
+                    "name": "CMA CGM PSA LION TERMINAL",
+                    "code": "SGSINDCCL",
+                    "id": 26209,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-24T11:00:00.000Z",
+                "gmtEtd": "2026-07-24T03:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65564584,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "DCT TERMINAL GDANSK",
+                    "code": "PLGDNDDCT",
+                    "id": 26151,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-31T20:00:00.000Z",
+                "gmtEta": "2026-08-31T18:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 461,
+                "code": "FAL",
+                "name": "French Asia Line 1 (FAL 1)"
+              },
+              "vessel": {
+                "vesselGID": "V000008642",
+                "name": "CMA CGM BOUGAINVILLE",
+                "code": "CGBGV",
+                "IMO": 9702156
+              },
+              "imoNumber": 9702156,
+              "externalVoyageNumber": "1FL3QW1MA",
+              "internalVoyageNumber": "",
+              "transitTime": 39
+            }
+          ],
+          "transportSummary": "VESSEL:510:V000026210:0MEO5W1MA/VESSEL:461:V000008642:1FL3QW1MA",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-24T07:45:00.000Z",
+            "siCutoffTime": "2026-06-24T09:00:00.000Z",
+            "vgmCutoffTime": "2026-06-24T07:45:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        }
+      ]
+    },
+    {
+      "identification": {
+        "dataSourceType": "SSM2014",
+        "requestRefNo": "7928c247-2876-4caf-a270-3bdedcff2e9a"
+      },
+      "carrier": {
+        "_id": "557ab159395a5b8cdab49527",
+        "carrierID": 7,
+        "name": "EVERGREEN",
+        "scac": "EGLV",
+        "shortName": "EVERGREEN",
+        "url": "http://www.shipmentlink.com/tvs2/jsp/TVS2_InteractiveSchedule.jsp",
+        "enabled": true,
+        "ssmEnabled": true,
+        "sortingKey": "evergreenline",
+        "updatedAt": "2021-08-18T05:03:18.959Z",
+        "updatedBy": "huangde4",
+        "analyticsEnabled": true,
+        "ssSearchEnabled": true,
+        "vsSearchEnabled": true,
+        "chineseName": "长荣海运"
+      },
+      "por": {
+        "location": {
+          "_id": "66078e4263a71000141bfc06",
+          "source": "CS4",
+          "unlocode": "CNTAO",
+          "name": "Qingdao",
+          "uc_name": "QINGDAO",
+          "geo": [
+            120.19677,
+            35.999554
+          ],
+          "chineseName": "青岛",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P94",
+          "csID": 94,
+          "csCityID": 2532082,
+          "type": "PORT",
+          "fullName": "Qingdao, Shandong, China",
+          "timezone": "Asia/Shanghai",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "fnd": {
+        "location": {
+          "_id": "66078e4263a71000141bfc01",
+          "source": "CS4",
+          "unlocode": "PLGDN",
+          "name": "Gdansk",
+          "uc_name": "GDANSK",
+          "geo": [
+            18.646638,
+            54.352025
+          ],
+          "chineseName": "格但斯克",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P341",
+          "csID": 341,
+          "csCityID": 2547944,
+          "type": "PORT",
+          "fullName": "Gdansk, Pomorskie, Poland",
+          "timezone": "Europe/Warsaw",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "route": [
+        {
+          "csRouteID": 7880332196,
+          "csPointPairID": 102823,
+          "carrierScac": "EGLV",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-17T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-09-09T00:00:00.000Z"
+          },
+          "transitTime": 54,
+          "direct": true,
+          "touchTime": "2026-06-07T09:05:15.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65974762,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai"
+                },
+                "etd": "2026-07-17T00:00:00.000Z",
+                "gmtEtd": "2026-07-16T16:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65974770,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-09-09T00:00:00.000Z",
+                "gmtEta": "2026-09-08T22:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025589,
+                "code": "NE1",
+                "name": "ASIA/NORTH EUROPE WEEKLYEXPRESS SERVICE 1 (OA NEUR LOOP1)"
+              },
+              "vessel": {
+                "vesselGID": "V000027328",
+                "name": "OOCL PIRAEUS",
+                "IMO": 9908097
+              },
+              "imoNumber": 9908097,
+              "externalVoyageNumber": "012W",
+              "internalVoyageNumber": "",
+              "transitTime": 54
+            }
+          ],
+          "transportSummary": "VESSEL:10025589:V000027328:012W",
+          "isPossibleDirect": false,
+          "cutoffTime": {},
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7850343600,
+          "csPointPairID": 102823,
+          "carrierScac": "EGLV",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-03T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-26T00:00:00.000Z"
+          },
+          "transitTime": 54,
+          "direct": true,
+          "touchTime": "2026-06-07T09:05:15.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65860852,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai"
+                },
+                "etd": "2026-07-03T00:00:00.000Z",
+                "gmtEtd": "2026-07-02T16:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65860860,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-08-26T00:00:00.000Z",
+                "gmtEta": "2026-08-25T22:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025589,
+                "code": "NE1",
+                "name": "ASIA/NORTH EUROPE WEEKLYEXPRESS SERVICE 1 (OA NEUR LOOP1)"
+              },
+              "vessel": {
+                "vesselGID": "V000031587",
+                "name": "NANTONG CHUANQI 456",
+                "IMO": 9986324
+              },
+              "imoNumber": 9986324,
+              "externalVoyageNumber": "001W",
+              "internalVoyageNumber": "",
+              "transitTime": 54
+            }
+          ],
+          "transportSummary": "VESSEL:10025589:V000031587:001W",
+          "isPossibleDirect": false,
+          "cutoffTime": {},
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7905089683,
+          "csPointPairID": 102823,
+          "carrierScac": "EGLV",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-14T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-09-02T00:00:00.000Z"
+          },
+          "transitTime": 50,
+          "direct": true,
+          "touchTime": "2026-06-07T09:05:15.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66232105,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai"
+                },
+                "etd": "2026-07-14T00:00:00.000Z",
+                "gmtEtd": "2026-07-13T16:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66232113,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw"
+                },
+                "eta": "2026-09-02T00:00:00.000Z",
+                "gmtEta": "2026-09-01T22:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10025589,
+                "code": "NE1",
+                "name": "ASIA/NORTH EUROPE WEEKLYEXPRESS SERVICE 1 (OA NEUR LOOP1)"
+              },
+              "vessel": {
+                "vesselGID": "V000028134",
+                "name": "OOCL DENMARK",
+                "IMO": 9922548
+              },
+              "imoNumber": 9922548,
+              "externalVoyageNumber": "009W",
+              "internalVoyageNumber": "",
+              "transitTime": 50
+            }
+          ],
+          "transportSummary": "VESSEL:10025589:V000028134:009W",
+          "isPossibleDirect": false,
+          "cutoffTime": {},
+          "isUncertainTransitTime": false
+        }
+      ]
+    },
+    {
+      "identification": {
+        "dataSourceType": "SSM2014",
+        "requestRefNo": "7928c247-2876-4caf-a270-3bdedcff2e9a"
+      },
+      "carrier": {
+        "_id": "5559fcab395a2df11f3e0edd",
+        "carrierID": 5,
+        "name": "MSC",
+        "scac": "MSCU",
+        "enabled": true,
+        "ssmEnabled": true,
+        "url": "https://www.msc.com/",
+        "shortName": "MSC",
+        "sortingKey": "msc",
+        "updatedAt": "2021-08-18T05:04:18.037Z",
+        "analyticsEnabled": true,
+        "updatedBy": "huangde4",
+        "ssSearchEnabled": true,
+        "vsSearchEnabled": true,
+        "chineseName": "地中海航运"
+      },
+      "por": {
+        "location": {
+          "_id": "66078e4263a71000141bfc06",
+          "source": "CS4",
+          "unlocode": "CNTAO",
+          "name": "Qingdao",
+          "uc_name": "QINGDAO",
+          "geo": [
+            120.19677,
+            35.999554
+          ],
+          "chineseName": "青岛",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P94",
+          "csID": 94,
+          "csCityID": 2532082,
+          "type": "PORT",
+          "fullName": "Qingdao, Shandong, China",
+          "timezone": "Asia/Shanghai",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "fnd": {
+        "location": {
+          "_id": "66078e4263a71000141bfc01",
+          "source": "CS4",
+          "unlocode": "PLGDN",
+          "name": "Gdansk",
+          "uc_name": "GDANSK",
+          "geo": [
+            18.646638,
+            54.352025
+          ],
+          "chineseName": "格但斯克",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P341",
+          "csID": 341,
+          "csCityID": 2547944,
+          "type": "PORT",
+          "fullName": "Gdansk, Pomorskie, Poland",
+          "timezone": "Europe/Warsaw",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "route": [
+        {
+          "csRouteID": 7909008700,
+          "csPointPairID": 130283,
+          "carrierScac": "MSCU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-11T18:15:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-09-13T06:00:00.000Z"
+          },
+          "transitTime": 64,
+          "direct": false,
+          "touchTime": "2026-06-07T00:48:55.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66451479,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO NEW QIANWAN CONTAINER TERMINAL",
+                    "id": 65953,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-11T18:15:00.000Z",
+                "gmtEtd": "2026-07-11T10:15:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P92",
+                  "name": "Ningbo",
+                  "unlocode": "CNNGB",
+                  "csID": 92,
+                  "csCityId": 2531706,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "GANGJI TERMINAL (PHASE IV)",
+                    "id": 18293,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-15T00:00:00.000Z",
+                "gmtEta": "2026-07-14T16:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10058476,
+                "code": "LION",
+                "name": "LION"
+              },
+              "vessel": {
+                "vesselGID": "V000003367",
+                "name": "MSC CAPELLA",
+                "IMO": 9465289
+              },
+              "imoNumber": 9465289,
+              "externalVoyageNumber": "GL628W",
+              "internalVoyageNumber": "",
+              "transitTime": 4
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P92",
+                  "name": "Ningbo",
+                  "unlocode": "CNNGB",
+                  "csID": 92,
+                  "csCityId": 2531706,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "GANGJI TERMINAL (PHASE IV)",
+                    "id": 18293,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-23T00:00:00.000Z",
+                "gmtEtd": "2026-07-22T16:00:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BALTIC HUB",
+                    "id": 76922,
+                    "type": "Facility"
+                  }
+                },
+                "eta": "2026-09-13T06:00:00.000Z",
+                "gmtEta": "2026-09-13T04:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10057457,
+                "code": "Britannia",
+                "name": "Britannia"
+              },
+              "vessel": {
+                "vesselGID": "V000003598",
+                "name": "MSC TRIESTE",
+                "IMO": 9484479
+              },
+              "imoNumber": 9484479,
+              "externalVoyageNumber": "QB629W",
+              "internalVoyageNumber": "",
+              "transitTime": 52
+            }
+          ],
+          "transportSummary": "VESSEL:10058476:V000003367:GL628W/VESSEL:10057457:V000003598:QB629W",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "vgmCutoffTime": "2026-07-07T06:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7957166152,
+          "csPointPairID": 130283,
+          "carrierScac": "MSCU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-26T06:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-26T01:45:00.000Z"
+          },
+          "transitTime": 61,
+          "direct": false,
+          "touchTime": "2026-06-07T00:48:55.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66332436,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO NEW QIANWAN CONTAINER TERMINAL",
+                    "id": 65953,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-26T06:00:00.000Z",
+                "gmtEtd": "2026-06-25T22:00:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P92",
+                  "name": "Ningbo",
+                  "unlocode": "CNNGB",
+                  "csID": 92,
+                  "csCityId": 2531706,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "GANGJI TERMINAL (PHASE IV)",
+                    "id": 18293,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-01T00:00:00.000Z",
+                "gmtEta": "2026-06-30T16:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10058476,
+                "code": "LION",
+                "name": "LION"
+              },
+              "vessel": {
+                "vesselGID": "V000028666",
+                "name": "MSC IDANIA",
+                "IMO": 9962562
+              },
+              "imoNumber": 9962562,
+              "externalVoyageNumber": "GL626W",
+              "internalVoyageNumber": "",
+              "transitTime": 5
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P92",
+                  "name": "Ningbo",
+                  "unlocode": "CNNGB",
+                  "csID": 92,
+                  "csCityId": 2531706,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "GANGJI TERMINAL (PHASE IV)",
+                    "id": 18293,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-03T00:45:00.000Z",
+                "gmtEtd": "2026-07-02T16:45:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BALTIC HUB",
+                    "id": 76922,
+                    "type": "Facility"
+                  }
+                },
+                "eta": "2026-08-26T01:45:00.000Z",
+                "gmtEta": "2026-08-25T23:45:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10057457,
+                "code": "Britannia",
+                "name": "Britannia"
+              },
+              "vessel": {
+                "vesselGID": "V000003569",
+                "name": "MSC SAVONA",
+                "IMO": 9460356
+              },
+              "imoNumber": 9460356,
+              "externalVoyageNumber": "QB626W",
+              "internalVoyageNumber": "",
+              "transitTime": 54
+            }
+          ],
+          "transportSummary": "VESSEL:10058476:V000028666:GL626W/VESSEL:10057457:V000003569:QB626W",
+          "isPossibleDirect": false,
+          "cutoffTime": {},
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7951166237,
+          "csPointPairID": 130283,
+          "carrierScac": "MSCU",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-07-03T06:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-09-06T06:00:00.000Z"
+          },
+          "transitTime": 65,
+          "direct": false,
+          "touchTime": "2026-06-07T00:48:55.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO NEW QIANWAN CONTAINER TERMINAL",
+                    "id": 65953,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-03T06:00:00.000Z",
+                "gmtEtd": "2026-07-02T22:00:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P92",
+                  "name": "Ningbo",
+                  "unlocode": "CNNGB",
+                  "csID": 92,
+                  "csCityId": 2531706,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "GANGJI TERMINAL (PHASE IV)",
+                    "id": 18293,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-08T00:00:00.000Z",
+                "gmtEta": "2026-07-07T16:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10058476,
+                "code": "LION",
+                "name": "LION"
+              },
+              "vessel": {
+                "vesselGID": "V-99999999",
+                "name": "---",
+                "IMO": 9999999
+              },
+              "imoNumber": 9999999,
+              "externalVoyageNumber": "GL627W",
+              "internalVoyageNumber": "",
+              "transitTime": 5
+            },
+            {
+              "fromPoint": {
+                "location": {
+                  "locationID": "P92",
+                  "name": "Ningbo",
+                  "unlocode": "CNNGB",
+                  "csID": 92,
+                  "csCityId": 2531706,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "GANGJI TERMINAL (PHASE IV)",
+                    "id": 18293,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-13T23:30:00.000Z",
+                "gmtEtd": "2026-07-13T15:30:00.000Z"
+              },
+              "toPoint": {
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BALTIC HUB",
+                    "id": 76922,
+                    "type": "Facility"
+                  }
+                },
+                "eta": "2026-09-06T06:00:00.000Z",
+                "gmtEta": "2026-09-06T04:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10057457,
+                "code": "Britannia",
+                "name": "Britannia"
+              },
+              "vessel": {
+                "vesselGID": "V000027113",
+                "name": "MSC SOFIA",
+                "IMO": 9927275
+              },
+              "imoNumber": 9927275,
+              "externalVoyageNumber": "QB628W",
+              "internalVoyageNumber": "",
+              "transitTime": 55
+            }
+          ],
+          "transportSummary": "VESSEL:10058476:V-99999999:GL627W/VESSEL:10057457:V000027113:QB628W",
+          "isPossibleDirect": false,
+          "cutoffTime": {},
+          "isUncertainTransitTime": false
+        }
+      ]
+    },
+    {
+      "identification": {
+        "dataSourceType": "SSM2014",
+        "requestRefNo": "7928c247-2876-4caf-a270-3bdedcff2e9a"
+      },
+      "carrier": {
+        "_id": "5a83a77c7c7ffb28c44be551",
+        "carrierID": 1000160,
+        "name": "ONE",
+        "scac": "ONEY",
+        "updatedAt": "2021-08-18T05:04:25.474Z",
+        "url": "https://www.one-line.com/",
+        "shortName": "ONE",
+        "sortingKey": "ocean network express",
+        "previewEnabled": false,
+        "createdBy": "CSDev",
+        "updatedBy": "huangde4",
+        "__v": 0,
+        "createdAt": "2018-02-14T03:05:32.403Z",
+        "ssmEnabled": true,
+        "enabled": true,
+        "analyticsEnabled": true,
+        "ssSearchEnabled": true,
+        "vsSearchEnabled": true,
+        "chineseName": "海洋网联船务"
+      },
+      "por": {
+        "location": {
+          "_id": "66078e4263a71000141bfc06",
+          "source": "CS4",
+          "unlocode": "CNTAO",
+          "name": "Qingdao",
+          "uc_name": "QINGDAO",
+          "geo": [
+            120.19677,
+            35.999554
+          ],
+          "chineseName": "青岛",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P94",
+          "csID": 94,
+          "csCityID": 2532082,
+          "type": "PORT",
+          "fullName": "Qingdao, Shandong, China",
+          "timezone": "Asia/Shanghai",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "fnd": {
+        "location": {
+          "_id": "66078e4263a71000141bfc01",
+          "source": "CS4",
+          "unlocode": "PLGDN",
+          "name": "Gdansk",
+          "uc_name": "GDANSK",
+          "geo": [
+            18.646638,
+            54.352025
+          ],
+          "chineseName": "格但斯克",
+          "ssmLastUpdateTime": "10 Jan 2022 20:00:00",
+          "locationID": "P341",
+          "csID": 341,
+          "csCityID": 2547944,
+          "type": "PORT",
+          "fullName": "Gdansk, Pomorskie, Poland",
+          "timezone": "Europe/Warsaw",
+          "refreshDateTime": "2026-06-07T00:00:02.371Z"
+        }
+      },
+      "route": [
+        {
+          "csRouteID": 7906908041,
+          "csPointPairID": 13117841,
+          "carrierScac": "ONEY",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-17T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-17T00:00:00.000Z"
+          },
+          "transitTime": 61,
+          "direct": false,
+          "importHaulage": "CY",
+          "exportHaulage": "CY",
+          "touchTime": "2026-06-06T02:18:01.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65849772,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO NEW QIANWAN CONTAINER TERMINAL CO. LTD.",
+                    "code": "CNTAO10",
+                    "id": 40840,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-17T13:00:00.000Z",
+                "gmtEtd": "2026-06-17T05:00:00.000Z",
+                "cyCutoffTime": "2026-06-15T00:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65849773,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P358",
+                  "name": "Busan",
+                  "unlocode": "KRPUS",
+                  "csID": 358,
+                  "csCityId": 2535304,
+                  "timezone": "Asia/Seoul",
+                  "facility": {
+                    "name": "HPNT, HMM PSA NEW-PORT TERMINAL CO., LTD",
+                    "code": "KRPUS12",
+                    "id": 60414,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-06-19T23:00:00.000Z",
+                "gmtEta": "2026-06-19T14:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10030411,
+                "code": "EC3",
+                "name": "EAST COAST 3"
+              },
+              "vessel": {
+                "vesselGID": "V000022944",
+                "name": "ONE GRUS",
+                "code": "ONGT",
+                "IMO": 9806067
+              },
+              "imoNumber": 9806067,
+              "externalVoyageNumber": "030W",
+              "internalVoyageNumber": "",
+              "transitTime": 3
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65356349,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P358",
+                  "name": "Busan",
+                  "unlocode": "KRPUS",
+                  "csID": 358,
+                  "csCityId": 2535304,
+                  "timezone": "Asia/Seoul",
+                  "facility": {
+                    "name": "HANJIN BUSAN NEW PORT COMPANY(HJNC)",
+                    "code": "KRPUS14",
+                    "id": 38974,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-26T02:00:00.000Z",
+                "gmtEtd": "2026-06-25T17:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65601326,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P299",
+                  "name": "Rotterdam",
+                  "unlocode": "NLRTM",
+                  "csID": 299,
+                  "csCityId": 2545653,
+                  "timezone": "Europe/Amsterdam",
+                  "facility": {
+                    "name": "RWG (ROTTERDAM WORLD GATEWAY)",
+                    "code": "NLRTM15",
+                    "id": 44720,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-01T23:00:00.000Z",
+                "gmtEta": "2026-08-01T21:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10030451,
+                "code": "FE4",
+                "name": "FAR EAST EUROPE 4"
+              },
+              "vessel": {
+                "vesselGID": "V000027366",
+                "name": "ONE INTELLIGENCE",
+                "code": "TLIT",
+                "IMO": 9933121
+              },
+              "imoNumber": 9933121,
+              "externalVoyageNumber": "008W",
+              "internalVoyageNumber": "",
+              "transitTime": 38
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66150566,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P299",
+                  "name": "Rotterdam",
+                  "unlocode": "NLRTM",
+                  "csID": 299,
+                  "csCityId": 2545653,
+                  "timezone": "Europe/Amsterdam",
+                  "facility": {
+                    "name": "RWG (ROTTERDAM WORLD GATEWAY)",
+                    "code": "NLRTM15",
+                    "id": 44720,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-08-14T02:00:00.000Z",
+                "gmtEtd": "2026-08-14T00:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66150556,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BALTIC HUB CONTAINER TERMINAL SP. Z O. O.",
+                    "code": "PLGDN21",
+                    "id": 59142,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-17T08:00:00.000Z",
+                "gmtEta": "2026-08-17T06:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10063353,
+                "code": "IBX",
+                "name": "IBERIA BALTIC EXPRESS"
+              },
+              "vessel": {
+                "vesselGID": "V000028295",
+                "name": "LANGENESS",
+                "code": "LNNT",
+                "IMO": 9944778
+              },
+              "imoNumber": 9944778,
+              "externalVoyageNumber": "042N",
+              "internalVoyageNumber": "",
+              "transitTime": 4
+            }
+          ],
+          "transportSummary": "VESSEL:10030411:V000022944:030W/VESSEL:10030451:V000027366:008W/VESSEL:10063353:V000028295:042N",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-15T00:00:00.000Z",
+            "vgmCutoffTime": "2026-06-16T13:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7909143649,
+          "csPointPairID": 13117841,
+          "carrierScac": "ONEY",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-30T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-31T00:00:00.000Z"
+          },
+          "transitTime": 62,
+          "direct": false,
+          "importHaulage": "CY",
+          "exportHaulage": "CY",
+          "touchTime": "2026-06-06T02:18:01.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65852745,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO NEW QIANWAN CONTAINER TERMINAL CO. LTD.",
+                    "code": "CNTAO10",
+                    "id": 40840,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-30T13:00:00.000Z",
+                "gmtEtd": "2026-06-30T05:00:00.000Z",
+                "cyCutoffTime": "2026-06-28T00:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65852746,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P358",
+                  "name": "Busan",
+                  "unlocode": "KRPUS",
+                  "csID": 358,
+                  "csCityId": 2535304,
+                  "timezone": "Asia/Seoul",
+                  "facility": {
+                    "name": "HPNT, HMM PSA NEW-PORT TERMINAL CO., LTD",
+                    "code": "KRPUS12",
+                    "id": 60414,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-02T11:00:00.000Z",
+                "gmtEta": "2026-07-02T02:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10030411,
+                "code": "EC3",
+                "name": "EAST COAST 3"
+              },
+              "vessel": {
+                "vesselGID": "V000021861",
+                "name": "ONE MADRID",
+                "code": "ODDT",
+                "IMO": 9805453
+              },
+              "imoNumber": 9805453,
+              "externalVoyageNumber": "029W",
+              "internalVoyageNumber": "",
+              "transitTime": 2
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65851062,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P358",
+                  "name": "Busan",
+                  "unlocode": "KRPUS",
+                  "csID": 358,
+                  "csCityId": 2535304,
+                  "timezone": "Asia/Seoul",
+                  "facility": {
+                    "name": "HANJIN BUSAN NEW PORT COMPANY(HJNC)",
+                    "code": "KRPUS14",
+                    "id": 38974,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-10T02:00:00.000Z",
+                "gmtEtd": "2026-07-09T17:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65851059,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P299",
+                  "name": "Rotterdam",
+                  "unlocode": "NLRTM",
+                  "csID": 299,
+                  "csCityId": 2545653,
+                  "timezone": "Europe/Amsterdam",
+                  "facility": {
+                    "name": "RWG (ROTTERDAM WORLD GATEWAY)",
+                    "code": "NLRTM15",
+                    "id": 44720,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-15T23:00:00.000Z",
+                "gmtEta": "2026-08-15T21:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10030451,
+                "code": "FE4",
+                "name": "FAR EAST EUROPE 4"
+              },
+              "vessel": {
+                "vesselGID": "V000015737",
+                "name": "ONE TRUTH",
+                "code": "OQRT",
+                "IMO": 9773210
+              },
+              "imoNumber": 9773210,
+              "externalVoyageNumber": "030W",
+              "internalVoyageNumber": "",
+              "transitTime": 38
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66303495,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P299",
+                  "name": "Rotterdam",
+                  "unlocode": "NLRTM",
+                  "csID": 299,
+                  "csCityId": 2545653,
+                  "timezone": "Europe/Amsterdam",
+                  "facility": {
+                    "name": "RWG (ROTTERDAM WORLD GATEWAY)",
+                    "code": "NLRTM15",
+                    "id": 44720,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-08-28T02:00:00.000Z",
+                "gmtEtd": "2026-08-28T00:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66303488,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BALTIC HUB CONTAINER TERMINAL SP. Z O. O.",
+                    "code": "PLGDN21",
+                    "id": 59142,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-31T08:00:00.000Z",
+                "gmtEta": "2026-08-31T06:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10063353,
+                "code": "IBX",
+                "name": "IBERIA BALTIC EXPRESS"
+              },
+              "vessel": {
+                "vesselGID": "V000004724",
+                "name": "SVENDBORG",
+                "code": "SDBT",
+                "IMO": 9454230
+              },
+              "imoNumber": 9454230,
+              "externalVoyageNumber": "078N",
+              "internalVoyageNumber": "",
+              "transitTime": 4
+            }
+          ],
+          "transportSummary": "VESSEL:10030411:V000021861:029W/VESSEL:10030451:V000015737:030W/VESSEL:10063353:V000004724:078N",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-28T00:00:00.000Z",
+            "vgmCutoffTime": "2026-06-29T13:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        },
+        {
+          "csRouteID": 7923152701,
+          "csPointPairID": 13117841,
+          "carrierScac": "ONEY",
+          "por": {
+            "location": {
+              "locationID": "P94",
+              "name": "Qingdao",
+              "unlocode": "CNTAO",
+              "csID": 94,
+              "csCityId": 2532082,
+              "timezone": "Asia/Shanghai"
+            },
+            "etd": "2026-06-29T00:00:00.000Z"
+          },
+          "fnd": {
+            "location": {
+              "locationID": "P341",
+              "name": "Gdansk",
+              "unlocode": "PLGDN",
+              "csID": 341,
+              "csCityId": 2547944,
+              "timezone": "Europe/Warsaw"
+            },
+            "eta": "2026-08-31T00:00:00.000Z"
+          },
+          "transitTime": 63,
+          "direct": false,
+          "importHaulage": "CY",
+          "exportHaulage": "CY",
+          "touchTime": "2026-06-06T02:18:01.000Z",
+          "leg": [
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66315128,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P94",
+                  "name": "Qingdao",
+                  "unlocode": "CNTAO",
+                  "csID": 94,
+                  "csCityId": 2532082,
+                  "timezone": "Asia/Shanghai",
+                  "facility": {
+                    "name": "QINGDAO NEW QIANWAN CONTAINER TERMINAL CO. LTD.",
+                    "code": "CNTAO10",
+                    "id": 40840,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-06-29T11:00:00.000Z",
+                "gmtEtd": "2026-06-29T03:00:00.000Z",
+                "cyCutoffTime": "2026-06-27T00:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66315129,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P358",
+                  "name": "Busan",
+                  "unlocode": "KRPUS",
+                  "csID": 358,
+                  "csCityId": 2535304,
+                  "timezone": "Asia/Seoul",
+                  "facility": {
+                    "name": "HANJIN BUSAN NEW PORT COMPANY(HJNC)",
+                    "code": "KRPUS14",
+                    "id": 38974,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-07-01T19:00:00.000Z",
+                "gmtEta": "2026-07-01T10:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10057576,
+                "code": "AX4",
+                "name": "ASIA LATIN AMERICA EXPRESS 4"
+              },
+              "vessel": {
+                "vesselGID": "V000002153",
+                "name": "HYUNDAI COURAGE",
+                "code": "HCRT",
+                "IMO": 9347542
+              },
+              "imoNumber": 9347542,
+              "externalVoyageNumber": "124E",
+              "internalVoyageNumber": "",
+              "transitTime": 3
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65851062,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P358",
+                  "name": "Busan",
+                  "unlocode": "KRPUS",
+                  "csID": 358,
+                  "csCityId": 2535304,
+                  "timezone": "Asia/Seoul",
+                  "facility": {
+                    "name": "HANJIN BUSAN NEW PORT COMPANY(HJNC)",
+                    "code": "KRPUS14",
+                    "id": 38974,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-07-10T02:00:00.000Z",
+                "gmtEtd": "2026-07-09T17:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 65851059,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P299",
+                  "name": "Rotterdam",
+                  "unlocode": "NLRTM",
+                  "csID": 299,
+                  "csCityId": 2545653,
+                  "timezone": "Europe/Amsterdam",
+                  "facility": {
+                    "name": "RWG (ROTTERDAM WORLD GATEWAY)",
+                    "code": "NLRTM15",
+                    "id": 44720,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-15T23:00:00.000Z",
+                "gmtEta": "2026-08-15T21:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10030451,
+                "code": "FE4",
+                "name": "FAR EAST EUROPE 4"
+              },
+              "vessel": {
+                "vesselGID": "V000015737",
+                "name": "ONE TRUTH",
+                "code": "OQRT",
+                "IMO": 9773210
+              },
+              "imoNumber": 9773210,
+              "externalVoyageNumber": "030W",
+              "internalVoyageNumber": "",
+              "transitTime": 38
+            },
+            {
+              "fromPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66303495,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P299",
+                  "name": "Rotterdam",
+                  "unlocode": "NLRTM",
+                  "csID": 299,
+                  "csCityId": 2545653,
+                  "timezone": "Europe/Amsterdam",
+                  "facility": {
+                    "name": "RWG (ROTTERDAM WORLD GATEWAY)",
+                    "code": "NLRTM15",
+                    "id": 44720,
+                    "type": "Terminal"
+                  }
+                },
+                "etd": "2026-08-28T02:00:00.000Z",
+                "gmtEtd": "2026-08-28T00:00:00.000Z"
+              },
+              "toPoint": {
+                "voyageStop": {
+                  "voyageStopId": 66303488,
+                  "skip": false
+                },
+                "location": {
+                  "locationID": "P341",
+                  "name": "Gdansk",
+                  "unlocode": "PLGDN",
+                  "csID": 341,
+                  "csCityId": 2547944,
+                  "timezone": "Europe/Warsaw",
+                  "facility": {
+                    "name": "BALTIC HUB CONTAINER TERMINAL SP. Z O. O.",
+                    "code": "PLGDN21",
+                    "id": 59142,
+                    "type": "Terminal"
+                  }
+                },
+                "eta": "2026-08-31T08:00:00.000Z",
+                "gmtEta": "2026-08-31T06:00:00.000Z"
+              },
+              "transportMode": "VESSEL",
+              "service": {
+                "serviceID": 10063353,
+                "code": "IBX",
+                "name": "IBERIA BALTIC EXPRESS"
+              },
+              "vessel": {
+                "vesselGID": "V000004724",
+                "name": "SVENDBORG",
+                "code": "SDBT",
+                "IMO": 9454230
+              },
+              "imoNumber": 9454230,
+              "externalVoyageNumber": "078N",
+              "internalVoyageNumber": "",
+              "transitTime": 4
+            }
+          ],
+          "transportSummary": "VESSEL:10057576:V000002153:124E/VESSEL:10030451:V000015737:030W/VESSEL:10063353:V000004724:078N",
+          "isPossibleDirect": false,
+          "cutoffTime": {
+            "cyCutoffTime": "2026-06-27T00:00:00.000Z",
+            "vgmCutoffTime": "2026-06-28T11:00:00.000Z"
+          },
+          "isUncertainTransitTime": false
+        }
+      ]
+    }
+  ],
+  "limitedScope": {
+    "totalAvailableRoutes": 66,
+    "trialLimitedRoutes": 18,
+    "description": "You are currently accessing a trial of our service and only a limited number of routes will be received. Upgrade your package to receive the entire scope of our solution or contact us at customerservices@iqax.com for assistance."
+  }
+}
