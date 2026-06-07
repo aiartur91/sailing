@@ -149,7 +149,46 @@ function RealApp() {
     try { navigator.clipboard.writeText(txt); } catch(e){}
     showToast('Voyage details copied');
   };
-  const onExport = () => showToast('Generating 1-page PDF…');
+  const onExport = () => { exportRows(sel ? [sel] : [], `sailing_${sel?sel.carrier+'_'+sel.pol+'-'+sel.pod:'export'}`); };
+
+  // ── Excel export (real .xls — opens directly in Excel with columns) ──
+  const XLS_COLS = [
+    ['Carrier', s=>s.carrier],
+    ['Service', s=>s.service||''],
+    ['Service name', s=>s.serviceName||''],
+    ['POL', s=>pname(s.pol)],
+    ['POL code', s=>s.pol],
+    ['Transshipment', s=>s.ts?pname(s.ts):''],
+    ['TS code', s=>s.ts||''],
+    ['POD', s=>pname(s.pod)],
+    ['POD code', s=>s.pod],
+    ['Routing', s=>s.ts?'1 transshipment':'Direct'],
+    ['Feeder vessel', s=>s.feeder?s.feeder.vessel:''],
+    ['Feeder voyage', s=>s.feeder?s.feeder.voyage:''],
+    ['Mother vessel', s=>s.mother?s.mother.vessel:''],
+    ['Mother voyage', s=>s.mother?s.mother.voyage:''],
+    ['Mother IMO', s=>s.mother?s.mother.imo:''],
+    ['ETD', s=>fmtDateY(s.etd)],
+    ['ETA', s=>fmtDateY(s.eta)],
+    ['Transit (days)', s=>s.transit],
+    ['ETD week', s=>s.week],
+  ];
+  const xlsEsc = (v)=> String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  function exportRows(rows, filename){
+    if (!rows || rows.length===0){ showToast('Nothing to export'); return; }
+    const head = '<tr>'+XLS_COLS.map(c=>`<th>${xlsEsc(c[0])}</th>`).join('')+'</tr>';
+    const body = rows.map(s=>'<tr>'+XLS_COLS.map(c=>`<td>${xlsEsc(c[1](s))}</td>`).join('')+'</tr>').join('');
+    const html = `\uFEFF<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>Sailings</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><style>table{border-collapse:collapse}th,td{border:1px solid #b6c2d0;padding:4px 8px;font-family:Calibri,Arial,sans-serif;font-size:11pt;mso-number-format:"\\@";white-space:nowrap}th{background:#0b2f54;color:#fff;font-weight:700}</style></head><body><table>${head}${body}</table></body></html>`;
+    const blob = new Blob([html], { type:'application/vnd.ms-excel;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href=url;
+    a.download = `${filename||'sailings'}_${new Date().toISOString().slice(0,10)}.xls`;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url), 1000);
+    showToast(`Exported ${rows.length} sailing${rows.length>1?'s':''} to Excel`);
+  }
+  const onExportResults = () => exportRows(items, `sailings_${applied.pol}-${applied.pod==='all'?'EU':applied.pod}`);
+  const onExportShortlist = () => exportRows(S.filter(x=>stars.has(x.id)), 'shortlist');
 
   const onResetFilters = () => {
     setFilter({ routing:'all', space:false });
@@ -171,7 +210,7 @@ function RealApp() {
   return (
     <div className={'app'+(detailView?' detailview':'')}>
       <TopBar shortlistCount={stars.size}/>
-      <SearchBar q={q} setQ={setQ} onSearch={onSearch}/>
+      <SearchBar q={q} setQ={setQ} onSearch={onSearch} onExport={onExportResults}/>
       <Filters filter={filter} setFilter={setFilter} counts={counts}/>
       <div className="body">
         <div className="split">
@@ -193,7 +232,7 @@ function RealApp() {
       <div className={'tray'+(stars.size>0?' show':'')}>
         <div className="ct">{Ico.star({ fill:'#fff', width:16, height:16 })} <span><b>{stars.size}</b></span> in shortlist</div>
         <button className="btn btn-sm" style={{ background:'rgba(255,255,255,.14)', color:'#fff' }} onClick={()=>showToast('Opening shortlist…')}>View</button>
-        <button className="btn btn-sm btn-primary" onClick={()=>showToast('Exporting shortlist to Excel…')}>{Ico.pdf({ stroke:'#fff' })} Export all</button>
+        <button className="btn btn-sm btn-primary" onClick={onExportShortlist}>{Ico.pdf({ stroke:'#fff' })} Export all</button>
       </div>
 
       <div className={'toast'+(toast?' show':'')}>{toast && <>{Ico.check({ stroke:'#7ee0a6' })} {toast}</>}</div>

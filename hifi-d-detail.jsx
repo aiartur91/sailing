@@ -158,7 +158,7 @@ function DetailPane({ s, star, onStar, onExport, onCopy, onBack, showCutoffs=tru
               {Ico.star({ fill: star?'currentColor':'none' })} {star?'Shortlisted':'Shortlist'}
             </button>
             <button className="btn btn-ghost btn-sm" onClick={onCopy}>{Ico.copy()} Copy</button>
-            <button className="btn btn-primary btn-sm" onClick={onExport}>{Ico.pdf({ stroke:'#fff' })} Export PDF</button>
+            <button className="btn btn-primary btn-sm" onClick={onExport}>{Ico.pdf({ stroke:'#fff' })} Export Excel</button>
           </div>
         </div>
 

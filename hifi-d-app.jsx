@@ -31,7 +31,7 @@ function PortSelect({ label, value, onChange, options, allLabel }) {
   );
 }
 
-function SearchBar({ q, setQ, onSearch }) {
+function SearchBar({ q, setQ, onSearch, onExport }) {
   return (
     <div className="searchbar">
       <PortSelect label="Port of loading" value={q.pol} onChange={v=>setQ(s=>({...s,pol:v}))} options={window.LANES_POL}/>
@@ -60,7 +60,7 @@ function SearchBar({ q, setQ, onSearch }) {
       <button className="btn btn-primary" onClick={onSearch}>{Ico.arrowS({ stroke:'#fff' })} Search</button>
       <div className="field export">
         <label>&nbsp;</label>
-        <button className="btn btn-ghost">{Ico.pdf()} Export results</button>
+        <button className="btn btn-ghost" onClick={onExport}>{Ico.pdf()} Export results</button>
       </div>
     </div>
   );
