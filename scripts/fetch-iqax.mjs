@@ -19,13 +19,21 @@ import { existsSync } from 'node:fs';
 
 // ─────────────────────────── CONFIG ───────────────────────────
 const APP_KEY = process.env.IQAX_APP_KEY;
-const BASE    = (process.env.IQAX_BASE || 'https://api.bigschedules.com').replace(/\/$/,'');
+// Normalise host: ensure scheme, strip trailing slash. Accepts "api.x.com",
+// "https://api.x.com", or "https://api.x.com/" — all become a valid base.
+function normBase(v){
+  let b = String(v || 'https://api.bigschedules.com').trim();
+  if (!/^https?:\/\//i.test(b)) b = 'https://' + b;   // add scheme if missing
+  return b.replace(/\/+$/,'');                          // drop trailing slash(es)
+}
+const BASE = normBase(process.env.IQAX_BASE);
 const DEBUG   = process.argv.includes('--debug');
 const SEARCH_WEEKS = 6;            // 1..8
 const CSV_PATH = 'sailings.csv';
 
 // SCAC → our display name. MAERSK is intentionally EXCLUDED here — it comes
-// from the dedicated Maersk API script. IQAX owns the other 8 carriers.
+// from the dedicated Maersk API script. IQAX owns the other carriers.
+// (Carrier list matches your IQAX licence scope.)
 const SCAC_TO_NAME = {
   MSCU:'MSC',
   HLCU:'HAPAG-LLOYD',
@@ -33,21 +41,34 @@ const SCAC_TO_NAME = {
   OOLU:'OOCL',
   YMLU:'YANG MING',
   ONEY:'ONE',
-  CMDU:'CMA CGM', ANNU:'CMA CGM',
+  CMDU:'CMA CGM',
   EGLV:'EVERGREEN',
 };
-const CARRIER_PARAM = Object.keys(SCAC_TO_NAME).join(',');   // Maersk SCACs omitted
+const CARRIER_PARAM = Object.keys(SCAC_TO_NAME).join(';');   // IQAX uses ';' separators
 const EXCLUDE_CARRIERS = new Set(['MAERSK']);               // safety: never write Maersk from IQAX
 
-// ── Lanes by COUNTRY PAIR (origin country → destination country) ──
+// ── IQAX port codes (from your licence scope) → our canonical code ──
+// The KEY only accepts the IQAX codes, so we REQUEST with them, then map the
+// response back to our standard codes so the CSV/site stay consistent with
+// Maersk's UN/LOCODEs. Codes not listed pass through unchanged.
+const IQAX_TO_CANON = {
+  CNSHG:'CNSHA',   // Shanghai
+  CNSZX:'CNYTN',   // Shenzhen / Yantian
+  CNTSN:'CNTXG',   // Tianjin / Xingang
+  VNCMV:'VNCMT',   // Cai Mep
+  VNQNH:'VNUIH',   // Quy Nhon
+};
+const toCanon = (code)=> IQAX_TO_CANON[(code||'').toUpperCase()] || (code||'').toUpperCase();
+
+// ── Lanes by COUNTRY PAIR — REQUEST uses IQAX scope codes ──
 const ORIGIN_GROUPS = {
-  cn: ['CNSHA','CNNGB','CNYTN','CNTAO','CNXMN','CNNSA','CNTXG','CNDLC'],
-  in: ['INNSA','INMUN','INHZA','INPAV','INMAA','INENR','INCOK','INTUT','INCCU','INHAL','INVTZ'],
-  bd: ['BDCGP','BDMGL','BDPGN'],
-  vn: ['VNCMT','VNSGN','VNHPH','VNDAD','VNUIH'],
+  cn: ['CNTAO','CNDLC','CNTSN','CNXMN','CNLYG','CNNKG','CNSHG','CNNGB','CNSZX','CNNSA','CNCAN'],
+  in: ['INTUT','INMAA','INNML','INCOK','INCCU','INNSA','INBOM','INMUN'],
+  bd: ['BDCGP','BDDAC','BDMGL'],
+  vn: ['VNQNH','VNDAD','VNCMV','VNSGN'],
 };
 const DEST_GROUPS = {
-  pl: ['PLGDN','PLGDY'],            // IQAX keeps Gdynia (feeder services may call it)
+  pl: ['PLGDN','PLGDY'],
   de: ['DEHAM','DEBRV','DEWVN'],
   nl: ['NLRTM'],
   be: ['BEANR'],
@@ -125,17 +146,20 @@ const MAX_RETRIES = 5;
 const BACKOFF = [20000, 45000, 90000, 150000, 240000];
 
 async function fetchLane(porID, fndID){
+  const today = new Date().toISOString().slice(0,10);
   const qs = new URLSearchParams({
     appKey: APP_KEY,
     porID, fndID,
     searchDuration: String(SEARCH_WEEKS),
+    departureFrom: today,
     carrier: CARRIER_PARAM,
-    exposeMaerskService: 'true',
+    enableNearbySchedules: 'false',
+    useRealTimeData: 'false',
   });
   const url = `${BASE}/openapi/schedules/routeschedules?${qs}`;
   for (let attempt=0; attempt<=MAX_RETRIES; attempt++){
     let res;
-    try { res = await fetch(url, { headers:{ 'Accept':'application/json' } }); }
+    try { res = await fetch(url, { headers:{ 'Accept':'application/json', 'Referer':'https://www.bigschedules.com', 'Origin':'https://www.bigschedules.com' } }); }
     catch(e){ if(attempt===MAX_RETRIES) throw e; await sleep(BACKOFF[Math.min(attempt,BACKOFF.length-1)]); continue; }
     if (res.status === 401){
       const b = await res.text().catch(()=> '');
@@ -170,15 +194,15 @@ function rowsFromResponse(json, reqPor, reqFnd){
       if (vlegs.length === 0) continue;
 
       const unlo = (pt)=> pt?.location?.unlocode || '';
-      const pol = unlo(vlegs[0].fromPoint) || r.por?.location?.unlocode || reqPor;
-      const pod = unlo(vlegs[vlegs.length-1].toPoint) || r.fnd?.location?.unlocode || reqFnd;
+      const pol = toCanon(unlo(vlegs[0].fromPoint) || r.por?.location?.unlocode || reqPor);
+      const pod = toCanon(unlo(vlegs[vlegs.length-1].toPoint) || r.fnd?.location?.unlocode || reqFnd);
       const isTS = vlegs.length > 1;
 
       // mainline (mother) = vessel leg with the longest transitTime; feeder = first other vessel leg
       const byDur = [...vlegs].sort((a,b)=> (b.transitTime||0) - (a.transitTime||0));
       const mother = byDur[0];
       const feeder = isTS ? (vlegs.find(l => l !== mother) || null) : null;
-      const ts = isTS ? unlo(mother.fromPoint) : '';
+      const ts = isTS ? toCanon(unlo(mother.fromPoint)) : '';
 
       const svc = mother.service || {};
       const svcCode = svc.externalCode || svc.code || '';
@@ -190,7 +214,7 @@ function rowsFromResponse(json, reqPor, reqFnd){
       if (!transit && etd && eta) transit = Math.round((new Date(eta)-new Date(etd))/864e5);
 
       const cut = r.cutoffTime || {};
-      const rotation = vlegs.map(l => unlo(l.fromPoint)).concat(unlo(vlegs[vlegs.length-1].toPoint)).filter(Boolean);
+      const rotation = vlegs.map(l => toCanon(unlo(l.fromPoint))).concat(toCanon(unlo(vlegs[vlegs.length-1].toPoint))).filter(Boolean);
 
       out.push({
         carrier,
